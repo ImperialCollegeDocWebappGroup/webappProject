@@ -1,21 +1,24 @@
 //
-//  FriendsList.swift
+//  SettingPageVC.swift
 //  webapp
 //
-//  Created by Zhang, Zhuofan on 04/06/2015.
+//  Created by Timeless on 05/06/2015.
 //  Copyright (c) 2015 Shan, Jinyi. All rights reserved.
 //
 
 import UIKit
 
-class FriendsList: UITableViewController {
-    
-    var friends = ["Hubert Yates", "Ricardo Nichols", "Raul Garner", "Wendy Stewart"]
+class SettingPageVC: UITableViewController {
 
+    @IBAction func back(sender: UIButton) {
+        if(self.presentingViewController != nil ) {
+            self.dismissViewControllerAnimated(false, completion: nil)
+            println("cancel")
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.editing = true
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,36 +32,29 @@ class FriendsList: UITableViewController {
     }
 
     // MARK: - Table view data source
-/*
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 0
     }
-*/
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return friends.count
+        return 0
     }
 
-    
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FriendCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
-        cell.textLabel!.text = friends[indexPath.row]
+
         return cell
     }
-    
+    */
 
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return .None
-    }
-    
-    override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -79,16 +75,12 @@ class FriendsList: UITableViewController {
     }
     */
 
-    
+    /*
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-         let movedObject = self.friends[fromIndexPath.row]
-         friends.removeAtIndex(fromIndexPath.row)
-         friends.insert(movedObject, atIndex: toIndexPath.row)
-         NSLog("%@", "\(fromIndexPath.row) => \(toIndexPath.row) \(friends)")
-    }
 
+    }
+    */
 
     /*
     // Override to support conditional rearranging of the table view.

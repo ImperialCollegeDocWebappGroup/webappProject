@@ -75,7 +75,7 @@ class SignupVC: UIViewController {
             var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
             
             if ( urlData != nil ) {
-                let res = response as NSHTTPURLResponse!;
+                let res = response as! NSHTTPURLResponse!;
                 
                 NSLog("Response code: %ld", res.statusCode);
                 
@@ -87,10 +87,10 @@ class SignupVC: UIViewController {
                     
                     var error: NSError?
                     
-                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as NSDictionary
+                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as! NSDictionary
                     
                     
-                    let success:NSInteger = jsonData.valueForKey("success") as NSInteger
+                    let success:NSInteger = jsonData.valueForKey("success") as! NSInteger
                     
                     //[jsonData[@"success"] integerValue];
                     
@@ -105,7 +105,7 @@ class SignupVC: UIViewController {
                         var error_msg:NSString
                         
                         if jsonData["error_message"] as? NSString != nil {
-                            error_msg = jsonData["error_message"] as NSString
+                            error_msg = jsonData["error_message"] as! NSString
                         } else {
                             error_msg = "Unknown Error"
                         }
