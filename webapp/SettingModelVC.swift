@@ -120,12 +120,14 @@ class SettingModelVC: UIViewController {
         height = heightInit
         weight = weightInit
         postToDB()
-        self.performSegueWithIdentifier("goto_room", sender: self)
+      //  self.performSegueWithIdentifier("goto_room", sender: self)
+       // navigationController?.popViewControllerAnimated(true)
     }
     
     func processConfirmAlert(alert: UIAlertAction!) {
         postToDB()
-        self.performSegueWithIdentifier("goto_room", sender: self)
+     //   self.performSegueWithIdentifier("goto_room", sender: self)
+        //navigationController?.popViewControllerAnimated(true)
     }
     
     

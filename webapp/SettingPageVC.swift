@@ -10,20 +10,14 @@ import UIKit
 
 class SettingPageVC: UITableViewController {
 
-    @IBAction func back(sender: UIButton) {
-        if(self.presentingViewController != nil ) {
-            self.dismissViewControllerAnimated(false, completion: nil)
-            println("cancel")
-        }
-    }
+    var settings: [String] = ["Reset my model", "Logout"]
+    
+
     override func viewDidLoad() {
+
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,27 +28,49 @@ class SettingPageVC: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+        return self.settings.count
     }
 
-    /*
+    
+    
+
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
-
+        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        
+        cell.textLabel?.text = self.settings[indexPath.row]
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        
         return cell
     }
-    */
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //CODE TO BE RUN ON CELL TOUCH
+    //    self.dismissViewControllerAnimated(true,completion: nil)
+        switch (indexPath.row) {
+            case 0: self.performSegueWithIdentifier("set_model", sender: self)
+            case 1:
+                var confirmAlert = UIAlertController(title: "Log out", message: "Do you really want to log out?", preferredStyle: .Alert )
+                
+                confirmAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: processConfirmAlert))
+                
+                confirmAlert.addAction(UIAlertAction(title: "Wait a sec", style: .Cancel, handler: nil))
+                
+                self.presentViewController(confirmAlert, animated: true, completion: nil)
+            default: ()
+        }
+    }
+    
+    
+    
+    func processConfirmAlert (alert: UIAlertAction!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        self.performSegueWithIdentifier("set_login", sender: self)
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
