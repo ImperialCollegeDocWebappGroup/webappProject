@@ -68,8 +68,17 @@ class SettingPageVC: UITableViewController {
     
     
     func processConfirmAlert (alert: UIAlertAction!) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-        self.performSegueWithIdentifier("set_login", sender: self)
+        
+            let appDomain = NSBundle.mainBundle().bundleIdentifier
+            NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+            self.dismissViewControllerAnimated(true, completion: nil)
+            self.performSegueWithIdentifier("set_login", sender: self)
+        
+        
+        
+
+    //    self.dismissViewControllerAnimated(true, completion: nil)
+      //  self.performSegueWithIdentifier("set_login", sender: self)
     }
     /*
     // Override to support conditional editing of the table view.
