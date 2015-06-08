@@ -1,20 +1,18 @@
 //
-//  SettingPageVC.swift
+//  WardrobeTVC.swift
 //  webapp
 //
-//  Created by Timeless on 05/06/2015.
+//  Created by Timeless on 08/06/2015.
 //  Copyright (c) 2015 Shan, Jinyi. All rights reserved.
 //
 
 import UIKit
 
-class SettingPageVC: UITableViewController {
+class WardrobeTVC: UITableViewController {
 
-    var settings: [String] = ["Reset my model", "Logout"]
-    
+    var sections: [String] = ["Toppings", "Bottoms"]
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -32,51 +30,42 @@ class SettingPageVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.settings.count
+        return self.sections.count
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         
-        cell.textLabel?.text = self.settings[indexPath.row]
+        cell.textLabel?.text = self.sections[indexPath.row]
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         return cell
     }
-
+    
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //CODE TO BE RUN ON CELL TOUCH
-    //    self.dismissViewControllerAnimated(true,completion: nil)
         switch (indexPath.row) {
-            case 0: self.performSegueWithIdentifier("set_model", sender: self)
-            case 1:
-                var confirmAlert = UIAlertController(title: "Log out", message: "Do you really want to log out?", preferredStyle: .Alert )
-                
-                confirmAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: processConfirmAlert))
-                
-                confirmAlert.addAction(UIAlertAction(title: "Wait a sec", style: .Cancel, handler: nil))
-                
-                self.presentViewController(confirmAlert, animated: true, completion: nil)
-            default: ()
+        case 0: self.performSegueWithIdentifier("view_toppings", sender: self)
+        case 1:
+            self.performSegueWithIdentifier("view_bottoms", sender: self)
+        default: ()
         }
     }
-    
-    
-    
-    func processConfirmAlert (alert: UIAlertAction!) {
+  /*
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         
-            let appDomain = NSBundle.mainBundle().bundleIdentifier
-            NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
-            self.dismissViewControllerAnimated(true, completion: nil)
-            self.performSegueWithIdentifier("set_login", sender: self)
+        // Set title
+        self.navigationItem.title = "My Wardrobe"
         
-        
-        
-
-    //    self.dismissViewControllerAnimated(true, completion: nil)
-      //  self.performSegueWithIdentifier("set_login", sender: self)
+        // Add Submit button
+        var submitButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "submitPost:")
+        self.navigationItem.rightBarButtonItem = submitButton
     }
+    
+    */
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
