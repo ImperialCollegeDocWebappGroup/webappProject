@@ -7,20 +7,16 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>A4F6520A-F5DC-4ECA-9F0A-EDFA8A4D944E</string>
 	<key>IDESourceControlProjectName</key>
-	<string>webapp</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4838BF289F74BD87208488F3B2A30E98A5252D3B</key>
-		<string>https://github.com/TimelessJY/webapp.git</string>
 		<key>BA5696E69CB54F7646BDDAD2AA2BBF3B87471191</key>
 		<string>https://github.com/ImperialCollegeDocWebappGroup/webappProject.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>webapp.xcodeproj</string>
+	<string>webapp.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4838BF289F74BD87208488F3B2A30E98A5252D3B</key>
-		<string>../../../webapp</string>
 		<key>BA5696E69CB54F7646BDDAD2AA2BBF3B87471191</key>
 		<string>../..</string>
 	</dict>
@@ -36,17 +32,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4838BF289F74BD87208488F3B2A30E98A5252D3B</string>
-			<key>IDESourceControlWCCName</key>
-			<string>webapp</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>BA5696E69CB54F7646BDDAD2AA2BBF3B87471191</string>
 			<key>IDESourceControlWCCName</key>
-			<string>webappProject</string>
+			<string>webappProject-backup</string>
 		</dict>
 	</array>
 </dict>

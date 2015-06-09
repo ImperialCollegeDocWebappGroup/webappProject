@@ -10,13 +10,14 @@ import UIKit
 
 class MomentsVC: UIViewController {
 
+    @IBOutlet weak var navigateBar: UINavigationBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    @IBOutlet weak var navigateBar: UINavigationBar!
-
+    
     override func viewDidAppear(animated: Bool) {
         navigateBar.setBackgroundImage(UIImage(named:"navigation"),
             forBarMetrics: .Default)

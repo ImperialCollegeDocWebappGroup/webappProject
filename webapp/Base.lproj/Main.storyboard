@@ -65,7 +65,7 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="webapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DNw-uu-Dgq">
@@ -296,10 +296,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4ZY-rl-EBD">
-                                <rect key="frame" x="148" y="343" width="78" height="30"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.74999999999999978" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome" id="OYV-YT-BCc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="191"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" id="LSv-Bc-bey">
+                                <rect key="frame" x="48" y="235" width="225" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="txtUsername:" destination="Tgx-im-fpw" eventType="touchUpInside" id="uLq-NG-sam"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome, please log in below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Mh-21-wsL">
+                                <rect key="frame" x="0.0" y="195" width="320" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" id="uG3-i7-ave">
+                                <rect key="frame" x="48" y="273" width="225" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Fitting Room" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FsJ-IF-b2q">
+                                <rect key="frame" x="69" y="91" width="183" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="24"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4ZY-rl-EBD">
+                                <rect key="frame" x="48" y="316" width="225" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.39087702470000002" green="1" blue="0.65863969209999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <state key="normal" title="Sign In">
                                     <color key="titleColor" red="0.097367949669999995" green="0.1427398238" blue="0.71452809340000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -309,26 +342,11 @@
                                     <segue destination="vXZ-lx-hvc" kind="modal" identifier="goto_home" id="yOD-7x-8fc"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" id="LSv-Bc-bey">
-                                <rect key="frame" x="104" y="197" width="167" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="txtUsername:" destination="Tgx-im-fpw" eventType="touchUpInside" id="uLq-NG-sam"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login Below" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Mh-21-wsL">
-                                <rect key="frame" x="133" y="162" width="109" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8tc-GX-786">
-                                <rect key="frame" x="102" y="398" width="171" height="30"/>
+                                <rect key="frame" x="48" y="472" width="225" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <color key="backgroundColor" red="0.39087702470000002" green="1" blue="0.65863969209999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <state key="normal" title="Register A New Account">
                                     <color key="titleColor" red="0.097367949669999995" green="0.1427398238" blue="0.71452809340000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -337,19 +355,6 @@
                                     <segue destination="WlX-Fq-MUz" kind="modal" identifier="goto_signup" id="pFw-Nu-i4S"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" id="uG3-i7-ave">
-                                <rect key="frame" x="104" y="265" width="167" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Fitting Room" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FsJ-IF-b2q">
-                                <rect key="frame" x="96" y="72" width="183" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="24"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.842160731" green="1" blue="0.77450374320000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -360,7 +365,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uyh-ZQ-rxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1213" y="1462"/>
+            <point key="canvasLocation" x="1297" y="1439"/>
         </scene>
         <!--Load Image-->
         <scene sceneID="sPT-oB-eTg">
@@ -490,36 +495,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up Now" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jnt-85-Qqr">
-                                <rect key="frame" x="112" y="108" width="151" height="38"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome1" id="8nD-Zh-7Bg">
+                                <rect key="frame" x="27" y="0.0" width="320" height="175"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Username" minimumFontSize="17" id="O3x-6U-GJf">
-                                <rect key="frame" x="86" y="183" width="202" height="30"/>
+                                <rect key="frame" x="86" y="211" width="202" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" minimumFontSize="17" id="pDk-uE-t6j">
-                                <rect key="frame" x="86" y="244" width="202" height="30"/>
+                                <rect key="frame" x="86" y="255" width="202" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Your Password" minimumFontSize="17" id="A2Y-99-EsX">
-                                <rect key="frame" x="86" y="305" width="202" height="30"/>
+                                <rect key="frame" x="86" y="293" width="202" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NzP-eP-itD">
-                                <rect key="frame" x="73" y="387" width="228" height="30"/>
+                                <rect key="frame" x="73" y="344" width="228" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <color key="backgroundColor" red="0.39087702470000002" green="1" blue="0.65863969209999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <state key="normal" title="Create My New Account">
                                     <color key="titleColor" red="0.097367949669999995" green="0.1427398238" blue="0.71452809340000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -529,11 +531,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q1x-Fn-bHQ">
-                                <rect key="frame" x="46" y="448" width="282" height="30"/>
+                                <rect key="frame" x="73" y="450" width="228" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                <state key="normal" title="I Already Have An Account - Go Login">
+                                <color key="backgroundColor" red="0.39087702470000002" green="1" blue="0.65863969209999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <state key="normal" title="Login to my account">
                                     <color key="titleColor" red="0.097367949669999995" green="0.1427398238" blue="0.71452809340000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -541,6 +543,13 @@
                                     <action selector="gotoLogin:" destination="WlX-Fq-MUz" eventType="touchUpInside" id="TR5-BQ-8uL"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome, join us now!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jnt-85-Qqr">
+                                <rect key="frame" x="55" y="171" width="254" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.84216073101532263" green="1" blue="0.77450374317595472" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.097367949669999995" green="0.1427398238" blue="0.71452809340000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -553,7 +562,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSj-F4-wpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="605.5" y="1559.4999999999991"/>
+            <point key="canvasLocation" x="605" y="1559"/>
         </scene>
         <!--Setting ModelVC-->
         <scene sceneID="Xhi-Wj-Yhj">
@@ -737,21 +746,33 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="My Fitting Room" id="Xv5-o0-fRM">
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="L2Y-dx-iq7"/>
+                                        <barButtonItem key="leftBarButtonItem" image="menu-icon" id="L2Y-dx-iq7">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="menuButtonTapped:" destination="2Kn-XS-Z1j" id="src-Iv-8hV"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <view hidden="YES" contentMode="scaleToFill" id="YRe-02-5fF">
+                                <rect key="frame" x="0.0" y="44" width="168" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="home_ic" id="bjy-cu-Q82"/>
                     <connections>
+                        <outlet property="dropDownView" destination="YRe-02-5fF" id="2xb-TF-RhX"/>
+                        <outlet property="menuButt" destination="L2Y-dx-iq7" id="Hju-6E-gCT"/>
                         <outlet property="navigateBar" destination="neR-gb-WZh" id="ZJU-nG-1wC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hU4-ZW-Yac" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1653" y="1398"/>
+            <point key="canvasLocation" x="1651" y="1394"/>
         </scene>
         <!--Settings-->
         <scene sceneID="6bl-nH-4bE">
@@ -926,11 +947,14 @@
         <image name="default_profile" width="1290" height="1290"/>
         <image name="friends_ic" width="24" height="24"/>
         <image name="home_ic" width="24" height="24"/>
+        <image name="menu-icon" width="33" height="30"/>
         <image name="moments_ic" width="26" height="24"/>
         <image name="setting_ic" width="24" height="24"/>
         <image name="share" width="188" height="64"/>
         <image name="skinColours" width="551" height="68"/>
         <image name="wardrobe_ic" width="24" height="24"/>
+        <image name="welcome" width="1180" height="526"/>
+        <image name="welcome1" width="694" height="350"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -940,7 +964,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="DUG-Ad-2le"/>
         <segue reference="Rrc-eS-wVN"/>
-        <segue reference="07U-up-CAh"/>
+        <segue reference="uPJ-qB-xmA"/>
         <segue reference="yOD-7x-8fc"/>
         <segue reference="YWd-5N-y4d"/>
     </inferredMetricsTieBreakers>
