@@ -12,7 +12,7 @@ class HomeTabBC: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -25,8 +25,6 @@ class HomeTabBC: UITabBarController {
         self.tabBarController?.selectedIndex = 0
     }
     
-    
-
     /*
     // MARK: - Navigation
 

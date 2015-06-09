@@ -10,6 +10,8 @@ import UIKit
 
 class MainFeaturesVC: UIViewController {
 
+    @IBOutlet weak var navigateBar: UINavigationBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,5 +22,8 @@ class MainFeaturesVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    
+    override func viewDidAppear(animated: Bool) {
+        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
+            forBarMetrics: .Default)
+    }
 }

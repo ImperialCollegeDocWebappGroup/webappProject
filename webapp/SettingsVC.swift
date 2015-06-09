@@ -13,12 +13,18 @@ class SettingsVC: UIViewController {
     
     var settings: [String] = ["Reset my model", "Logout"]
     
+    @IBOutlet weak var navigateBar: UINavigationBar!
 
      @IBOutlet var tableView: UITableView!
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+ 
+    override func viewDidAppear(animated: Bool) {
+        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
+            forBarMetrics: .Default)
     }
     
     override func viewDidLoad() {

@@ -44,6 +44,13 @@ class SettingModelVC: UIViewController {
         deselectGender(MaleButt)
     }
     
+    @IBOutlet weak var navigateBar: UINavigationBar!
+    
+    override func viewDidAppear(animated: Bool) {
+        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
+            forBarMetrics: .Default)
+    }
+    
     func selectGender(butt: UIButton) {
         butt.selected = true
         if butt == MaleButt {

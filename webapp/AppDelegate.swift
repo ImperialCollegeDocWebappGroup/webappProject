@@ -13,7 +13,7 @@ import UIKit
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    
+         UIApplication.sharedApplication().statusBarStyle = .LightContent
         return true
         
     }
@@ -52,4 +52,5 @@ import UIKit
         
     }
     
+  
 }
