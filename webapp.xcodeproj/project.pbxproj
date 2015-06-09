@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1846BAC11B1E75FE00FEA88E /* FirstTimeEntryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1846BAC01B1E75FE00FEA88E /* FirstTimeEntryVC.swift */; };
 		1846BAC51B1E768300FEA88E /* SettingModelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1846BAC41B1E768300FEA88E /* SettingModelVC.swift */; };
 		1846BAC91B1E788B00FEA88E /* MainFeaturesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1846BAC81B1E788B00FEA88E /* MainFeaturesVC.swift */; };
 		186B81D31B1F81E700C3DD9B /* LoadImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B81D21B1F81E700C3DD9B /* LoadImageVC.swift */; };
@@ -20,6 +19,9 @@
 		188F049B1B25A85200F55F41 /* WardrobeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F049A1B25A85200F55F41 /* WardrobeTVC.swift */; };
 		188F049D1B25ADCD00F55F41 /* BottomsScrollVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F049C1B25ADCD00F55F41 /* BottomsScrollVC.swift */; };
 		188F049F1B25B74A00F55F41 /* SharingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F049E1B25B74A00F55F41 /* SharingVC.swift */; };
+		188F04A11B25C0DD00F55F41 /* MomentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F04A01B25C0DD00F55F41 /* MomentsVC.swift */; };
+		188F04A31B25C11E00F55F41 /* HomeTabBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F04A21B25C11E00F55F41 /* HomeTabBC.swift */; };
+		188F04A51B25E4B100F55F41 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F04A41B25E4B100F55F41 /* SettingsVC.swift */; };
 		18E402581B13634800AB9ADD /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E402571B13634800AB9ADD /* SignupVC.swift */; };
 		365A51071B133805005C2E92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365A51061B133805005C2E92 /* AppDelegate.swift */; };
 		365A51091B133805005C2E92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365A51081B133805005C2E92 /* ViewController.swift */; };
@@ -43,7 +45,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1846BAC01B1E75FE00FEA88E /* FirstTimeEntryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeEntryVC.swift; sourceTree = "<group>"; };
 		1846BAC41B1E768300FEA88E /* SettingModelVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModelVC.swift; sourceTree = "<group>"; };
 		1846BAC81B1E788B00FEA88E /* MainFeaturesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFeaturesVC.swift; sourceTree = "<group>"; };
 		186B81D21B1F81E700C3DD9B /* LoadImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadImageVC.swift; sourceTree = "<group>"; };
@@ -56,6 +57,9 @@
 		188F049A1B25A85200F55F41 /* WardrobeTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WardrobeTVC.swift; sourceTree = "<group>"; };
 		188F049C1B25ADCD00F55F41 /* BottomsScrollVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomsScrollVC.swift; sourceTree = "<group>"; };
 		188F049E1B25B74A00F55F41 /* SharingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingVC.swift; sourceTree = "<group>"; };
+		188F04A01B25C0DD00F55F41 /* MomentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentsVC.swift; sourceTree = "<group>"; };
+		188F04A21B25C11E00F55F41 /* HomeTabBC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabBC.swift; sourceTree = "<group>"; };
+		188F04A41B25E4B100F55F41 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		18E402571B13634800AB9ADD /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		365A51011B133805005C2E92 /* webapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = webapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		365A51051B133805005C2E92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -123,7 +127,6 @@
 				365A51261B134D89005C2E92 /* LoginVCViewController.swift */,
 				18E402571B13634800AB9ADD /* SignupVC.swift */,
 				1846BAC81B1E788B00FEA88E /* MainFeaturesVC.swift */,
-				1846BAC01B1E75FE00FEA88E /* FirstTimeEntryVC.swift */,
 				1846BAC41B1E768300FEA88E /* SettingModelVC.swift */,
 				186B81D21B1F81E700C3DD9B /* LoadImageVC.swift */,
 				D4E37FC71B20D9950066AF5D /* FriendCell.swift */,
@@ -134,6 +137,9 @@
 				188F049A1B25A85200F55F41 /* WardrobeTVC.swift */,
 				188F049C1B25ADCD00F55F41 /* BottomsScrollVC.swift */,
 				188F049E1B25B74A00F55F41 /* SharingVC.swift */,
+				188F04A01B25C0DD00F55F41 /* MomentsVC.swift */,
+				188F04A21B25C11E00F55F41 /* HomeTabBC.swift */,
+				188F04A41B25E4B100F55F41 /* SettingsVC.swift */,
 			);
 			path = webapp;
 			sourceTree = "<group>";
@@ -263,14 +269,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				188F04A31B25C11E00F55F41 /* HomeTabBC.swift in Sources */,
 				18E402581B13634800AB9ADD /* SignupVC.swift in Sources */,
 				1846BAC91B1E788B00FEA88E /* MainFeaturesVC.swift in Sources */,
+				188F04A11B25C0DD00F55F41 /* MomentsVC.swift in Sources */,
 				186B81D31B1F81E700C3DD9B /* LoadImageVC.swift in Sources */,
 				365A51091B133805005C2E92 /* ViewController.swift in Sources */,
 				186B81EC1B246ECB00C3DD9B /* ToppingsScrollVC.swift in Sources */,
 				365A51071B133805005C2E92 /* AppDelegate.swift in Sources */,
 				186B81D91B206CAC00C3DD9B /* ysocket.swift in Sources */,
-				1846BAC11B1E75FE00FEA88E /* FirstTimeEntryVC.swift in Sources */,
 				188F049D1B25ADCD00F55F41 /* BottomsScrollVC.swift in Sources */,
 				365A51271B134D89005C2E92 /* LoginVCViewController.swift in Sources */,
 				186B81DA1B206CAC00C3DD9B /* ytcpsocket.c in Sources */,
@@ -282,6 +289,7 @@
 				D4E37FCE1B20DC390066AF5D /* AddNewFriend.swift in Sources */,
 				D4E37FCA1B20D9B10066AF5D /* FriendsList.swift in Sources */,
 				186B81E81B21BD4A00C3DD9B /* SettingPageVC.swift in Sources */,
+				188F04A51B25E4B100F55F41 /* SettingsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

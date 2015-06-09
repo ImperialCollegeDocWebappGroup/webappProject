@@ -102,7 +102,35 @@ class ToppingsScrollVC: UIViewController, UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         loadVisiblePages()
     }
+    /*
+    let scrollView = UIScrollView(frame: CGRectMake(0, 0, 100, 100))
+    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * 3, scrollView.frame.size.height)
+    scrollView.delegate = self
+    let pageControl = UIPageControl(frame:CGRectMake(0, 90, scrollView.frame.size.width, 20))
+    pageControl.numberOfPages = Int(scrollView.contentSize.width / scrollView.frame.size.width)
+    pageControl.addTarget(self, action: Selector("changePage:"), forControlEvents: UIControlEvents.ValueChanged)
     
     
-
+    func changePage(sender: AnyObject) -> () {
+        let x = CGFloat(pageControl.currentPage) * scrollView.frame.size.width
+        scrollView.setContentOffset(CGPointMake(x, 0), animated: true)
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) -> () {
+        let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width);
+        pageControl.currentPage = Int(pageNumber)
+    }
+   
+    
+    func changePage(sender: AnyObject) -> () {
+        if let page = sender.currentPage {
+            var frame:CGRect = scrollView.frame;
+            
+            frame.origin.x = frame.size.width * CGFloat(page)
+            frame.origin.y = 0
+            scrollView.scrollRectToVisible(frame, animated: true)
+        }
+    }
+    
+ */
 }

@@ -30,6 +30,7 @@ class SettingModelVC: UIViewController {
         UITextField!
     @IBOutlet weak var SkinColourSlider: UISlider!
     
+    @IBOutlet weak var SaveButt: UIBarButtonItem!
     
     @IBAction func MaleTapped(sender: UIButton) {
         maleUser = true
@@ -70,8 +71,8 @@ class SettingModelVC: UIViewController {
     }
     
     
-    @IBAction func SaveModelTapped(sender: UIButton) {
-        // check height and weight value
+    
+    @IBAction func SaveTapped(sender: UIBarButtonItem) { // check height and weight value
         let a:Int? = txtHeight.text.toInt()
         let b:Int? = txtWeight.text.toInt()
         
@@ -79,7 +80,7 @@ class SettingModelVC: UIViewController {
         var invalidInput: Bool = false
         
         if a != nil && b != nil {
-           height = a!
+            height = a!
             weight = b!
             if height < heightMin || height > heightMax {
                 invalidInput = true
@@ -101,7 +102,7 @@ class SettingModelVC: UIViewController {
             invalidInputAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
             
             self.presentViewController(invalidInputAlert, animated: true, completion: nil)
-        
+            
         } else {
             var confirmAlert = UIAlertController(title: "Valid inputs", message: "Do you confirm your information?", preferredStyle: .Alert )
             
@@ -110,9 +111,8 @@ class SettingModelVC: UIViewController {
             confirmAlert.addAction(UIAlertAction(title: "Wait a sec", style: .Cancel, handler: nil))
             
             self.presentViewController(confirmAlert, animated: true, completion: nil)
-
+            
         }
-        // goto_room
     }
     
     func processAlert(alert: UIAlertAction!) {
@@ -120,13 +120,13 @@ class SettingModelVC: UIViewController {
         height = heightInit
         weight = weightInit
         postToDB()
-      //  self.performSegueWithIdentifier("goto_room", sender: self)
-       // navigationController?.popViewControllerAnimated(true)
+        self.performSegueWithIdentifier("goto_home", sender: self)
+        // navigationController?.popViewControllerAnimated(true)
     }
     
     func processConfirmAlert(alert: UIAlertAction!) {
         postToDB()
-     //   self.performSegueWithIdentifier("goto_room", sender: self)
+        self.performSegueWithIdentifier("goto_home", sender: self)
         //navigationController?.popViewControllerAnimated(true)
     }
     
@@ -141,7 +141,7 @@ class SettingModelVC: UIViewController {
             var (success,errmsg)=client.send(str:"SELECT * FROM cities;\n")
             if success{
                 println("sent success!")
-                                var data=client.read(1024*10)
+                var data=client.read(1024*10)
                 if let d = data {
                     if let str = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
                         println("read success")
@@ -167,6 +167,5 @@ class SettingModelVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    
+        
 }

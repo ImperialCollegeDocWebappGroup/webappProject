@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BottomsScrollVC: UIViewController {
+class BottomsScrollVC: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -53,6 +53,7 @@ class BottomsScrollVC: UIViewController {
         }
         
         if let pageView = pageViews[page] {
+            // the view is already loaded
         } else {
             var frame = scrollView.bounds
             frame.origin.x = frame.size.width * CGFloat(page)

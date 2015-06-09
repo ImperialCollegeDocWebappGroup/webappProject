@@ -95,8 +95,8 @@ class LoginVCViewController: UIViewController {
                         prefs.setInteger(1, forKey: "ISLOGGEDIN")
                         prefs.synchronize()
                         
-                      //    self.performSegueWithIdentifier("goto_home", sender: self)
-                       self.dismissViewControllerAnimated(true, completion: nil)
+                          self.performSegueWithIdentifier("goto_home", sender: self)
+                       //self.dismissViewControllerAnimated(true, completion: nil)
                       
                     } else {
                         var error_msg:NSString
