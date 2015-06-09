@@ -820,7 +820,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="Setting1" id="1CT-Lp-jxR"/>
+                    <tabBarItem key="tabBarItem" title="Settings" id="1CT-Lp-jxR"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="RUN-2m-JKP" id="GS6-jx-wHf"/>
@@ -829,72 +829,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pTM-sT-zb8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2326" y="1410"/>
-        </scene>
-        <!--Setting-->
-        <scene sceneID="ei8-7R-PlD">
-            <objects>
-                <tableViewController id="UE4-zk-zaC" customClass="SettingPageVC" customModule="webapp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="k79-tl-gas">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ResetModelCell" id="RLu-1Q-qF9">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="RLu-1Q-qF9" id="Qm1-p1-Wf1">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset my model" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GOh-iW-wa2">
-                                            <rect key="frame" x="26" y="11" width="125" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LogoutCell" id="2El-lu-3MN">
-                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="2El-lu-3MN" id="tUH-ET-RxC">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logout" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sBH-HV-Qwl">
-                                            <rect key="frame" x="28" y="11" width="54" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="Tgx-im-fpw" kind="modal" identifier="set_login" id="s8y-66-iUt"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="UE4-zk-zaC" id="uz6-JT-iG9"/>
-                            <outlet property="delegate" destination="UE4-zk-zaC" id="OmV-MM-Mbe"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" id="yQu-PT-fyj"/>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Setting" id="1DZ-5t-YWG">
-                        <barButtonItem key="backBarButtonItem" title="back" id="QFy-Ks-vid"/>
-                    </navigationItem>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <segue destination="1Ty-56-PsZ" kind="push" identifier="set_model" id="4M5-UU-1gI"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dAg-cY-uX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2266" y="2527"/>
         </scene>
         <!--My Wardrobe-->
         <scene sceneID="FWe-4C-j7m">
@@ -980,7 +914,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Setting1" width="72" height="72"/>
         <image name="black2" width="95" height="95"/>
         <image name="colour1" width="93" height="91"/>
         <image name="combine" width="194" height="75"/>
@@ -998,8 +931,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="cJV-Uc-HbM"/>
         <segue reference="DUG-Ad-2le"/>
-        <segue reference="4M5-UU-1gI"/>
-        <segue reference="s8y-66-iUt"/>
+        <segue reference="pg2-AN-ngx"/>
+        <segue reference="uPJ-qB-xmA"/>
         <segue reference="yOD-7x-8fc"/>
         <segue reference="EJL-YH-dOY"/>
         <segue reference="YWd-5N-y4d"/>
