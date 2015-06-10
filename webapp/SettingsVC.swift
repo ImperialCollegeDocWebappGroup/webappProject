@@ -49,9 +49,9 @@ class SettingsVC: UIViewController {
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
         
-        cell.textLabel?.text = self.settings[indexPath.row]
+        cell.textLabel.text = self.settings[indexPath.row]
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         return cell

@@ -52,9 +52,9 @@ shadow, NSShadowAttributeName,
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = dropDownMenu.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        var cell:UITableViewCell = dropDownMenu.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
         
-        cell.textLabel?.text = self.menus[indexPath.row]
+        cell.textLabel.text = self.menus[indexPath.row]
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         return cell

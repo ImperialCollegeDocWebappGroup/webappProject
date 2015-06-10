@@ -19,7 +19,6 @@ class FriendsVC: UIViewController {
     
     var friends = ["Hubert Yates", "Ricardo Nichols", "Raul Garner", "Wendy Stewart"]
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,45 +28,76 @@ class FriendsVC: UIViewController {
         
         navigateBar.setBackgroundImage(UIImage(named:"navigation"),
             forBarMetrics: .Default)
-
         
+        self.tableView.editing = true
         // Do any additional setup after loading the view.
+        
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Friendcell")
+        
     }
     /*
     override func viewDidAppear(animated: Bool) {
-        // change width of navigation bar
-        navigateBar.frame=CGRectMake(0, 0, 400, 60)
-        
-        self.view .addSubview(navigateBar)
-        
-        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
-            forBarMetrics: .Default)
+    // change width of navigation bar
+    navigateBar.frame=CGRectMake(0, 0, 400, 60)
+    
+    self.view .addSubview(navigateBar)
+    
+    navigateBar.setBackgroundImage(UIImage(named:"navigation"),
+    forBarMetrics: .Default)
     }
     */
-
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return friends.count
+        return self.friends.count
     }
-
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("FriendCell") as UITableViewCell
+        
+        // Configure the cell...
+        cell.textLabel.text = self.friends[indexPath.row]
+        return cell
+    }
+    
+    
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .None
+    }
+    
+    func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
     @IBAction func addButtTapped(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("goto_add", sender: self)
     }
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
+    func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+        
+        let movedObject = self.friends[fromIndexPath.row]
+        friends.removeAtIndex(fromIndexPath.row)
+        friends.insert(movedObject, atIndex: toIndexPath.row)
+        NSLog("%@", "\(fromIndexPath.row) => \(toIndexPath.row) \(friends)")
+    }
+    
 }

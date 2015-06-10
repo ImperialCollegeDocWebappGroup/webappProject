@@ -34,9 +34,9 @@ class WardrobeTVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
         
-        cell.textLabel?.text = self.sections[indexPath.row]
+        cell.textLabel.text = self.sections[indexPath.row]
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         return cell
