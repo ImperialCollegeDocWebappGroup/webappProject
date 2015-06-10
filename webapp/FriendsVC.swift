@@ -18,8 +18,7 @@ class FriendsVC: UIViewController {
     
     
     var friends = ["Hubert Yates", "Ricardo Nichols", "Raul Garner", "Wendy Stewart"]
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         navigateBar.frame=CGRectMake(0, 0, 400, 60)
@@ -35,6 +34,27 @@ class FriendsVC: UIViewController {
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Friendcell")
         
     }
+    
+    
+    /*
+    override func viewDidAppear(animated: Bool) {
+    // 1
+    var nav = self.navigationController?.navigationBar
+    // 2
+    nav?.barStyle = UIBarStyle.Black
+    nav?.tintColor = UIColor.yellowColor()
+    // 3
+    let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+    imageView.contentMode = .ScaleAspectFit
+    // 4
+    let image = UIImage(named: "black1")
+    imageView.image = image
+    // 5
+    navigationItem.titleView = imageView
+    }
+    
+    */
+    
     /*
     override func viewDidAppear(animated: Bool) {
     // change width of navigation bar
@@ -63,10 +83,10 @@ class FriendsVC: UIViewController {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("FriendCell") as UITableViewCell
+        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("FriendCell") as! UITableViewCell
         
         // Configure the cell...
-        cell.textLabel.text = self.friends[indexPath.row]
+        cell.textLabel!.text = self.friends[indexPath.row]
         return cell
     }
     
