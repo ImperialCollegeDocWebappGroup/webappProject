@@ -19,6 +19,11 @@ class SharingVC: UIViewController {
     }
 
     override func viewDidAppear(animated: Bool) {
+        // change width of navigation bar
+        navigateBar.frame=CGRectMake(0, 0, 400, 60)
+        
+        self.view .addSubview(navigateBar)
+        
         navigateBar.setBackgroundImage(UIImage(named:"navigation"),
             forBarMetrics: .Default)
     }

@@ -14,6 +14,9 @@ class AddNewFriend: UIViewController {
     @IBOutlet weak var foundLabel: UIButton!
     var fri : String = ""
     
+    @IBOutlet weak var doneButt: UIBarButtonItem!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,6 +39,9 @@ class AddNewFriend: UIViewController {
 
     }
     
+    @IBAction func doneButtTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     @IBAction func searchPressed(sender: UIButton) {
         

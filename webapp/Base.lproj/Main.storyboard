@@ -20,7 +20,7 @@
                         <outlet property="tabBarItem" destination="wqi-vI-cVY" id="mcJ-wQ-RtD"/>
                         <segue destination="2Kn-XS-Z1j" kind="relationship" relationship="viewControllers" id="SZy-3o-AOO"/>
                         <segue destination="7gT-Vn-mUa" kind="relationship" relationship="viewControllers" id="EJL-YH-dOY"/>
-                        <segue destination="Ftm-Hn-n3M" kind="relationship" relationship="viewControllers" id="cJV-Uc-HbM"/>
+                        <segue destination="nz1-Ml-jWJ" kind="relationship" relationship="viewControllers" id="RF5-2h-ip1"/>
                         <segue destination="Qey-Ne-vrL" kind="relationship" relationship="viewControllers" id="p4k-5b-iBh"/>
                         <segue destination="DBY-zY-lNx" kind="relationship" relationship="viewControllers" id="YGu-AD-8dI"/>
                     </connections>
@@ -65,7 +65,7 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="webapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DNw-uu-Dgq">
@@ -167,16 +167,65 @@
                                 <state key="normal" title="Add">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="L3A-LM-pgq" kind="push" id="Im6-9D-Kwl"/>
-                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9hl-Wu-bw4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1409.5" y="693.5"/>
+            <point key="canvasLocation" x="1234" y="500"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="7IZ-0q-pwO">
+            <objects>
+                <viewController id="nz1-Ml-jWJ" customClass="FriendsVC" customModule="webapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6a3-eE-HQq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ni0-Uh-mCF">
+                                <rect key="frame" x="0.0" y="44" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="AKI-LN-w7h">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AKI-LN-w7h" id="7y8-jg-h1d">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" id="sIo-Xb-N4w">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Friends" id="t34-1k-DzF">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="oYl-V8-NKS">
+                                            <connections>
+                                                <action selector="addButtTapped:" destination="nz1-Ml-jWJ" id="2WO-pk-J5F"/>
+                                                <segue destination="L3A-LM-pgq" kind="modal" identifier="goto_add" id="c9j-TO-BBv"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Friends" image="friends_ic" id="WAS-a1-d2q"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addButt" destination="oYl-V8-NKS" id="HdJ-dC-ncB"/>
+                        <outlet property="navigateBar" destination="sIo-Xb-N4w" id="jU1-5o-4rc"/>
+                        <outlet property="tableView" destination="Ni0-Uh-mCF" id="69f-Fw-uaT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sZh-lx-8G9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1617" y="533"/>
         </scene>
         <!--SharingVC-->
         <scene sceneID="yyo-k3-Fdz">
@@ -234,7 +283,7 @@
             </objects>
             <point key="canvasLocation" x="2302" y="693"/>
         </scene>
-        <!--ADD A NEW FRIEND-->
+        <!--Add New Friend-->
         <scene sceneID="Zzp-UF-mcQ">
             <objects>
                 <viewController id="L3A-LM-pgq" customClass="AddNewFriend" customModule="webapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -275,18 +324,31 @@
                                     <action selector="foundPressed:" destination="L3A-LM-pgq" eventType="touchUpInside" id="lqJ-HZ-nLd"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" id="BFS-rk-NMT">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Find new friend" id="PZ5-Cb-ecC">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="DeS-ee-NFj">
+                                            <connections>
+                                                <action selector="doneButtTapped:" destination="L3A-LM-pgq" id="VFV-Vz-O7B"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="ADD A NEW FRIEND" id="sgm-MM-68Q"/>
                     <connections>
+                        <outlet property="doneButt" destination="DeS-ee-NFj" id="Muc-oa-qbD"/>
                         <outlet property="foundLabel" destination="erq-1F-hIq" id="Igp-Tq-B2X"/>
                         <outlet property="searchUsername" destination="bTO-kY-8MC" id="4ZG-uf-Vvs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2aZ-cc-L38" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2052.5" y="12.5"/>
+            <point key="canvasLocation" x="2113" y="-177"/>
         </scene>
         <!--LoginVC View Controller-->
         <scene sceneID="vJt-w5-ak2">
@@ -333,7 +395,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.39087702470000002" green="1" blue="0.65863969209999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                <state key="normal" title="Sign In">
+                                <state key="normal" title="SIGN IN">
                                     <color key="titleColor" red="0.097367949669999995" green="0.1427398238" blue="0.71452809340000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -413,7 +475,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S53-Ao-qqB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1429" y="2335.9999999999991"/>
+            <point key="canvasLocation" x="1429" y="2515"/>
         </scene>
         <!--Toppings ScrollVC-->
         <scene sceneID="yyL-NB-KWN">

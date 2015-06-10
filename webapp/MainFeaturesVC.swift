@@ -19,12 +19,27 @@ class MainFeaturesVC: UIViewController {
     var isAnimating: Bool = false
     var dropDownViewIsDisplayed: Bool = false
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         var height:CGFloat = self.dropDownView.frame.size.height
         var width:CGFloat = self.dropDownView.frame.size.width
         self.dropDownView.frame = CGRectMake(0, -height, width, height)
         self.dropDownViewIsDisplayed = false
+        
+        
+       // change width of navigation bar
+            navigateBar.frame=CGRectMake(0, 0, 400, 60)
+
+            self.view .addSubview(navigateBar)
+        
+        
+        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
+            forBarMetrics: .Default)
+        
+        
+        menuButt.setBackgroundImage(UIImage(named: "menu_icon"), forState: .Normal, barMetrics: .Default)
     }
 
     
@@ -33,14 +48,6 @@ class MainFeaturesVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewDidAppear(animated: Bool) {
-        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
-            forBarMetrics: .Default)
-        
-        
-        menuButt.setBackgroundImage(UIImage(named: "menu_icon"), forState: .Normal, barMetrics: .Default)
-    }
-    
     /*
     @IBAction func menuButtonTapped(sender: UIBarButtonItem?) {
         if (self.dropDownViewIsDisplayed) {
