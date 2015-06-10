@@ -16,6 +16,7 @@ class AddNewFriend: UIViewController {
     
     @IBOutlet weak var doneButt: UIBarButtonItem!
     
+    @IBOutlet weak var navigateBar: UINavigationBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,12 @@ class AddNewFriend: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // change width of navigation bar
+        navigateBar.frame=CGRectMake(0, 0, 400, 60)
+        
+        self.view .addSubview(navigateBar)
+        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
+            forBarMetrics: .Default)
         // Dispose of any resources that can be recreated.
     }
     

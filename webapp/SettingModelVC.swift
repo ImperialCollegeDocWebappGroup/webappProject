@@ -36,17 +36,31 @@ class SettingModelVC: UIViewController {
         maleUser = true
         selectGender(sender)
         deselectGender(FemaleButt)
+        modelImage.image = UIImage(named: "defaultM")
+        
+        
     }
     
     @IBAction func FemaleTapped(sender: UIButton) {
         maleUser = false
         selectGender(sender)
         deselectGender(MaleButt)
+        modelImage.image = UIImage(named: "defaultF")
+
     }
     
     @IBOutlet weak var navigateBar: UINavigationBar!
     
+    @IBOutlet weak var modelImage: UIImageView!
     override func viewDidAppear(animated: Bool) {
+        navigateBar.frame=CGRectMake(0, 0, 400, 60)
+        
+        self.view .addSubview(navigateBar)
+
+        // change width of navigation bar
+        navigateBar.frame=CGRectMake(0, 0, 400, 60)
+        
+        self.view .addSubview(navigateBar)
         navigateBar.setBackgroundImage(UIImage(named:"navigation"),
             forBarMetrics: .Default)
     }

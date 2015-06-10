@@ -14,8 +14,6 @@ class MainFeaturesVC: UIViewController {
     
     @IBOutlet weak var menuButt: UIBarButtonItem!
     
-    @IBOutlet weak var dropDownView: UIView!
-    
     var isAnimating: Bool = false
     var dropDownViewIsDisplayed: Bool = false
     
@@ -23,14 +21,8 @@ class MainFeaturesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var height:CGFloat = self.dropDownView.frame.size.height
-        var width:CGFloat = self.dropDownView.frame.size.width
-        self.dropDownView.frame = CGRectMake(0, -height, width, height)
-        self.dropDownViewIsDisplayed = false
-        
-        
-       // change width of navigation bar
-            navigateBar.frame=CGRectMake(0, 0, 400, 60)
+               // change width of navigation bar
+            navigateBar.frame=CGRectMake(0, 0, 400, 100)
 
             self.view .addSubview(navigateBar)
         
@@ -40,13 +32,21 @@ class MainFeaturesVC: UIViewController {
         
         
         menuButt.setBackgroundImage(UIImage(named: "menu_icon"), forState: .Normal, barMetrics: .Default)
+        
+        
+        /*
+setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
+shadow, NSShadowAttributeName,
+[UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];*/
     }
 
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
 
     /*
     @IBAction func menuButtonTapped(sender: UIBarButtonItem?) {

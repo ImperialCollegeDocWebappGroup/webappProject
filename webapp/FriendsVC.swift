@@ -23,11 +23,17 @@ class FriendsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         self.tableView.editing = true
+        navigateBar.frame=CGRectMake(0, 0, 400, 60)
+        
+        self.view .addSubview(navigateBar)
+        
+        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
+            forBarMetrics: .Default)
+
         
         // Do any additional setup after loading the view.
     }
-    
+    /*
     override func viewDidAppear(animated: Bool) {
         // change width of navigation bar
         navigateBar.frame=CGRectMake(0, 0, 400, 60)
@@ -37,7 +43,7 @@ class FriendsVC: UIViewController {
         navigateBar.setBackgroundImage(UIImage(named:"navigation"),
             forBarMetrics: .Default)
     }
-    
+    */
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
