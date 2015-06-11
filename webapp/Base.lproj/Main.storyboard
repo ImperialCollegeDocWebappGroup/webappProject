@@ -21,7 +21,7 @@
                         <outlet property="tabBarItem" destination="wqi-vI-cVY" id="mcJ-wQ-RtD"/>
                         <segue destination="TSw-Qw-dMI" kind="relationship" relationship="viewControllers" id="SZy-3o-AOO"/>
                         <segue destination="7gT-Vn-mUa" kind="relationship" relationship="viewControllers" id="EJL-YH-dOY"/>
-                        <segue destination="nz1-Ml-jWJ" kind="relationship" relationship="viewControllers" id="RF5-2h-ip1"/>
+                        <segue destination="ulN-TG-rog" kind="relationship" relationship="viewControllers" id="RF5-2h-ip1"/>
                         <segue destination="Qey-Ne-vrL" kind="relationship" relationship="viewControllers" id="p4k-5b-iBh"/>
                         <segue destination="DBY-zY-lNx" kind="relationship" relationship="viewControllers" id="YGu-AD-8dI"/>
                     </connections>
@@ -220,7 +220,7 @@
             </objects>
             <point key="canvasLocation" x="1516.5" y="244.5"/>
         </scene>
-        <!--Friends-->
+        <!--FriendsVC-->
         <scene sceneID="7IZ-0q-pwO">
             <objects>
                 <viewController id="nz1-Ml-jWJ" customClass="FriendsVC" customModule="webapp" customModuleProvider="target" sceneMemberID="viewController">
@@ -236,7 +236,7 @@
                                 <rect key="frame" x="0.0" y="60" width="600" height="491"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendCell" textLabel="FUm-ze-TI4" imageView="LQd-dE-JO8" style="IBUITableViewCellStyleDefault" id="AKI-LN-w7h" customClass="FriendCell" customModule="webapp" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="FriendCell" textLabel="FUm-ze-TI4" imageView="LQd-dE-JO8" style="IBUITableViewCellStyleDefault" id="AKI-LN-w7h" customClass="FriendCell" customModule="webapp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AKI-LN-w7h" id="7y8-jg-h1d">
@@ -254,6 +254,9 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Bxs-OV-HMv" kind="push" identifier="gotoprofile" trigger="accessoryAction" id="bqm-VG-NLE"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -289,7 +292,7 @@
                             <constraint firstItem="Ni0-Uh-mCF" firstAttribute="top" secondItem="sIo-Xb-N4w" secondAttribute="bottom" constant="16" id="tS4-ib-UGV"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Friends" image="friends_ic" id="WAS-a1-d2q"/>
+                    <navigationItem key="navigationItem" id="LpP-6W-WeH"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addButt" destination="oYl-V8-NKS" id="HdJ-dC-ncB"/>
@@ -299,7 +302,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZh-lx-8G9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2840.5" y="550.5"/>
+            <point key="canvasLocation" x="3818" y="554"/>
+        </scene>
+        <!--Friend Profile-->
+        <scene sceneID="0kC-lJ-bGu">
+            <objects>
+                <viewController id="Bxs-OV-HMv" customClass="FriendProfile" customModule="webapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Vs5-dU-g0c"/>
+                        <viewControllerLayoutGuide type="bottom" id="UGd-A6-1n6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kk1-MW-fMM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="X2w-c5-K0z"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IfU-Vd-7Ru" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4689" y="646"/>
         </scene>
         <!--SharingVC-->
         <scene sceneID="yyo-k3-Fdz">
@@ -377,7 +399,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydE-SS-9PC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4415.5" y="313.5"/>
+            <point key="canvasLocation" x="5365" y="311"/>
         </scene>
         <!--Add New Friend-->
         <scene sceneID="Zzp-UF-mcQ">
@@ -475,7 +497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2aZ-cc-L38" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3792.5" y="164.5"/>
+            <point key="canvasLocation" x="4604" y="164"/>
         </scene>
         <!--LoginVC View Controller-->
         <scene sceneID="vJt-w5-ak2">
@@ -725,7 +747,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ovN-BC-h9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5156" y="517"/>
+            <point key="canvasLocation" x="5968" y="517"/>
         </scene>
         <!--Bottoms ScrollVC-->
         <scene sceneID="FqH-oy-5cj">
@@ -736,7 +758,7 @@
                         <viewControllerLayoutGuide type="bottom" id="N62-x4-eYx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bjG-W9-f5A">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="wl1-Hq-LXI">
@@ -771,7 +793,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="crv-lp-Nze" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3800.5" y="1093.5"/>
+            <point key="canvasLocation" x="4612" y="1093"/>
         </scene>
         <!--SignupVC-->
         <scene sceneID="Pi2-u6-PzK">
@@ -1339,7 +1361,7 @@
             <objects>
                 <tableViewController id="7gT-Vn-mUa" customClass="WardrobeTVC" customModule="webapp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kAr-JH-pnn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1439,7 +1461,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SVN-d5-1uX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3126" y="1775"/>
+            <point key="canvasLocation" x="3034" y="1579"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="lbR-eL-NGp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ulN-TG-rog" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Friends" image="friends_ic" id="WAS-a1-d2q"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YNz-xt-Bmd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nz1-Ml-jWJ" kind="relationship" relationship="rootViewController" id="dqU-E2-0d3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QMh-I2-FaX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3006" y="554"/>
         </scene>
     </scenes>
     <resources>
@@ -1459,11 +1500,11 @@
         <image name="welcome1" width="694" height="350"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DUG-Ad-2le"/>
-        <segue reference="R3n-gH-sDe"/>
-        <segue reference="uPJ-qB-xmA"/>
+        <segue reference="w3r-YD-KRj"/>
         <segue reference="rc6-sg-cxC"/>
-        <segue reference="mgZ-R3-dTL"/>
+        <segue reference="NsL-Qv-GqE"/>
+        <segue reference="uPJ-qB-xmA"/>
+        <segue reference="R3n-gH-sDe"/>
         <segue reference="AGi-Pk-CDR"/>
     </inferredMetricsTieBreakers>
 </document>

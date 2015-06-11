@@ -30,6 +30,7 @@
 		365A51111B133805005C2E92 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365A510F1B133805005C2E92 /* LaunchScreen.xib */; };
 		365A511D1B133805005C2E92 /* webappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365A511C1B133805005C2E92 /* webappTests.swift */; };
 		365A51271B134D89005C2E92 /* LoginVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365A51261B134D89005C2E92 /* LoginVCViewController.swift */; };
+		BDF519021B2A4D5600872BA7 /* FriendProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF519011B2A4D5600872BA7 /* FriendProfile.swift */; };
 		D48D79A61B288F15007B40E4 /* MomentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48D79A51B288F15007B40E4 /* MomentCell.swift */; };
 		D4E37FC81B20D9950066AF5D /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E37FC71B20D9950066AF5D /* FriendCell.swift */; };
 		D4E37FCE1B20DC390066AF5D /* AddNewFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E37FCD1B20DC390066AF5D /* AddNewFriend.swift */; };
@@ -73,6 +74,7 @@
 		365A511B1B133805005C2E92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		365A511C1B133805005C2E92 /* webappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webappTests.swift; sourceTree = "<group>"; };
 		365A51261B134D89005C2E92 /* LoginVCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVCViewController.swift; sourceTree = "<group>"; };
+		BDF519011B2A4D5600872BA7 /* FriendProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendProfile.swift; sourceTree = "<group>"; };
 		D48D79A51B288F15007B40E4 /* MomentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentCell.swift; sourceTree = "<group>"; };
 		D4E37FC71B20D9950066AF5D /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		D4E37FCD1B20DC390066AF5D /* AddNewFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewFriend.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				181F63181B2834E300A0CB1D /* FriendsVC.swift */,
 				D4E37FC71B20D9950066AF5D /* FriendCell.swift */,
 				184BA3DD1B285BA900E53202 /* CombineVC.swift */,
+				BDF519011B2A4D5600872BA7 /* FriendProfile.swift */,
 			);
 			path = webapp;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				181F63191B2834E300A0CB1D /* FriendsVC.swift in Sources */,
 				186B81DB1B206CAC00C3DD9B /* ytcpsocket.swift in Sources */,
 				D4E37FC81B20D9950066AF5D /* FriendCell.swift in Sources */,
+				BDF519021B2A4D5600872BA7 /* FriendProfile.swift in Sources */,
 				188F049F1B25B74A00F55F41 /* SharingVC.swift in Sources */,
 				D4E37FCE1B20DC390066AF5D /* AddNewFriend.swift in Sources */,
 				188F04A51B25E4B100F55F41 /* SettingsVC.swift in Sources */,

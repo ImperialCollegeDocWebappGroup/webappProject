@@ -28,7 +28,7 @@ class FriendsVC: UIViewController {
         navigateBar.setBackgroundImage(UIImage(named:"navigation"),
             forBarMetrics: .Default)
         
-        self.tableView.editing = true
+        //self.tableView.editing = true
         // Do any additional setup after loading the view.
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Friendcell")
@@ -87,10 +87,17 @@ class FriendsVC: UIViewController {
         
         // Configure the cell...
         cell.textLabel!.text = self.friends[indexPath.row]
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("gotoprofile", sender: self)    
     
+    }
+    
+    
+    /*
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         return .None
     }
@@ -98,10 +105,12 @@ class FriendsVC: UIViewController {
     func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
     }
-    
+    */
     @IBAction func addButtTapped(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("goto_add", sender: self)
     }
+    
+    
     /*
     // MARK: - Navigation
     
@@ -111,7 +120,7 @@ class FriendsVC: UIViewController {
     // Pass the selected object to the new view controller.
     }
     */
-    
+    /*
     func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
         
         let movedObject = self.friends[fromIndexPath.row]
@@ -119,5 +128,5 @@ class FriendsVC: UIViewController {
         friends.insert(movedObject, atIndex: toIndexPath.row)
         NSLog("%@", "\(fromIndexPath.row) => \(toIndexPath.row) \(friends)")
     }
-    
+ */
 }
