@@ -9,7 +9,7 @@
 import UIKit
 
 class SignupVC: UIViewController {
-
+    
     @IBOutlet weak var txtUsername: UITextField!
     
     @IBOutlet weak var txtPassword: UITextField!
@@ -18,16 +18,16 @@ class SignupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     @IBAction func signupTapped(sender: AnyObject) {
         var username:NSString = txtUsername.text as NSString
         var password:NSString = txtPassword.text as NSString
@@ -99,8 +99,13 @@ class SignupVC: UIViewController {
                     if(success == 1)
                     {
                         NSLog("Sign Up SUCCESS");
+                        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                        prefs.setObject(username, forKey: "USERNAME")
+                        prefs.setInteger(1, forKey: "ISLOGGEDIN")
+                        prefs.synchronize()
+                        prefs = NSUserDefaults.standardUserDefaults()
+                        println (prefs.valueForKey("USERNAME") as! NSString as String)
                         self.performSegueWithIdentifier("goto_entry", sender: self)
-                        //self.dismissViewControllerAnimated(true, completion: nil)
                     } else {
                         var error_msg:NSString
                         
@@ -142,18 +147,61 @@ class SignupVC: UIViewController {
     }
     
     
+    func signUpSuccess() {
+        let query: String = "INSERT INTO userprofile VALUES ('Sam2', 'Jiahao2', true, 30, 170, 65, 6, ARRAY['http://www.selfridges.com/en/givenchy-amerika-cuban-fit-cotton-jersey-t-shirt_242-3000831-15S73176511/?previewAttribute=Black']);"
+        
+        var client:TCPClient = TCPClient(addr: "146.169.53.36", port: 1111)
+        var (csuccess,cerrmsg)=client.connect(timeout: 10)
+        if csuccess{
+            println("Connection success!")
+            var (ssuccess,serrmsg)=client.send(str: "Hey!\n")
+            if ssuccess{
+                println("sent success!")
+                var data = client.read(1024*10)
+                if let d = data {
+                    if let str = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
+                        println("read success")
+                        println(str)
+                        var data: NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
+                        var error1: NSError?
+                        var jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error1)
+                        if let e  = error1 {
+                            println("Error: \(error1)")
+                        }
+                        let c = (jsonObject as! NSDictionary)["content"] as! [String]
+                        let u = (jsonObject as! NSDictionary)["usrname"] as! [String]
+                        let p = (jsonObject as! NSDictionary)["ptime"] as! [String]
+                        println("u: \(u[0])")
+                        println("c: \(c[0])")
+                        println("p: \(p[0])")
+                        client.close()
+                    }
+                }
+            } else {
+                println("sent failed!")
+                client.close()
+                println(serrmsg)
+            }
+        }else{
+            println("connection failed!")
+            client.close()
+            println(cerrmsg)
+        }
+        
+    }
+    
     @IBAction func gotoLogin(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
-    
+        
     }
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

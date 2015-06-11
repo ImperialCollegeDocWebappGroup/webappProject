@@ -25,9 +25,9 @@ class SettingModelVC: UIViewController {
     @IBOutlet weak var FemaleButt: UIButton!
     @IBOutlet weak var MaleButt: UIButton!
     @IBOutlet weak var txtHeight:
-        UITextField!
+    UITextField!
     @IBOutlet weak var txtWeight:
-        UITextField!
+    UITextField!
     @IBOutlet weak var SkinColourSlider: UISlider!
     
     @IBOutlet weak var SaveButt: UIBarButtonItem!
@@ -46,7 +46,7 @@ class SettingModelVC: UIViewController {
         selectGender(sender)
         deselectGender(MaleButt)
         modelImage.image = UIImage(named: "defaultF")
-
+        
     }
     
     @IBOutlet weak var navigateBar: UINavigationBar!
@@ -56,7 +56,7 @@ class SettingModelVC: UIViewController {
         navigateBar.frame=CGRectMake(0, 0, 400, 60)
         
         self.view .addSubview(navigateBar)
-
+        
         // change width of navigation bar
         navigateBar.frame=CGRectMake(0, 0, 400, 60)
         
@@ -85,7 +85,7 @@ class SettingModelVC: UIViewController {
         }
     }
     
-
+    
     @IBAction func skinColourChanged(sender: UISlider) {
         
         skinColour = Int(sender.value)
@@ -117,22 +117,14 @@ class SettingModelVC: UIViewController {
         
         if invalidInput {
             var invalidInputAlert = UIAlertController(title: "Invalid inputs", message: error_msg as String, preferredStyle: .Alert )
-            
             invalidInputAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: processAlert))
-            
             invalidInputAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-            
             self.presentViewController(invalidInputAlert, animated: true, completion: nil)
-            
         } else {
             var confirmAlert = UIAlertController(title: "Valid inputs", message: "Do you confirm your information?", preferredStyle: .Alert )
-            
             confirmAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: processConfirmAlert))
-            
             confirmAlert.addAction(UIAlertAction(title: "Wait a sec", style: .Cancel, handler: nil))
-            
             self.presentViewController(confirmAlert, animated: true, completion: nil)
-            
         }
     }
     
@@ -140,44 +132,81 @@ class SettingModelVC: UIViewController {
         // use default values of height and weight
         height = heightInit
         weight = weightInit
-        postToDB()
-        self.performSegueWithIdentifier("goto_home", sender: self)
+        if (postToDB()) {
+            self.performSegueWithIdentifier("goto_home", sender: self)
+        } else {
+            var nerworkErrorAlert = UIAlertController(title: "Network error", message: "Network error, please try again", preferredStyle: .Alert )
+            nerworkErrorAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            self.presentViewController(nerworkErrorAlert, animated: true, completion: nil)
+        }
         // navigationController?.popViewControllerAnimated(true)
     }
     
     func processConfirmAlert(alert: UIAlertAction!) {
-        postToDB()
-        self.performSegueWithIdentifier("goto_home", sender: self)
+        if (postToDB()) {
+            self.performSegueWithIdentifier("goto_home", sender: self)
+        } else {
+            var nerworkErrorAlert = UIAlertController(title: "Network error", message: "Network error, please try again", preferredStyle: .Alert )
+            nerworkErrorAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            self.presentViewController(nerworkErrorAlert, animated: true, completion: nil)
+        }
         //navigationController?.popViewControllerAnimated(true)
     }
     
     
-    func postToDB() {
+    func postToDB() -> Bool {
         // post user information to database
-        var info = [maleUser, height, weight, skinColour]
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
+        
+        //INSERT INTO userprofile VALUES 
+        //('Sam2', 'Jiahao2', true, 30, 170, 65, 6,
+// ARRAY['http://www.selfridges.com/en/givenchy-amerika-cuban-fit-cotton-jersey-t-shirt_242-3000831-15S73176511/?previewAttribute=Black']);
+        var gender = "false"
+        if (maleUser) {
+            gender = "true"
+        }
+        var info = [gender, String(height), String(weight), String(skinColour)]
+        
+        
+        var requestLine = ("INSERT INTO userprofile VALUES ('" + logname + "', '")
+        requestLine += (logname + "', " + info[0] + ", 20, " + info[1] + ", ")
+        requestLine += (info[2] + ", " + info[3] + ");\n")
+        
+        println(requestLine)
+        
         var client:TCPClient = TCPClient(addr: "146.169.53.36", port: 1111)
         var (success,errmsg)=client.connect(timeout: 10)
         if success{
             println("Connection success!")
-            var (success,errmsg)=client.send(str:"SELECT * FROM cities;\n")
-            if success{
+            var (success,errmsg)=client.send(str: requestLine)
+            if success {
                 println("sent success!")
                 var data=client.read(1024*10)
                 if let d = data {
                     if let str = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
                         println("read success")
                         println(str)
-                        client.close()
+                        if (str == "ERROR") {
+                            client.close()
+                            return false
+                        } else {
+                            return true
+                        }
+                        
                     }
                 }
             }else{
                 client.close()
                 println(errmsg)
+                return false
             }
         }else{
             client.close()
             println(errmsg)
+            return false
         }
+        return false
     }
     
     override func viewDidLoad() {
@@ -188,5 +217,5 @@ class SettingModelVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-        
+    
 }

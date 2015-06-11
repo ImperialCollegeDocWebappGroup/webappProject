@@ -16,6 +16,12 @@ class MainFeaturesVC: UIViewController {
     
     @IBOutlet weak var dropDownMenu: UITableView!
 
+    @IBOutlet weak var modelView: UIImageView!
+    
+    @IBOutlet weak var shirtView: UIImageView!
+    
+    var shirt: UIImage! = nil
+    
     var menus:[String] = ["Load Clothing", "Combine with another", "Share to Friends"]
     
     
@@ -40,6 +46,8 @@ shadow, NSShadowAttributeName,
 [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];*/
         
         dropDownMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        shirtView.image = shirt
+     
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -121,5 +129,11 @@ shadow, NSShadowAttributeName,
                 })
         }
     }*/
+    
+    
+   
+
+
+    
 }
 

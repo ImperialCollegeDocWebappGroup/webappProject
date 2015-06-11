@@ -130,11 +130,13 @@ class LoadImageVC: UIViewController {
         let url = NSURL(string: imageUrl)
         if let data = NSData(contentsOfURL: url!) {
             imageURL.image = UIImage(data: data)
+            println("good1")
         } else {
             invalidURL = true
         }
         
         if invalidURL {
+            println("not good")
             var invalidURLAlert = UIAlertController(title: "Invalid URL", message: error_msg as String, preferredStyle: .Alert )
             
             invalidURLAlert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
@@ -144,6 +146,21 @@ class LoadImageVC: UIViewController {
         }
     }
     
+ 
+  
+ 
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+         println("called")
+        println(segue.destinationViewController.description)
+        println(segue.sourceViewController.description)
+        println(segue.identifier)
+        var svc = segue.destinationViewController as! MainFeaturesVC;
+           svc.shirt = imageURL.image
+    }
+    
+   
+  
    /* @IBAction func displayImage(sender: UIButton) {
         var image2 : UIImage = UIImage(named:"notfound")!
         let url = NSURL(string: imageUrl)
