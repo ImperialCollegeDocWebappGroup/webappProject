@@ -990,14 +990,27 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultM" translatesAutoresizingMaskIntoConstraints="NO" id="SEa-1h-lZx">
-                                <rect key="frame" x="3" y="239" width="597" height="360"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="defaultM" translatesAutoresizingMaskIntoConstraints="NO" id="SEa-1h-lZx">
+                                <rect key="frame" x="0.0" y="323" width="409" height="277"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="skinColours" translatesAutoresizingMaskIntoConstraints="NO" id="R4J-8Y-aol">
                                 <rect key="frame" x="213" y="220" width="136" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="113" id="FNb-H8-LcK"/>
                                 </constraints>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Efm-mB-PiY">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="camera" id="vAX-sI-P9L">
+                                        <connections>
+                                            <action selector="cameraTapped:" destination="1Ty-56-PsZ" id="M2m-ug-Sgv"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ihe-YJ-Hvx">
+                                <rect key="frame" x="108" y="238" width="198" height="114"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1044,6 +1057,7 @@
                         <outlet property="FemaleButt" destination="fLD-md-pJZ" id="N9G-5C-Zau"/>
                         <outlet property="MaleButt" destination="tsN-t2-mJC" id="BWV-RA-zdV"/>
                         <outlet property="SkinColourSlider" destination="8QJ-TB-pwz" id="CoM-z1-iqh"/>
+                        <outlet property="faceview" destination="Ihe-YJ-Hvx" id="J36-sV-4LI"/>
                         <outlet property="modelImage" destination="SEa-1h-lZx" id="XMP-fX-iVH"/>
                         <outlet property="txtHeight" destination="nMQ-Ha-JQ0" id="fc1-TQ-L0K"/>
                         <outlet property="txtWeight" destination="kWB-2l-0M2" id="Bjn-ZO-sln"/>
@@ -1052,7 +1066,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nMb-OM-UXC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2040" y="2406"/>
+            <point key="canvasLocation" x="2045" y="2406"/>
         </scene>
         <!--Main FeaturesVC-->
         <scene sceneID="Yuf-No-4T8">

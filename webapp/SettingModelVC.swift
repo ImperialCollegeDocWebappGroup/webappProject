@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingModelVC: UIViewController {
+class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     let heightMin = 120
     let heightMax = 220
     let weightMin = 30
@@ -22,6 +22,8 @@ class SettingModelVC: UIViewController {
     var height: Int = 160
     var weight: Int = 50
     
+    var imagePicker: UIImagePickerController!
+    
     @IBOutlet weak var FemaleButt: UIButton!
     @IBOutlet weak var MaleButt: UIButton!
     @IBOutlet weak var txtHeight:
@@ -30,12 +32,15 @@ class SettingModelVC: UIViewController {
     UITextField!
     @IBOutlet weak var SkinColourSlider: UISlider!
     
-    
+    @IBOutlet weak var modelImage: UIImageView!
+
+    @IBOutlet weak var faceview: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         var saveButton: UIBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveTapped:")
         self.navigationItem.rightBarButtonItem = saveButton
+        self.tabBarController?.tabBar.hidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,7 +61,7 @@ class SettingModelVC: UIViewController {
         
     }
 
-    
+   
     
     @IBAction func MaleTapped(sender: UIButton) {
         maleUser = true
@@ -74,12 +79,12 @@ class SettingModelVC: UIViewController {
         modelImage.image = UIImage(named: "defaultF")
         
     }
+
     
-    
-    @IBOutlet weak var modelImage: UIImageView!
     override func viewDidAppear(animated: Bool) {
     
     }
+    
     
     func selectGender(butt: UIButton) {
         butt.selected = true
@@ -105,6 +110,24 @@ class SettingModelVC: UIViewController {
     @IBAction func skinColourChanged(sender: UISlider) {
         
         skinColour = Int(sender.value)
+    }
+    
+    
+    
+    @IBAction func cameraTapped(sender: UIBarButtonItem) {
+   /*     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            let imagePicker = UIImagePickerController()
+            
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+            imagePicker.mediaTypes = [kUTTypeImage as NSString]
+            imagePicker.allowsEditing = false
+            
+            self.presentedViewController(imagePicker, animated:true, completion: nil)
+            
+            newMedia = true
+        }*/
+        
     }
     
     
