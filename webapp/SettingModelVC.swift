@@ -30,7 +30,33 @@ class SettingModelVC: UIViewController {
     UITextField!
     @IBOutlet weak var SkinColourSlider: UISlider!
     
-    @IBOutlet weak var SaveButt: UIBarButtonItem!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var saveButton: UIBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveTapped:")
+        self.navigationItem.rightBarButtonItem = saveButton
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        println("saved")
+        if segue.identifier == "saved" {
+            
+            println(segue.destinationViewController.description)
+            println(segue.sourceViewController.description)
+            println(segue.identifier)
+            var svc = segue.destinationViewController as! MainFeaturesVC;
+            svc.shirt = modelImage.image
+        }
+        
+    }
+
+    
     
     @IBAction func MaleTapped(sender: UIButton) {
         maleUser = true
@@ -49,20 +75,10 @@ class SettingModelVC: UIViewController {
         
     }
     
-    @IBOutlet weak var navigateBar: UINavigationBar!
     
     @IBOutlet weak var modelImage: UIImageView!
     override func viewDidAppear(animated: Bool) {
-        navigateBar.frame=CGRectMake(0, 0, 400, 60)
-        
-        self.view .addSubview(navigateBar)
-        
-        // change width of navigation bar
-        navigateBar.frame=CGRectMake(0, 0, 400, 60)
-        
-        self.view .addSubview(navigateBar)
-        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
-            forBarMetrics: .Default)
+    
     }
     
     func selectGender(butt: UIButton) {
@@ -93,7 +109,7 @@ class SettingModelVC: UIViewController {
     
     
     
-    @IBAction func SaveTapped(sender: UIBarButtonItem) { // check height and weight value
+    func saveTapped(sender: UIBarButtonItem) { // check height and weight value
         let a:Int? = txtHeight.text.toInt()
         let b:Int? = txtWeight.text.toInt()
         
@@ -133,7 +149,7 @@ class SettingModelVC: UIViewController {
         height = heightInit
         weight = weightInit
         if (postToDB()) {
-            self.performSegueWithIdentifier("goto_home", sender: self)
+            self.performSegueWithIdentifier("saved", sender: self)
         } else {
             var nerworkErrorAlert = UIAlertController(title: "Network error", message: "Network error, please try again", preferredStyle: .Alert )
             nerworkErrorAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
@@ -144,7 +160,7 @@ class SettingModelVC: UIViewController {
     
     func processConfirmAlert(alert: UIAlertAction!) {
         if (postToDB()) {
-            self.performSegueWithIdentifier("goto_home", sender: self)
+            self.performSegueWithIdentifier("saved", sender: self)
         } else {
             var nerworkErrorAlert = UIAlertController(title: "Network error", message: "Network error, please try again", preferredStyle: .Alert )
             nerworkErrorAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
@@ -208,14 +224,5 @@ class SettingModelVC: UIViewController {
         }
         return false
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
 }

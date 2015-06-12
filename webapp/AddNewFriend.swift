@@ -14,9 +14,6 @@ class AddNewFriend: UIViewController {
     @IBOutlet weak var foundLabel: UIButton!
     var fri : String = ""
     
-    @IBOutlet weak var doneButt: UIBarButtonItem!
-    
-    @IBOutlet weak var navigateBar: UINavigationBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +23,7 @@ class AddNewFriend: UIViewController {
     }
 
     override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // change width of navigation bar
-        navigateBar.frame=CGRectMake(0, 0, 400, 60)
-        
-        self.view .addSubview(navigateBar)
-        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
-            forBarMetrics: .Default)
-        // Dispose of any resources that can be recreated.
-    }
+        super.didReceiveMemoryWarning()    }
     
     @IBAction func foundPressed(sender: UIButton) {
          // code to send friend request
@@ -44,10 +33,6 @@ class AddNewFriend: UIViewController {
         
         self.presentViewController(alertController, animated: true, completion: nil)
 
-    }
-    
-    @IBAction func doneButtTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func searchPressed(sender: UIButton) {

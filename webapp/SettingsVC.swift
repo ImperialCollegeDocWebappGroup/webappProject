@@ -13,7 +13,6 @@ class SettingsVC: UIViewController {
     
     var settings: [String] = ["Reset my model", "Logout"]
     
-    @IBOutlet weak var navigateBar: UINavigationBar!
 
      @IBOutlet var tableView: UITableView!
     
@@ -23,13 +22,12 @@ class SettingsVC: UIViewController {
     }
  
     override func viewDidAppear(animated: Bool) {
-        // change width of navigation bar
-        navigateBar.frame=CGRectMake(0, 0, 400, 60)
+        // change width of navigation bar   
+               self.navigationItem.title = "SETTINGS"
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
         
-        self.view .addSubview(navigateBar)
-        
-        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
-            forBarMetrics: .Default)
+
     }
     
     override func viewDidLoad() {
@@ -37,6 +35,8 @@ class SettingsVC: UIViewController {
         super.viewDidLoad()
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

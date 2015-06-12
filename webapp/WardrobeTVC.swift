@@ -45,9 +45,9 @@ class WardrobeTVC: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch (indexPath.row) {
-        case 0: self.performSegueWithIdentifier("view_toppings", sender: self)
+        case 0: self.performSegueWithIdentifier("goto_topping", sender: self)
         case 1:
-            self.performSegueWithIdentifier("view_bottoms", sender: self)
+            self.performSegueWithIdentifier("goto_bottom", sender: self)
         default: ()
         }
     }

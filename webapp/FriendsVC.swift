@@ -9,29 +9,22 @@
 import UIKit
 
 class FriendsVC: UIViewController {
-
-    @IBOutlet weak var navigateBar: UINavigationBar!
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var addButt: UIBarButtonItem!
     
     
     var friends = ["Hubert Yates", "Ricardo Nichols", "Raul Garner", "Wendy Stewart"]
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigateBar.frame=CGRectMake(0, 0, 400, 60)
-        
-        self.view .addSubview(navigateBar)
-        
-        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
-            forBarMetrics: .Default)
-        
-        //self.tableView.editing = true
-        // Do any additional setup after loading the view.
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Friendcell")
+        self.navigationItem.title = "Friends"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation4"), forBarMetrics: .Default)
+
         
     }
     
@@ -106,9 +99,7 @@ class FriendsVC: UIViewController {
         return false
     }
     */
-    @IBAction func addButtTapped(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("goto_add", sender: self)
-    }
+
     
     
     /*

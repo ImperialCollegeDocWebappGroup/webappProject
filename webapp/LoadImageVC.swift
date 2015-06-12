@@ -16,18 +16,9 @@ class LoadImageVC: UIViewController {
     
     @IBOutlet weak var imageURL: UIImageView!
     
-    @IBOutlet weak var navigateBar: UINavigationBar!
-    
-    override func viewDidLoad() {
+       override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        navigateBar.frame=CGRectMake(0, 0, 400, 60)
-        
-        self.view .addSubview(navigateBar)
-        
-        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
-            forBarMetrics: .Default)
-
+        self.navigationController?.navigationBar.backItem?.title = "Cancel"
     }
     
     override func didReceiveMemoryWarning() {

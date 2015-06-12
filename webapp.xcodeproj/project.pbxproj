@@ -30,6 +30,7 @@
 		365A51111B133805005C2E92 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365A510F1B133805005C2E92 /* LaunchScreen.xib */; };
 		365A511D1B133805005C2E92 /* webappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365A511C1B133805005C2E92 /* webappTests.swift */; };
 		365A51271B134D89005C2E92 /* LoginVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365A51261B134D89005C2E92 /* LoginVCViewController.swift */; };
+		491DDDEE1B2AF8E700992831 /* PhotoViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491DDDED1B2AF8E700992831 /* PhotoViewVC.swift */; };
 		BDF519021B2A4D5600872BA7 /* FriendProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF519011B2A4D5600872BA7 /* FriendProfile.swift */; };
 		D48D79A61B288F15007B40E4 /* MomentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48D79A51B288F15007B40E4 /* MomentCell.swift */; };
 		D4E37FC81B20D9950066AF5D /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E37FC71B20D9950066AF5D /* FriendCell.swift */; };
@@ -74,6 +75,7 @@
 		365A511B1B133805005C2E92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		365A511C1B133805005C2E92 /* webappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webappTests.swift; sourceTree = "<group>"; };
 		365A51261B134D89005C2E92 /* LoginVCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVCViewController.swift; sourceTree = "<group>"; };
+		491DDDED1B2AF8E700992831 /* PhotoViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewVC.swift; sourceTree = "<group>"; };
 		BDF519011B2A4D5600872BA7 /* FriendProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendProfile.swift; sourceTree = "<group>"; };
 		D48D79A51B288F15007B40E4 /* MomentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentCell.swift; sourceTree = "<group>"; };
 		D4E37FC71B20D9950066AF5D /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				D4E37FC71B20D9950066AF5D /* FriendCell.swift */,
 				184BA3DD1B285BA900E53202 /* CombineVC.swift */,
 				BDF519011B2A4D5600872BA7 /* FriendProfile.swift */,
+				491DDDED1B2AF8E700992831 /* PhotoViewVC.swift */,
 			);
 			path = webapp;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				1846BAC51B1E768300FEA88E /* SettingModelVC.swift in Sources */,
 				181F63191B2834E300A0CB1D /* FriendsVC.swift in Sources */,
 				186B81DB1B206CAC00C3DD9B /* ytcpsocket.swift in Sources */,
+				491DDDEE1B2AF8E700992831 /* PhotoViewVC.swift in Sources */,
 				D4E37FC81B20D9950066AF5D /* FriendCell.swift in Sources */,
 				BDF519021B2A4D5600872BA7 /* FriendProfile.swift in Sources */,
 				188F049F1B25B74A00F55F41 /* SharingVC.swift in Sources */,

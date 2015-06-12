@@ -10,7 +10,6 @@ import UIKit
 
 class MainFeaturesVC: UIViewController {
 
-    @IBOutlet weak var navigateBar: UINavigationBar!
     
     @IBOutlet weak var menuButt: UIBarButtonItem!
     
@@ -22,23 +21,20 @@ class MainFeaturesVC: UIViewController {
     
     var shirt: UIImage! = nil
     
-    var menus:[String] = ["Load Clothing", "Combine with another", "Share to Friends"]
+    var menus:[String] = ["Load Clothing", "Combine with another", "Share to Friends", "Clear Appearance"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-               // change width of navigation bar
-            navigateBar.frame=CGRectMake(0, 0, 400, 100)
-            self.view .addSubview(navigateBar)
-        
-        
-        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
-            forBarMetrics: .Default)
-        
         
         menuButt.setBackgroundImage(UIImage(named: "menu_icon"), forState: .Normal, barMetrics: .Default)
         
         dropDownMenu.hidden = true
+        self.navigationItem.title = "FITTING ROOM"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        
         /*
 setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
 [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
@@ -78,6 +74,9 @@ shadow, NSShadowAttributeName,
             self.performSegueWithIdentifier("goto_combine", sender: self)
         case 2:
             self.performSegueWithIdentifier("goto_share", sender: self)
+        case 3:
+            println("selected")
+            shirtView.image = nil
         default: ()
         }
     }
@@ -101,37 +100,18 @@ shadow, NSShadowAttributeName,
     
     func hideDropDownView() {
         var frame:CGRect = self.dropDownMenu.frame
-        frame.origin.y = -frame.size.height
+        //frame.origin.y = -frame.size.height
         dropDownMenu.hidden = true
         //self.animateDropDownToFrame(frame) {}
     }
     
     func showDropDownView() {
         var frame:CGRect = self.dropDownMenu.frame
-        frame.origin.y = self.navigateBar.frame.size.height
+        //frame.origin.y = self.navigateBar.frame.size.height
         dropDownMenu.hidden = false
        // self.animateDropDownToFrame(frame) {}
         
     }
-    /*
-    func animateDropDownToFrame(frame: CGRect, completion:() -> Void) {
-        if (!self.isAnimating) {
-            self.isAnimating = true
-            
-            UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut,
-                animations: { () -> Void in self.dropDownView.frame = frame
-                }, completion:  {(completed: Bool) -> Void in {
-                    self.isAnimating = false
-                    if (completed) {
-                        completion()
-                    }
-                    }
-                })
-        }
-    }*/
-    
-    
-   
 
 
     

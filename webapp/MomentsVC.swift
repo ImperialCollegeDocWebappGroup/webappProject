@@ -10,8 +10,6 @@ import UIKit
 
 class MomentsVC: UIViewController {
 
-    @IBOutlet weak var navigateBar: UINavigationBar!
-    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -28,14 +26,15 @@ class MomentsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigateBar.frame=CGRectMake(0, 0, 400, 60)
-        
-        self.view .addSubview(navigateBar)
-        
-        navigateBar.setBackgroundImage(UIImage(named:"navigation"),forBarMetrics: .Default)
-        
-        //self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "MomentCell")
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+    self.navigationItem.title = "Moments"
+    self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
+    
+    self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation3"), forBarMetrics: .Default)
+    
+
     }
     
     /*
@@ -76,14 +75,5 @@ class MomentsVC: UIViewController {
         
         return cell
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

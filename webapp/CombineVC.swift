@@ -8,10 +8,17 @@
 
 import UIKit
 
-class CombineVC: UIViewController {
+class CombineVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "My Controller"
+        self.tabBarController?.hidesBottomBarWhenPushed
+        
 
         // Do any additional setup after loading the view.
     }
@@ -22,14 +29,16 @@ class CombineVC: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
     }
-    */
-
+    
+    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell: UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath) as! UICollectionViewCell
+        cell.backgroundColor = UIColor.redColor()
+        
+        return cell
+    
+    }
 }

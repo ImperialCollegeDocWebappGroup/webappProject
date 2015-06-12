@@ -10,22 +10,21 @@ import UIKit
 
 class SharingVC: UIViewController {
 
-    @IBOutlet weak var navigateBar: UINavigationBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
 
         // Do any additional setup after loading the view.
     }
 
     override func viewDidAppear(animated: Bool) {
         // change width of navigation bar
-        navigateBar.frame=CGRectMake(0, 0, 400, 60)
+        self.navigationItem.title = "Share to friends"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
         
-        self.view .addSubview(navigateBar)
-        
-        navigateBar.setBackgroundImage(UIImage(named:"navigation"),
-            forBarMetrics: .Default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation2"), forBarMetrics: .Default)
+
     }
     
     override func didReceiveMemoryWarning() {
