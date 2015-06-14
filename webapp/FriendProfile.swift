@@ -10,9 +10,13 @@ import UIKit
 
 class FriendProfile: UIViewController {
 
+    @IBOutlet weak var FriendName: UILabel!
+    
+    var name : String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        FriendName.text = name
         // Do any additional setup after loading the view.
     }
 

@@ -12,7 +12,7 @@ class FriendsVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    
+    var selectedRow: Int = 0
     
     var friends = ["Hubert Yates", "Ricardo Nichols", "Raul Garner", "Wendy Stewart"]
    
@@ -85,10 +85,18 @@ class FriendsVC: UIViewController {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("gotoprofile", sender: self)    
+       selectedRow = indexPath.row
+        self.performSegueWithIdentifier("gotoprofile", sender: self)
     
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        var dvc = segue.destinationViewController as! FriendProfile
+        // println(friends[selectedRow])
+        dvc.name = friends[selectedRow]
+        
+    }
     
     /*
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
