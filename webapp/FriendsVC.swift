@@ -14,8 +14,15 @@ class FriendsVC: UIViewController {
     
     var selectedRow: Int = 0
     
-    var friends = ["Hubert Yates", "Ricardo Nichols", "Raul Garner", "Wendy Stewart"]
-   
+    
+    var friends : [NSString] = ["Hubert Yates", "Ricardo Nichols", "Raul Garner", "Wendy Stewart"]
+    
+    var str2 : NSString = ""
+    
+    let link1 : String = "http://www.doc.ic.ac.uk/~jl6613/"
+    
+    let names : [String] = ["babyicon.jpeg","dengchaoicon.jpg","fanbingbingicon.jpeg","huangxiaomingicon.jpeg","kenzhendongicon.jpg","zhangxinyuicon.jpeg","zhangzhenicon.jpg"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +31,9 @@ class FriendsVC: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation4"), forBarMetrics: .Default)
+         postToDB()
+        // parseJson(str2)
+
 
         
     }
@@ -79,35 +89,50 @@ class FriendsVC: UIViewController {
         var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("FriendCell") as! UITableViewCell
         
         // Configure the cell...
-        cell.textLabel!.text = self.friends[indexPath.row]
+        cell.textLabel!.text = self.friends[indexPath.row] as String
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        let reallink : String = link1 + names[indexPath.row % 7]
+        println(reallink)
+        let url = NSURL(string: reallink)
+        if let data1 = NSData(contentsOfURL: url!) {
+            println("!!!!!")
+   
+           cell.imageView!.contentMode = .ScaleAspectFit
+           cell.imageView!.image = UIImage(data: data1)
+                    }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       selectedRow = indexPath.row
+        selectedRow = indexPath.row
         self.performSegueWithIdentifier("gotoprofile", sender: self)
-    
+        
     }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        var dvc = segue.destinationViewController as! FriendProfile
-        // println(friends[selectedRow])
-        dvc.name = friends[selectedRow]
+        if (segue.identifier == "gotoprofile") {
+            
+            var dvc = segue.destinationViewController as! FriendProfile
+            // println(friends[selectedRow])
+            dvc.name = friends[selectedRow] as String
+            dvc.iconUrl = link1 + names[selectedRow % 7]
+
+        }
+      
         
     }
     
     /*
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return .None
+    return .None
     }
     
     func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
+    return false
     }
     */
-
+    
     
     
     /*
@@ -121,11 +146,88 @@ class FriendsVC: UIViewController {
     */
     /*
     func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-        
-        let movedObject = self.friends[fromIndexPath.row]
-        friends.removeAtIndex(fromIndexPath.row)
-        friends.insert(movedObject, atIndex: toIndexPath.row)
-        NSLog("%@", "\(fromIndexPath.row) => \(toIndexPath.row) \(friends)")
+    
+    let movedObject = self.friends[fromIndexPath.row]
+    friends.removeAtIndex(fromIndexPath.row)
+    friends.insert(movedObject, atIndex: toIndexPath.row)
+    NSLog("%@", "\(fromIndexPath.row) => \(toIndexPath.row) \(friends)")
     }
- */
+    */
+    
+    func postToDB() -> Bool {
+        // post user information to database
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
+        
+        //SELECT unnest(friends) FROM friendlist WHERE uname = 'nathan';
+        
+        
+        var requestLine = "SELECT unnest(friends) FROM friendlist WHERE uname = '" + logname + "'\n;"
+        
+        println(requestLine)
+        
+        var client:TCPClient = TCPClient(addr: "146.169.53.33", port: 1111)
+        var (success,errmsg)=client.connect(timeout: 10)
+        if success{
+            println("Connection success!")
+            var (success,errmsg)=client.send(str: requestLine)
+            if success {
+                println("sent success!")
+                var data=client.read(1024*10)
+                if let d = data {
+                    if let str = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
+                        println("read success")
+                        println(str)
+                        println("fasa4")
+                        if (str == "ERROR") {
+                            client.close()
+                            return false
+                        } else {
+                            var data=client.read(1024*10)
+                            if let d = data {
+                                if let str = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
+                                    println(str)
+                                    str2 = str
+                                    println("fasa3")
+                                }
+                            }
+                            return true
+                        }
+                        
+                    }
+                }
+            }else{
+                client.close()
+                println(errmsg)
+                return false
+            }
+        }else{
+            client.close()
+            println(errmsg)
+            return false
+        }
+        return false
+    }
+    
+    func parseJson(str: NSString) {
+        println("===")
+
+         println(str)
+        var arr = str.componentsSeparatedByString("\n")
+        println(arr[1])
+        println(arr[0])
+        println("===")
+        var str2 : NSString = arr[1] as! NSString
+        var data: NSData = str2.dataUsingEncoding(NSUTF8StringEncoding)!
+        var error1: NSError?
+        var jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error1)
+        if let e  = error1 {
+            println("Error: \(error1)")
+        }
+        let frds = (jsonObject as! NSDictionary)["unnest"] as! [NSString]
+        for element in frds {
+            //println(element)
+        }
+        friends = frds
+    }
 }
