@@ -70,13 +70,17 @@ shadow, NSShadowAttributeName,
         switch (indexPath.row) {
         case 0:
             self.performSegueWithIdentifier("goto_load", sender: self)
+            dropDownMenu.hidden = true
         case 1:
             self.performSegueWithIdentifier("goto_combine", sender: self)
+            dropDownMenu.hidden = true
         case 2:
             self.performSegueWithIdentifier("goto_share", sender: self)
+            dropDownMenu.hidden = true
         case 3:
-            println("selected")
+            //println("selected")
             shirtView.image = nil
+            dropDownMenu.hidden = true
         default: ()
         }
     }

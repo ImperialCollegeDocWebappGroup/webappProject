@@ -41,12 +41,33 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         var saveButton: UIBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveTapped:")
         self.navigationItem.rightBarButtonItem = saveButton
         self.tabBarController?.tabBar.hidden = true
+        
+       /* if let previousVC = backViewController {
+            if previousVC
+            -------> distinguish previous view controller, to hide back button when pushed from registerVC
+        }*/
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    var backViewController : UIViewController? {
+        
+        var stack = self.navigationController!.viewControllers as Array
+        
+        for (var i = stack.count-1 ; i > 0; --i) {
+            if (stack[i] as! UIViewController == self) {
+                return stack[i-1] as? UIViewController
+            }
+            
+        }
+        return nil
+    }
+    
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         println("saved")
