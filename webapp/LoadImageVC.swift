@@ -10,15 +10,26 @@ import UIKit
 
 class LoadImageVC: UIViewController {
 
+
+    @IBOutlet weak var selectTable: UITableView!
+
+    var items:[String] = ["TOP", "Bottom", "Other"]
+
+    var loadSuccess: Bool = false
     var imageUrl: String = "www.google.co.uk"
+    
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     @IBOutlet weak var txtURL: UITextField!
     
     @IBOutlet weak var imageURL: UIImageView!
     
-       override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.backItem?.title = "Cancel"
+        selectTable.hidden = true
+        selectTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        saveButton.enabled = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -26,6 +37,65 @@ class LoadImageVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func saveTapped(sender: UIBarButtonItem) {
+        if (selectTable.hidden) {
+            self.showDropDownView()
+        } else {
+            self.hideDropDownView()
+        }
+
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.items.count;
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell:UITableViewCell = selectTable.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        
+        cell.textLabel?.text = self.items[indexPath.row]
+        
+        return cell
+    }
+    
+    
+    
+    func hideDropDownView() {
+        var frame:CGRect = self.selectTable.frame
+        frame.origin.y = -frame.size.height
+        selectTable.hidden = true
+        //self.animateDropDownToFrame(frame) {}
+    }
+    
+    func showDropDownView() {
+        var frame:CGRect = selectTable.frame
+        frame.origin.y = self.navigationController!.navigationBar.frame.size.height + 5
+        selectTable.hidden = false
+        // self.animateDropDownToFrame(frame) {}
+        
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectTable.hidden = true
+        switch (indexPath.row) {
+        case 0:
+            // top
+            println("top")
+            self.performSegueWithIdentifier("save", sender: self)
+        case 1:
+            // bottom
+            println("bottom")
+        case 2:
+            // other
+            println("other")
+        default: ()
+        }
+    }
+
     
     @IBAction func buttonPressed(sender: UIButton) {
       /*
@@ -94,6 +164,8 @@ class LoadImageVC: UIViewController {
                 println(altResult5!)
                 
                 imageUrl = altResult5! as String
+                    loadSuccess = true
+                    saveButton.enabled = true
                 }
             }
         } else {
@@ -164,15 +236,4 @@ class LoadImageVC: UIViewController {
         
     }*/
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

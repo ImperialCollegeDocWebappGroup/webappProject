@@ -22,7 +22,7 @@ class TakePhotoVC: UIViewController,UINavigationControllerDelegate, UIImagePicke
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.tabBarController!.tabBar.hidden = false
         // Do any additional setup after loading the view.
     }
     

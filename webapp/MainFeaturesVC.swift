@@ -8,8 +8,10 @@
 
 import UIKit
 
-class MainFeaturesVC: UIViewController {
+class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
+    
+    @IBOutlet weak var sectionMenu: UITableView!
     
     @IBOutlet weak var menuButt: UIBarButtonItem!
     
@@ -21,7 +23,8 @@ class MainFeaturesVC: UIViewController {
     
     var shirt: UIImage! = nil
     
-    var menus:[String] = ["Load Clothing", "Combine with another", "Share to Friends", "Clear Appearance"]
+    var menus:[String] = ["Load Clothing", "Combine with another", "Add to my wardrobe", "Share to Friends", "Clear Appearance"]
+    var sections:[String] = ["Top", "Bottom", "Other", "Whole appearance"]
     
     
     override func viewDidLoad() {
@@ -30,6 +33,7 @@ class MainFeaturesVC: UIViewController {
         menuButt.setBackgroundImage(UIImage(named: "menu_icon"), forState: .Normal, barMetrics: .Default)
         
         dropDownMenu.hidden = true
+        sectionMenu.hidden = true
         self.navigationItem.title = "FITTING ROOM"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
         
@@ -53,7 +57,11 @@ class MainFeaturesVC: UIViewController {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.menus.count
+        if (tableView == dropDownMenu) {
+            return self.menus.count
+        } else {
+            return self.sections.count
+        }
     }
     
     
@@ -69,18 +77,28 @@ class MainFeaturesVC: UIViewController {
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (tableView == dropDownMenu) {
         switch (indexPath.row) {
         case 0:
             self.performSegueWithIdentifier("goto_load", sender: self)
         case 1:
             self.performSegueWithIdentifier("goto_combine", sender: self)
         case 2:
-            self.performSegueWithIdentifier("goto_share", sender: self)
+            //add to my collection
+            sectionMenu.hidden = false
+            
         case 3:
+            self.performSegueWithIdentifier("goto_share", sender: self)
+        case 4:
             println("selected")
             shirtView.image = nil
         default: ()
         }
+        }
+        if (tableView == sectionMenu) {
+            // choose between top, bottom, other and whole appearance
+        }
+        
     }
     
     
@@ -124,7 +142,7 @@ class MainFeaturesVC: UIViewController {
         
     }
     
-    @IBAction func saveWholeView(sender: UIButton) {
+   /* @IBAction func saveWholeView(sender: UIButton) {
         
         UIGraphicsBeginImageContext(view.frame.size)
         view.layer.renderInContext(UIGraphicsGetCurrentContext())
@@ -139,6 +157,7 @@ class MainFeaturesVC: UIViewController {
         postToDB(teststring)
         
     }
+*/
     
     func postToDB(str2 : String) {
         // post user information to database
