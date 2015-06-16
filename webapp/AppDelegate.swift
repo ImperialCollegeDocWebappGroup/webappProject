@@ -21,6 +21,12 @@ import UIKit
         pageController.backgroundColor = UIColor.whiteColor()
         
 
+        UITabBar.appearance().translucent = false
+      //  UITabBar.appearance().barTintColor = UIColor(rgba: "#12296f")
+        UITabBar.appearance().backgroundImage = UIImage(named: "tabBar")
+        UITabBar.appearance().tintColor = UIColor.whiteColor()
+        UITabBar.appearance().autoresizesSubviews = false
+        UITabBar.appearance().clipsToBounds = true
         return true
         
     }
