@@ -48,6 +48,18 @@ class BeginningVC: UIViewController,UIPageViewControllerDataSource {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let isLoggedIn:Int = prefs.integerForKey("ISLOGGEDIN") as Int
+        if (isLoggedIn == 1) {
+            self.performSegueWithIdentifier("skip", sender: self)
+        }
+    }
+    
+    
     /*
     @IBAction func startAction(sender: AnyObject) {
     
