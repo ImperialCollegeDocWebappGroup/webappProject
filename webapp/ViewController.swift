@@ -11,8 +11,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
-    var serverIp  = "146.169.53.36"
     var portNumber = 1111
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var enterButton: UIButton!
@@ -51,50 +49,6 @@ class ViewController: UIViewController {
         
         self.performSegueWithIdentifier("goto_login", sender: self)
     }
-    
-    func postdata() {
-        //let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        //println (prefs.valueForKey("USERNAME") as! NSString as String)
-        var client:TCPClient = TCPClient(addr: "146.169.53.36", port: 1111)
-        var (csuccess,cerrmsg)=client.connect(timeout: 10)
-        if csuccess{
-            println("Connection success!")
-            var (ssuccess,serrmsg)=client.send(str: "Hey!\n")
-            if ssuccess{
-                println("sent success!")
-                var data = client.read(1024*10)
-                if let d = data {
-                    if let str = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
-                        println("read success")
-                        println(str)
-                        var data: NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
-                        var error1: NSError?
-                        var jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error1)
-                        if let e  = error1 {
-                            println("Error: \(error1)")
-                        }
-                        let c = (jsonObject as! NSDictionary)["content"] as! [String]
-                        let u = (jsonObject as! NSDictionary)["usrname"] as! [String]
-                        let p = (jsonObject as! NSDictionary)["ptime"] as! [String]
-                        println("u: \(u[0])")
-                        println("c: \(c[0])")
-                        println("p: \(p[0])")
-                        client.close()
-                    }
-                }
-            } else {
-                println("sent failed!")
-                client.close()
-                println(serrmsg)
-            }
-        }else{
-            println("connection failed!")
-            client.close()
-            println(cerrmsg)
-        }
-    }
-    
-    
     
     
 }

@@ -26,11 +26,11 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     var menus:[String] = ["Load Clothing", "Combine with another", "Add to my wardrobe", "Share to Friends", "Clear Appearance"]
     var sections:[String] = ["Top", "Bottom", "Hat", "Whole"]
     var sectionImgs:[String] = ["ttop", "bbottom", "hhat", "appearance"]
-    let link1 : String = "http://www.doc.ic.ac.uk/~jl6613/"
     let link : String = "http://www.doc.ic.ac.uk/~jl6613/"
     let fileName : String = "serverIp.txt"
     var serverIp : String = ""
     var str2 = ""
+    var imageLink = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +43,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             println(datastring)
             serverIp = datastring
         }
+        
         
         dropDownMenu.hidden = true
         sectionMenu.hidden = true
@@ -87,6 +88,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         
         var imageStretch = (CGFloat(modelWidth/default_weight) + CGFloat(modelHeight/default_height))/2
         modelView.transform = CGAffineTransformScale(modelView.transform, imageStretch, 1);
+        println(imageLink)
         
     }
     
@@ -217,7 +219,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (tableView == dropDownMenu) {
             var cell:UITableViewCell = dropDownMenu.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
-        
+            
             cell.textLabel!.text = self.menus[indexPath.row]
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             return cell
@@ -229,7 +231,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             var imageName = UIImage(named: sectionImgs[indexPath.row])
             cell.imageView!.image = imageName
             return cell
-
+            
         }
     }
     
@@ -285,8 +287,8 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
                 var teststring = imageData.base64EncodedStringWithOptions(nil)
                 //println(teststring)
                 
-               // postToDB(teststring)
-
+                // postToDB(teststring)
+                
                 println("appearance")
             default: ()
                 
@@ -338,7 +340,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         
     }
     
-
+    
     func postToDB(str2 : String) {
         // post user information to database
         var client:TCPClient = TCPClient(addr: "146.169.53.33", port: 1111)

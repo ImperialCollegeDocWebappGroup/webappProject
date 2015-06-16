@@ -9,15 +9,16 @@
 import UIKit
 
 class LoadImageVC: UIViewController {
-
-
+    
+    
     @IBOutlet weak var selectTable: UITableView!
-
+    
     var items:[String] = ["TOP", "Bottom", "Hat"]
     var selectParts = 0
     
     var loadSuccess: Bool = false
     var imageUrl: String = "www.google.co.uk"
+    var imageLink = ""
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
@@ -33,7 +34,7 @@ class LoadImageVC: UIViewController {
         //self.hidesBottomBarWhenPushed = true
         self.navigationItem.title = "Load Image"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-    self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
     
@@ -48,7 +49,7 @@ class LoadImageVC: UIViewController {
         } else {
             self.hideDropDownView()
         }
-
+        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -83,7 +84,7 @@ class LoadImageVC: UIViewController {
         // self.animateDropDownToFrame(frame) {}
         
     }
-
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectTable.hidden = true
         selectParts = indexPath.row
@@ -103,10 +104,10 @@ class LoadImageVC: UIViewController {
         default: ()
         }
     }
-
+    
     
     @IBAction func buttonPressed(sender: UIButton) {
-      /*
+        /*
         var altStringToSearch:String = "I want to make a cake and then prepare coffee"
         let altSearchTerm:String = "cake"
         let altScanner = NSScanner(string: altStringToSearch)
@@ -122,7 +123,7 @@ class LoadImageVC: UIViewController {
         */
         /*
         var realURL: String = "http://www.selfridges.com/en/ralph-lauren-new-fit-bi-swing-windbreaker-jacket_434-88064526-A30J4030Y3177/?previewAttribute=Rl+black"
-*/
+        */
         var error_msg: String = ""
         var invalidURL: Bool = false
         var realURL: String = txtURL.text!
@@ -140,40 +141,41 @@ class LoadImageVC: UIViewController {
                     invalidURL = true
                     error_msg = "URL is not from selfridges.com"
                 } else {
-                //  println("HTML : \(myHTMLString)")
-                println("success")
-                
-                let altSearchTerm:String = "<div class=\"productImage\">"
-                let altScanner = NSScanner(string: myHTMLString! as String)
-                var altResult:NSString?
-                altScanner.scanUpToString(altSearchTerm, intoString:&altResult)
-                var len2 = altResult!.length
-                // println(len2)
-                var someString = (myHTMLString! as NSString).substringFromIndex(len2)
-                //println(someString)
-                let altSearchTerm2:String = "/>"
-                let altScanner2 = NSScanner(string: someString)
-                var altResult22:NSString?
-                altScanner.scanUpToString(altSearchTerm2, intoString:&altResult22)
-                //   println(altResult22!)
-                
-                
-                let altSearchTerm222:String = "src=\""
-                let altScanner3 = NSScanner(string: altResult22! as String)
-                var altResult5:NSString?
-                altScanner3.scanUpToString(altSearchTerm222, intoString:&altResult5)
-                var len22 = altResult5!.length
-                //println(len22)
-                var someString2 = (altResult22! as NSString).substringFromIndex(len22+5)
-                //println(someString2)
-                let altSearchTerm3:String = "\""
-                let altScanner4 = NSScanner(string: someString2)
-                altScanner4.scanUpToString(altSearchTerm3, intoString:&altResult5)
-                println(altResult5!)
-                
-                imageUrl = altResult5! as String
+                    //  println("HTML : \(myHTMLString)")
+                    println("success")
+                    
+                    let altSearchTerm:String = "<div class=\"productImage\">"
+                    let altScanner = NSScanner(string: myHTMLString! as String)
+                    var altResult:NSString?
+                    altScanner.scanUpToString(altSearchTerm, intoString:&altResult)
+                    var len2 = altResult!.length
+                    // println(len2)
+                    var someString = (myHTMLString! as NSString).substringFromIndex(len2)
+                    //println(someString)
+                    let altSearchTerm2:String = "/>"
+                    let altScanner2 = NSScanner(string: someString)
+                    var altResult22:NSString?
+                    altScanner.scanUpToString(altSearchTerm2, intoString:&altResult22)
+                    //   println(altResult22!)
+                    
+                    
+                    let altSearchTerm222:String = "src=\""
+                    let altScanner3 = NSScanner(string: altResult22! as String)
+                    var altResult5:NSString?
+                    altScanner3.scanUpToString(altSearchTerm222, intoString:&altResult5)
+                    var len22 = altResult5!.length
+                    //println(len22)
+                    var someString2 = (altResult22! as NSString).substringFromIndex(len22+5)
+                    //println(someString2)
+                    let altSearchTerm3:String = "\""
+                    let altScanner4 = NSScanner(string: someString2)
+                    altScanner4.scanUpToString(altSearchTerm3, intoString:&altResult5)
+                    println(altResult5!)
+                    
+                    imageUrl = altResult5! as String
                     loadSuccess = true
                     saveButton.enabled = true
+                    imageLink = imageUrl
                 }
             }
         } else {
@@ -181,22 +183,6 @@ class LoadImageVC: UIViewController {
             error_msg = "Invalid URL."
             println("Error: \(realURL) doesn't seem to be a valid URL")
         }
-        /*
-        NSString *url = nil;
-        NSString *htmlString = ...
-        NSScanner *theScanner = [NSScanner scannerWithString:htmlString];
-        // find start of IMG tag
-        [theScanner scanUpToString:@"<img" intoString:nil];
-        if (![theScanner isAtEnd]) {
-        [theScanner scanUpToString:@"src" intoString:nil];
-        NSCharacterSet *charset = [NSCharacterSet characterSetWithCharactersInString:@"\"'"];
-        [theScanner scanUpToCharactersFromSet:charset intoString:nil];
-        [theScanner scanCharactersFromSet:charset intoString:nil];
-        [theScanner scanUpToCharactersFromSet:charset intoString:&url];
-        // "url" now contains the URL of the img
-        }
-        */
-        
         var image2 : UIImage = UIImage(named:"notfound")!
         let url = NSURL(string: imageUrl)
         if let data = NSData(contentsOfURL: url!) {
@@ -217,29 +203,15 @@ class LoadImageVC: UIViewController {
         }
     }
     
- 
-  
- 
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        
+        println("called")
+        println(segue.destinationViewController.description)
+        println(segue.sourceViewController.description)
+        println(segue.identifier)
         var svc = segue.destinationViewController as! MainFeaturesVC;
         svc.shirt = imageURL.image
         svc.selectParts = selectParts
+        svc.imageLink = imageLink
     }
-    
-   
-  
-   /* @IBAction func displayImage(sender: UIButton) {
-        var image2 : UIImage = UIImage(named:"notfound")!
-        let url = NSURL(string: imageUrl)
-        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
-        if data != nil {
-            
-            // imageURL.image = UIImage(data: data!)
-            imageURL.image = image2
-        }
-        
-    }*/
     
 }

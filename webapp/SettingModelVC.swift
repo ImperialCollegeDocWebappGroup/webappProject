@@ -36,22 +36,28 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     @IBOutlet weak var SkinColourSlider: UISlider!
     
     @IBOutlet weak var saveButt: UIButton!
-
+    
     @IBOutlet weak var faceview: UIImageView!
+    
+    let link : String = "http://www.doc.ic.ac.uk/~jl6613/"
+    
+    let fileName :  String = "serverIp.txt"
+    var serverIp : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Set My Model"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-       // ???????????
+        // ???????????
         //self.navigationController?.navigationBarHidden = true
         
-       /* if let previousVC = backViewController {
-            if previousVC
-            -------> distinguish previous view controller, to hide back button when pushed from registerVC
+        /* if let previousVC = backViewController {
+        if previousVC
+        -------> distinguish previous view controller, to hide back button when pushed from registerVC
         }*/
     }
-       override func didReceiveMemoryWarning() {
+    
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -70,22 +76,16 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         return nil
     }
     
-    
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         println("saved")
         if segue.identifier == "saved" {
-            
             println(segue.destinationViewController.description)
             println(segue.sourceViewController.description)
             println(segue.identifier)
-            var svc = segue.destinationViewController as! MainFeaturesVC;
+            //var svc = segue.destinationViewController as! MainFeaturesVC;
             //svc.shirt = modelImage
         }
-        
     }
-
-   
     
     @IBAction func MaleTapped(sender: UIButton) {
         maleUser = true
@@ -103,10 +103,10 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         modelImage = UIImage(named: "defaultF")!
         
     }
-
+    
     
     override func viewDidAppear(animated: Bool) {
-    
+        
     }
     
     
@@ -132,26 +132,22 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     
     
     @IBAction func skinColourChanged(sender: UISlider) {
-        
         skinColour = Int(sender.value)
     }
     
-    
-    
     @IBAction func cameraTapped(sender: UIButton) {
-   /*     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-            let imagePicker = UIImagePickerController()
-            
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-            imagePicker.mediaTypes = [kUTTypeImage as NSString]
-            imagePicker.allowsEditing = false
-            
-            self.presentedViewController(imagePicker, animated:true, completion: nil)
-            
-            newMedia = true
-        }*/
+        /*     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+        let imagePicker = UIImagePickerController()
         
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+        imagePicker.mediaTypes = [kUTTypeImage as NSString]
+        imagePicker.allowsEditing = false
+        
+        self.presentedViewController(imagePicker, animated:true, completion: nil)
+        
+        newMedia = true
+        }*/
     }
     
     @IBAction func saveTapped(sender: AnyObject) {
@@ -188,11 +184,9 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
             confirmAlert.addAction(UIAlertAction(title: "Wait a sec", style: .Cancel, handler: nil))
             self.presentViewController(confirmAlert, animated: true, completion: nil)
         }
-
+        
         
     }
-    
-    
     func processAlert(alert: UIAlertAction!) {
         // use default values of height and weight
         height = heightInit
@@ -220,59 +214,108 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     
     
     func postToDB() -> Bool {
-        return true
+        getServerIp()
         // post user information to database
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
-        
-        //INSERT INTO userprofile VALUES 
-        //('Sam2', 'Jiahao2', true, 30, 170, 65, 6,
-// ARRAY['http://www.selfridges.com/en/givenchy-amerika-cuban-fit-cotton-jersey-t-shirt_242-3000831-15S73176511/?previewAttribute=Black']);
         var gender = "false"
         if (maleUser) {
             gender = "true"
         }
         var info = [gender, String(height), String(weight), String(skinColour)]
-        
-        
         var requestLine = ("INSERT INTO userprofile VALUES ('" + logname + "', '")
         requestLine += (logname + "', " + info[0] + ", 20, " + info[1] + ", ")
-        requestLine += (info[2] + ", " + info[3] + ");\n")
-        
-        println(requestLine)
-        
-        var client:TCPClient = TCPClient(addr: "146.169.53.36", port: 1111)
+        requestLine += (info[2] + ", " + info[3] + ", ARRAY[]::text[], ARRAY['http://www.selfridges.com/en/givenchy-amerika-cuban-fit-cotton-jersey-t-shirt_242-3000831-15S73176511/?previewAttribute=Black'],")
+        var s1 = requestLine + "ARRAY[]::text[]);\n"
+        //   after new user
+        var s2 =    "INSERT INTO publishs VALUES ('" + logname + "',ARRAY[]::publishitem[]);\n"
+        var s3 =   "INSERT INTO friendlist VALUES ('" + logname + "',ARRAY['" + logname + "']);\n"
+        if query(s1) {
+            if query(s2) {
+                if query(s3) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func getServerIp() {
+        let reallink = link + fileName
+        let url = NSURL(string: reallink)
+        if let data1 = NSData(contentsOfURL: url!) {
+            println("!!!!!")
+            var datastring = NSString(data:data1, encoding:NSUTF8StringEncoding) as! String
+            println(datastring)
+            serverIp = datastring
+        }
+    }
+    
+    func query(query : String) -> Bool {
+        println("posting")
+        // post user information to database
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
+        var client:TCPClient = TCPClient(addr: serverIp, port: 1111)
         var (success,errmsg)=client.connect(timeout: 10)
         if success{
             println("Connection success!")
-            var (success,errmsg)=client.send(str: requestLine)
-            if success {
-                println("sent success!")
-                var data=client.read(1024*10)
-                if let d = data {
-                    if let str = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
-                        println("read success")
-                        println(str)
-                        if (str == "ERROR") {
-                            client.close()
-                            return false
-                        } else {
-                            return true
+            var (success,errmsg)=client.send(str: query)
+            var i: Int = 0
+            var dd : Bool = false
+            while true {
+                if success && i < 10 {
+                    println("sent success!")
+                    var data=client.read(1024*10)
+                    if let d = data {
+                        if let str1 = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
+                            println("read success")
+                            println(str1)
+                            println("----")
+                            var str  = str1.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                            println(str)
+                            if (str == "ERROR") {
+                                println("--ERROR")
+                                client.close()
+                                return false
+                            } else if (str == "NOERROR"){ // NOERROR
+                                println("--NOERROR")
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            } else if (str == "NOR") {
+                                println("--NOR")
+                                client.close()
+                                return true
+                            } else if (str == "YESR") {
+                                println("--YESR")
+                                dd = true
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            } else if dd && str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
+                                //data
+                                println("this is data")
+                                println(str)
+                                return true
+                            } else {
+                                println("er...")
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            }
                         }
                         
                     }
+                    i+=1
+                    
+                } else {
+                    client.close()
+                    println(errmsg)
+                    return false
                 }
-            }else{
-                client.close()
-                println(errmsg)
-                return false
+                
             }
         }else{
             client.close()
             println(errmsg)
             return false
         }
-        return false
     }
-
+    
+    
 }
