@@ -9,7 +9,7 @@
 import UIKit
 
 class AddNewFriend: UIViewController {
-
+    
     @IBOutlet weak var searchUsername: UITextField!
     @IBOutlet weak var foundLabel: UIButton!
     var fri : String = ""
@@ -23,9 +23,9 @@ class AddNewFriend: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         foundLabel.hidden = true
-
+        
         self.navigationItem.title = "Add a friends"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
@@ -36,17 +36,20 @@ class AddNewFriend: UIViewController {
         for f in friendsList {
             //println(f)
         }
-
+        
         
     }
-
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     @IBAction func foundPressed(sender: UIButton) {
-        if contains(friendsList , fri) {
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
+        println("=== " + fri)
+        if (contains(friendsList , fri) || (fri == logname)) {
             println("already friends")
             let alertController = UIAlertController(title: "Can't add friend", message:
                 fri + " is already your friend", preferredStyle: UIAlertControllerStyle.Alert)
@@ -169,7 +172,7 @@ class AddNewFriend: UIViewController {
                                 println("--YESR")
                                 dd = true
                                 (success,errmsg)=client.send(str: "GOOD\n")
-                            } else if dd {
+                            } else if dd && str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
                                 //data
                                 println("this is data")
                                 println(str)
@@ -266,7 +269,7 @@ class AddNewFriend: UIViewController {
                                 println("--YESR")
                                 dd = true
                                 (success,errmsg)=client.send(str: "GOOD\n")
-                            } else if dd {
+                            } else if dd && str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
                                 //data
                                 println("this is data")
                                 println(str)

@@ -37,8 +37,6 @@ class FriendsVC: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
-        
-        
         let reallink = link + fileName
         let url = NSURL(string: reallink)
         if let data1 = NSData(contentsOfURL:url!) {
@@ -46,14 +44,8 @@ class FriendsVC: UIViewController {
             var datastring = NSString(data:data1, encoding:NSUTF8StringEncoding) as! String
             println(datastring)
             serverIp = datastring
-
         }
-         getFriends()
-        // postToDB()
-        // parseJson(str2)
-
-
-        
+        getFriends()
     }
     
     
@@ -122,7 +114,6 @@ class FriendsVC: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "gotoprofile") {
-            
             var dvc = segue.destinationViewController as! FriendProfile
             // println(friends[selectedRow])
             dvc.name = friends[selectedRow] as String
@@ -136,10 +127,9 @@ class FriendsVC: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        println("friends vc appear")
+        //println("friends vc appear")
         //  getFriends()
         super.viewWillAppear(animated);
-        
     }
     
     
@@ -227,9 +217,9 @@ class FriendsVC: UIViewController {
         let frds = (jsonObject as! NSDictionary)["unnest"] as! [NSString]
         let length = frds.count
         friends = [NSString](count: length, repeatedValue: "")
-        for element in frds {
+        //for element in frds {
             //println(element)
-        }
+        //}
         friends = frds
     }
 }

@@ -19,11 +19,7 @@ class ToppingsScrollVC: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
        
         // need to load images from DB
-        pageImages = [UIImage(named: "c1")!,
-            UIImage(named: "collect")!,
-            UIImage(named: "share")!,
-            UIImage(named: "black1")!,
-            UIImage(named: "black2")!]
+        pageImages = []
         
         let pageCount = pageImages.count
         

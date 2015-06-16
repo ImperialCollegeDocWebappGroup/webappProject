@@ -17,6 +17,15 @@ class MomentCell: UITableViewCell {
     @IBOutlet weak var publishTime: UILabel!
     
     
+    @IBOutlet weak var momentsIcon: UIImageView!
+    
+    @IBOutlet weak var momentsPhoto: UIImageView!
+    
+    @IBOutlet weak var commentButton: UIButton!
+    
+    var selectedName :String = ""
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,5 +36,13 @@ class MomentCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+  
+    
+    @IBAction func commentTapped(sender: UIButton) {
+        println(username.text! +  " comment Tapped")
+    }
+    
+    
 
 }
