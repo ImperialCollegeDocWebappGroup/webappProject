@@ -35,6 +35,7 @@
 		49D122F71B30738A000E2B9B /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D122F61B30738A000E2B9B /* UserInfo.swift */; };
 		BD4E12F71B2F35E70007C979 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4E12F61B2F35E70007C979 /* ContentViewController.swift */; };
 		BD4E12F91B2F36220007C979 /* BeginningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4E12F81B2F36220007C979 /* BeginningVC.swift */; };
+		BD5EEEF41B30806E0058D79E /* BlankPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5EEEF31B30806E0058D79E /* BlankPage.swift */; };
 		BDF519021B2A4D5600872BA7 /* FriendProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF519011B2A4D5600872BA7 /* FriendProfile.swift */; };
 		D48D79A61B288F15007B40E4 /* MomentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48D79A51B288F15007B40E4 /* MomentCell.swift */; };
 		D4E37FCE1B20DC390066AF5D /* AddNewFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E37FCD1B20DC390066AF5D /* AddNewFriend.swift */; };
@@ -83,6 +84,7 @@
 		49D122F61B30738A000E2B9B /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		BD4E12F61B2F35E70007C979 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		BD4E12F81B2F36220007C979 /* BeginningVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeginningVC.swift; sourceTree = "<group>"; };
+		BD5EEEF31B30806E0058D79E /* BlankPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlankPage.swift; sourceTree = "<group>"; };
 		BDF519011B2A4D5600872BA7 /* FriendProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendProfile.swift; sourceTree = "<group>"; };
 		D48D79A51B288F15007B40E4 /* MomentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentCell.swift; sourceTree = "<group>"; };
 		D4E37FCD1B20DC390066AF5D /* AddNewFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewFriend.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				BD4E12F61B2F35E70007C979 /* ContentViewController.swift */,
 				BD4E12F81B2F36220007C979 /* BeginningVC.swift */,
 				49D122F61B30738A000E2B9B /* UserInfo.swift */,
+				BD5EEEF31B30806E0058D79E /* BlankPage.swift */,
 			);
 			path = webapp;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				491DDDEE1B2AF8E700992831 /* PhotoViewVC.swift in Sources */,
 				BD4E12F71B2F35E70007C979 /* ContentViewController.swift in Sources */,
 				BDF519021B2A4D5600872BA7 /* FriendProfile.swift in Sources */,
+				BD5EEEF41B30806E0058D79E /* BlankPage.swift in Sources */,
 				188F049F1B25B74A00F55F41 /* SharingVC.swift in Sources */,
 				D4E37FCE1B20DC390066AF5D /* AddNewFriend.swift in Sources */,
 				49D122F71B30738A000E2B9B /* UserInfo.swift in Sources */,
