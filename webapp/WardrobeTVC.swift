@@ -11,6 +11,7 @@ import UIKit
 class WardrobeTVC: UITableViewController {
 
     var sections: [String] = ["Toppings", "Bottoms"]
+    var sectionImgs:[String] = ["Top", "Bottom"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,7 @@ class WardrobeTVC: UITableViewController {
         
         cell.textLabel!.text = self.sections[indexPath.row]
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell.imageView!.image = UIImage(named: sectionImgs[indexPath.row])
         
         return cell
     }

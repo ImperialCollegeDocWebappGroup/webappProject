@@ -25,7 +25,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     var menus:[String] = ["Load Clothing", "Combine with another", "Add to my wardrobe", "Share to Friends", "Clear Appearance"]
     var sections:[String] = ["Top", "Bottom", "Hat", "Whole"]
-    
+    var sectionImgs:[String] = ["ttop", "bbottom", "hhat", "appearance"]
     let link1 : String = "http://www.doc.ic.ac.uk/~jl6613/"
     let link : String = "http://www.doc.ic.ac.uk/~jl6613/"
     let fileName : String = "serverIp.txt"
@@ -43,8 +43,6 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             println(datastring)
             serverIp = datastring
         }
-        
-        menuButt.setBackgroundImage(UIImage(named: "menu_icon"), forState: .Normal, barMetrics: .Default)
         
         dropDownMenu.hidden = true
         sectionMenu.hidden = true
@@ -65,6 +63,8 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         
         dropDownMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         sectionMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell2")
+        
+        
         shirtView.image = shirt
         if(shirtView.image != nil){
             process()
@@ -226,6 +226,8 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             
             cell.textLabel!.text = self.sections[indexPath.row]
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            var imageName = UIImage(named: sectionImgs[indexPath.row])
+            cell.imageView!.image = imageName
             return cell
 
         }
@@ -234,6 +236,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        sectionMenu.hidden = true
         if (tableView == dropDownMenu) {
             switch (indexPath.row) {
             case 0:

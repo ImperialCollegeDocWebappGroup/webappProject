@@ -21,6 +21,11 @@ class FriendsVC: UIViewController {
     
     let link1 : String = "http://www.doc.ic.ac.uk/~jl6613/"
     
+
+    let link: String = "http://www.doc.ic.ac.uk/~jl6613/"
+    let fileName : String = "serverIp.txt"
+    var serverIp : String = ""
+    
     let names : [String] = ["babyicon.jpeg","dengchaoicon.jpg","fanbingbingicon.jpeg","huangxiaomingicon.jpeg","kenzhendongicon.jpg","zhangxinyuicon.jpeg","zhangzhenicon.jpg"]
     
     override func viewDidLoad() {
@@ -31,7 +36,20 @@ class FriendsVC: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-         postToDB()
+        
+        
+        
+        let reallink = link + fileName
+        let url = NSURL(string: reallink)
+        if let data1 = NSData(contentsOfURL:url!) {
+            println("!!!!!")
+            var datastring = NSString(data:data1, encoding:NSUTF8StringEncoding) as! String
+            println(datastring)
+            serverIp = datastring
+
+        }
+         getFriends()
+        // postToDB()
         // parseJson(str2)
 
 
@@ -39,36 +57,30 @@ class FriendsVC: UIViewController {
     }
     
     
-    /*
-    override func viewDidAppear(animated: Bool) {
-    // 1
-    var nav = self.navigationController?.navigationBar
-    // 2
-    nav?.barStyle = UIBarStyle.Black
-    nav?.tintColor = UIColor.yellowColor()
-    // 3
-    let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-    imageView.contentMode = .ScaleAspectFit
-    // 4
-    let image = UIImage(named: "black1")
-    imageView.image = image
-    // 5
-    navigationItem.titleView = imageView
+    @IBAction func refreshTapped(sender: UIBarButtonItem) {
+        getFriends()
     }
     
-    */
-    
-    /*
-    override func viewDidAppear(animated: Bool) {
-    // change width of navigation bar
-    navigateBar.frame=CGRectMake(0, 0, 400, 60)
-    
-    self.view .addSubview(navigateBar)
-    
-    navigateBar.setBackgroundImage(UIImage(named:"navigation"),
-    forBarMetrics: .Default)
+    func getFriends() {
+        println("getting")
+        if postToDB() {
+            println("post success")
+            parseJson(str2)
+        }
     }
-    */
+    
+    func getServerIp() {
+        let reallink = link + fileName
+        let url = NSURL(string: reallink)
+        if let data1 = NSData(contentsOfURL: url!) {
+            println("!!!!!")
+            var datastring = NSString(data:data1, encoding:NSUTF8StringEncoding) as! String
+            println(datastring)
+            serverIp = datastring
+        }
+    }
+
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -80,8 +92,6 @@ class FriendsVC: UIViewController {
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         return self.friends.count
     }
     
@@ -118,113 +128,105 @@ class FriendsVC: UIViewController {
             dvc.name = friends[selectedRow] as String
             dvc.iconUrl = link1 + names[selectedRow % 7]
 
+        } else if (segue.identifier == "addFriends") {
+            getFriends()
+            var dvc = segue.destinationViewController as! AddNewFriend
+            dvc.friendsList = friends
         }
-      
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        println("friends vc appear")
+        //  getFriends()
+        super.viewWillAppear(animated);
         
     }
     
-    /*
-    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-    return .None
-    }
-    
-    func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    return false
-    }
-    */
-    
-    
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
-    /*
-    func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    let movedObject = self.friends[fromIndexPath.row]
-    friends.removeAtIndex(fromIndexPath.row)
-    friends.insert(movedObject, atIndex: toIndexPath.row)
-    NSLog("%@", "\(fromIndexPath.row) => \(toIndexPath.row) \(friends)")
-    }
-    */
     
     func postToDB() -> Bool {
+        println("posting")
         // post user information to database
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
-        
         //SELECT unnest(friends) FROM friendlist WHERE uname = 'nathan';
-        
-        
-        var requestLine = "SELECT unnest(friends) FROM friendlist WHERE uname = '" + logname + "'\n;"
-        
+        var requestLine = "SELECT unnest(friends) FROM friendlist WHERE uname = '" + logname + "';\n"
         println(requestLine)
-        
-        var client:TCPClient = TCPClient(addr: "146.169.53.33", port: 1111)
+        var client:TCPClient = TCPClient(addr: serverIp, port: 1111)
         var (success,errmsg)=client.connect(timeout: 10)
         if success{
             println("Connection success!")
             var (success,errmsg)=client.send(str: requestLine)
-            if success {
-                println("sent success!")
-                var data=client.read(1024*10)
-                if let d = data {
-                    if let str = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
-                        println("read success")
-                        println(str)
-                        println("fasa4")
-                        if (str == "ERROR") {
-                            client.close()
-                            return false
-                        } else {
-                            var data=client.read(1024*10)
-                            if let d = data {
-                                if let str = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
-                                    println(str)
-                                    str2 = str
-                                    println("fasa3")
-                                }
+            var i: Int = 0
+            var dd : Bool = false
+            while true {
+                if success && i < 10 {
+                    println("sent success!")
+                    var data=client.read(1024*10)
+                    if let d = data {
+                        if let str1 = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
+                            println("read success")
+                            println(str1)
+                            println("----")
+                            var str  = str1.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                            println(str)
+                            //println("fasa4")
+                            if (str == "ERROR") {
+                                println("--ERROR")
+                                client.close()
+                                return false
+                            } else if (str == "NOERROR"){ // NOERROR
+                                println("--NOERROR")
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            } else if (str == "NOR") {
+                                println("--NOR")
+                                client.close()
+                                return true
+                            } else if (str == "YESR") {
+                                println("--YESR")
+                                dd = true
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            } else if dd && str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0{
+                                //data
+                                println("this is data")
+                                println(str)
+                                str2 = str
+                                return true
+                            } else {
+                                println("er...")
+                                (success,errmsg)=client.send(str: "GOOD\n")
                             }
-                            return true
                         }
                         
                     }
+                    i+=1
+                    
+                } else {
+                    client.close()
+                    println(errmsg)
+                    return false
                 }
-            }else{
-                client.close()
-                println(errmsg)
-                return false
+                
             }
         }else{
             client.close()
             println(errmsg)
             return false
         }
-        return false
     }
     
+                    
     func parseJson(str: NSString) {
         println("===")
-
-         println(str)
-        var arr = str.componentsSeparatedByString("\n")
-        println(arr[1])
-        println(arr[0])
-        println("===")
-        var str2 : NSString = arr[1] as! NSString
-        var data: NSData = str2.dataUsingEncoding(NSUTF8StringEncoding)!
+        println(str)
+        var data: NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
         var error1: NSError?
         var jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error1)
         if let e  = error1 {
             println("Error: \(error1)")
         }
         let frds = (jsonObject as! NSDictionary)["unnest"] as! [NSString]
+        let length = frds.count
+        friends = [NSString](count: length, repeatedValue: "")
         for element in frds {
             //println(element)
         }

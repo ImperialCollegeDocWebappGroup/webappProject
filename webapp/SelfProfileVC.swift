@@ -1,43 +1,29 @@
 //
-//  FriendProfile.swift
+//  SelfProfileVC.swift
 //  webapp
 //
-//  Created by ZhangZhuofan on 12/06/2015.
+//  Created by Timeless on 16/06/2015.
 //  Copyright (c) 2015 Shan, Jinyi. All rights reserved.
 //
 
 import UIKit
 
-class FriendProfile: UIViewController {
+class SelfProfileVC: UIViewController {
 
-    @IBOutlet weak var FriendName: UILabel!
-    
-    var name : String = ""
-    
-    @IBOutlet weak var icon: UIImageView!
-    let link1 : String = "http://www.doc.ic.ac.uk/~jl6613/babyicon.jpeg"
-    
-    var iconUrl: String = ""
-
+    @IBOutlet weak var userNameLB: UILabel!
+    @IBOutlet weak var genderLB: UILabel!
+    @IBOutlet weak var heightLB: UILabel!
+    @IBOutlet weak var weightLB: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        FriendName.text = name
-        // Do any additional setup after loading the view.
-        let url = NSURL(string: iconUrl)
-        if let data1 = NSData(contentsOfURL: url!) {
-            println("!!!!!2")
-            icon.image = UIImage(data:data1)
-            
-        }
-        
-
-        self.navigationItem.title = "Friend Profile"
+        self.navigationItem.title = "My Profile"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
 
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

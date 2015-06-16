@@ -11,7 +11,7 @@ import UIKit
 class SettingsVC: UIViewController {
 
     
-    var settings: [String] = ["Reset my model", "Logout"]
+    var settings: [String] = ["View My Account", "Reset My Model", "Logout"]
     
 
      @IBOutlet var tableView: UITableView!
@@ -62,8 +62,10 @@ class SettingsVC: UIViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch (indexPath.row) {
         case 0:
-            self.performSegueWithIdentifier("set_model", sender: self)
+            self.performSegueWithIdentifier("profile", sender: self)
         case 1:
+            self.performSegueWithIdentifier("set_model", sender: self)
+        case 2:
             var confirmAlert = UIAlertController(title: "Log out", message: "Do you really want to log out?", preferredStyle: .Alert )
             
             confirmAlert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: processConfirmAlert))
