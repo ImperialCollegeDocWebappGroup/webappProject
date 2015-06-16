@@ -24,8 +24,9 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     
     var imagePicker: UIImagePickerController!
     
-    @IBOutlet weak var saveBarButt: UIBarButtonItem!
-
+    var modelImage: UIImage = UIImage(named: "defaultM")!
+    
+    @IBOutlet weak var cameraButt: UIButton!
     @IBOutlet weak var FemaleButt: UIButton!
     @IBOutlet weak var MaleButt: UIButton!
     @IBOutlet weak var txtHeight:
@@ -34,14 +35,13 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     UITextField!
     @IBOutlet weak var SkinColourSlider: UISlider!
     
-    @IBOutlet weak var modelImage: UIImageView!
+    @IBOutlet weak var saveButt: UIButton!
 
     @IBOutlet weak var faceview: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var saveButton: UIBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveTapped:")
-        self.navigationItem.rightBarButtonItem = saveButton
+        self.navigationItem.title = "Set My Model"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
        // ???????????
         //self.navigationController?.navigationBarHidden = true
@@ -80,7 +80,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
             println(segue.sourceViewController.description)
             println(segue.identifier)
             var svc = segue.destinationViewController as! MainFeaturesVC;
-            svc.shirt = modelImage.image
+            //svc.shirt = modelImage
         }
         
     }
@@ -91,7 +91,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         maleUser = true
         selectGender(sender)
         deselectGender(FemaleButt)
-        modelImage.image = UIImage(named: "defaultM")
+        modelImage = UIImage(named: "defaultM")!
         
         
     }
@@ -100,7 +100,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         maleUser = false
         selectGender(sender)
         deselectGender(MaleButt)
-        modelImage.image = UIImage(named: "defaultF")
+        modelImage = UIImage(named: "defaultF")!
         
     }
 
@@ -138,7 +138,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     
     
     
-    @IBAction func cameraTapped(sender: UIBarButtonItem) {
+    @IBAction func cameraTapped(sender: UIButton) {
    /*     if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             let imagePicker = UIImagePickerController()
             
@@ -154,8 +154,8 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         
     }
     
-    
-    func saveTapped(sender: AnyObject) { // check height and weight value
+    @IBAction func saveTapped(sender: AnyObject) {
+        // check height and weight value
         let a:Int? = txtHeight.text.toInt()
         let b:Int? = txtWeight.text.toInt()
         
@@ -188,7 +188,10 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
             confirmAlert.addAction(UIAlertAction(title: "Wait a sec", style: .Cancel, handler: nil))
             self.presentViewController(confirmAlert, animated: true, completion: nil)
         }
+
+        
     }
+    
     
     func processAlert(alert: UIAlertAction!) {
         // use default values of height and weight
@@ -217,6 +220,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     
     
     func postToDB() -> Bool {
+        return true
         // post user information to database
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)

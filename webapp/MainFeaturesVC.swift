@@ -24,11 +24,25 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     var shirt: UIImage! = nil
     
     var menus:[String] = ["Load Clothing", "Combine with another", "Add to my wardrobe", "Share to Friends", "Clear Appearance"]
-    var sections:[String] = ["Top", "Bottom", "Other", "Whole appearance"]
+    var sections:[String] = ["Top", "Bottom", "Hat", "Whole"]
     
+    let link1 : String = "http://www.doc.ic.ac.uk/~jl6613/"
+    let link : String = "http://www.doc.ic.ac.uk/~jl6613/"
+    let fileName : String = "serverIp.txt"
+    var serverIp : String = ""
+    var str2 = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let reallink = link + fileName
+        let url = NSURL(string: reallink)
+        if let data1 = NSData(contentsOfURL: url!) {
+            println("!!!!!")
+            var datastring = NSString(data:data1, encoding:NSUTF8StringEncoding) as! String
+            println(datastring)
+            serverIp = datastring
+        }
         
         menuButt.setBackgroundImage(UIImage(named: "menu_icon"), forState: .Normal, barMetrics: .Default)
         
@@ -37,17 +51,154 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         self.navigationItem.title = "FITTING ROOM"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
-    self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
-
+        
+        
         shirtView.userInteractionEnabled = true
+        /*
+        setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+        [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
+        shadow, NSShadowAttributeName,
+        [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];*/
         
         dropDownMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        sectionMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell2")
         shirtView.image = shirt
         if(shirtView.image != nil){
             process()
         }
+        
+        var usrInfo = getData()
+        
+        if(usrInfo.gender){
+            modelView.image = UIImage(named:"defaultM")
+        }else{
+            modelView.image = UIImage(named:"defaultF")
+        }
+        
+        //change model:
+        var default_weight = 50.0
+        var default_height = 160.0
+        
+        var modelHeight = Double(usrInfo.height)
+        var modelWidth = Double(usrInfo.weight)
+        
+        var imageStretch = (CGFloat(modelWidth/default_weight) + CGFloat(modelHeight/default_height))/2
+        modelView.transform = CGAffineTransformScale(modelView.transform, imageStretch, 1);
+        
+    }
+    
+    func getServerIp() {
+        let reallink = link + fileName
+        let url = NSURL(string: reallink)
+        if let data1 = NSData(contentsOfURL: url!) {
+            println("!!!!!")
+            var datastring = NSString(data:data1, encoding:NSUTF8StringEncoding) as! String
+            println(datastring)
+            serverIp = datastring
+        }
+    }
+    
+    func getData()->UserInfo {
+        if postToDB() {
+            return parseJson(str2)
+        } else{
+            return UserInfo(login: "error",gender:"t",age:"0",height:"0",weight:"0",skincolor:"0")
+            // error
+        }
+    }
+    
+    func postToDB() -> Bool {
+        var queryLine = "SELECT login,gender,age,height,weight,skincolour FROM userprofile WHERE login = '"
+        println("posting")
+        // post user information to database
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
+        var requestLine = queryLine + logname + "'\n"
+        println(requestLine)
+        var client:TCPClient = TCPClient(addr: serverIp, port: 1111)
+        var (success,errmsg)=client.connect(timeout: 10)
+        if success{
+            println("Connection success!")
+            var (success,errmsg)=client.send(str: requestLine)
+            var i: Int = 0
+            var dd : Bool = false
+            while true {
+                if success && i < 10 {
+                    println("sent success!")
+                    var data=client.read(1024*10)
+                    if let d = data {
+                        if let str1 = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
+                            println("read success")
+                            println(str1)
+                            println("----")
+                            var str  = str1.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                            println(str)
+                            //println("fasa4")
+                            if (str == "ERROR") {
+                                println("--ERROR")
+                                client.close()
+                                return false
+                            } else if (str == "NOERROR"){ // NOERROR
+                                println("--NOERROR")
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            } else if (str == "NOR") {
+                                println("--NOR")
+                                client.close()
+                                return true
+                            } else if (str == "YESR") {
+                                println("--YESR")
+                                dd = true
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            } else if (dd && str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0){
+                                //data
+                                println("this is data")
+                                println(str)
+                                str2 = str
+                                return true
+                            } else {
+                                println("er...")
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            }
+                        }
+                        
+                    }
+                    i+=1
+                    
+                } else {
+                    client.close()
+                    println(errmsg)
+                    return false
+                }
+                
+            }
+        }else{
+            client.close()
+            println(errmsg)
+            return false
+        }
+    }
+    
+    func parseJson(str: NSString)->UserInfo {
+        println("===")
+        println(str)
+        var data: NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
+        var error1: NSError?
+        var jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error1)
+        if let e  = error1 {
+            println("Error: \(error1)")
+        }
+        let login = (jsonObject as! NSDictionary)["login"] as! [String]
+        let gender = (jsonObject as! NSDictionary)["gender"] as! [String]
+        let age = (jsonObject as! NSDictionary)["age"] as! [String]
+        let height = (jsonObject as! NSDictionary)["height"] as! [String]
+        let weight = (jsonObject as! NSDictionary)["weight"] as! [String]
+        let skincolor = (jsonObject as! NSDictionary)["skincolour"] as! [String]
+        
+        
+        return UserInfo(login:login[0],gender:gender[0],age:age[0],height:height[0],weight:weight[0],skincolor:skincolor[0])
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -64,40 +215,79 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = dropDownMenu.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        if (tableView == dropDownMenu) {
+            var cell:UITableViewCell = dropDownMenu.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         
-        cell.textLabel!.text = self.menus[indexPath.row]
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        
-        return cell
+            cell.textLabel!.text = self.menus[indexPath.row]
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            return cell
+        } else {
+            var cell:UITableViewCell = sectionMenu.dequeueReusableCellWithIdentifier("cell2") as! UITableViewCell
+            
+            cell.textLabel!.text = self.sections[indexPath.row]
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            return cell
+
+        }
     }
     
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (tableView == dropDownMenu) {
-        switch (indexPath.row) {
-        case 0:
-            dropDownMenu.hidden = true
-            self.performSegueWithIdentifier("goto_load", sender: self)
-        case 1:
-            dropDownMenu.hidden = true
-            self.performSegueWithIdentifier("goto_combine", sender: self)
-        case 2:
-            //add to my collection
-            sectionMenu.hidden = false
-            
-        case 3:
-            dropDownMenu.hidden = true
-            self.performSegueWithIdentifier("goto_share", sender: self)
-        case 4:
-            dropDownMenu.hidden = true
-            shirtView.image = nil
-        default: ()
-        }
+            switch (indexPath.row) {
+            case 0:
+                dropDownMenu.hidden = true
+                self.performSegueWithIdentifier("goto_load", sender: self)
+            case 1:
+                dropDownMenu.hidden = true
+                self.performSegueWithIdentifier("goto_combine", sender: self)
+            case 2:
+                //add to my collection
+                sectionMenu.hidden = false
+                
+            case 3:
+                dropDownMenu.hidden = true
+                self.performSegueWithIdentifier("goto_share", sender: self)
+            case 4:
+                dropDownMenu.hidden = true
+                shirtView.image = nil
+            default: ()
+            }
         }
         if (tableView == sectionMenu) {
             // choose between top, bottom, other and whole appearance
+            dropDownMenu.hidden = true
+            sectionMenu.hidden = true
+            switch (indexPath.row) {
+            case 0:
+                // add to top
+                println("top")
+            case 1:
+                // add to bottom
+                println("bottom")
+            case 2:
+                // add to hat
+                println("hat")
+            case 3:
+                // whole appearance
+                
+                UIGraphicsBeginImageContext(view.frame.size)
+                view.layer.renderInContext(UIGraphicsGetCurrentContext())
+                let image = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                var imageData = UIImageJPEGRepresentation(image,1)
+                
+                var teststring = imageData.base64EncodedStringWithOptions(nil)
+                //println(teststring)
+                
+               // postToDB(teststring)
+
+                println("appearance")
+            default: ()
+                
+            }
         }
         
     }
@@ -114,8 +304,10 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         if (dropDownMenu.hidden) {
             self.showDropDownView()
         } else {
-            
             self.hideDropDownView()
+        }
+        if (!sectionMenu.hidden) {
+            self.sectionMenu.hidden = true
         }
     }
     
@@ -143,23 +335,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         
     }
     
-   /* @IBAction func saveWholeView(sender: UIButton) {
-        
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.layer.renderInContext(UIGraphicsGetCurrentContext())
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        var imageData = UIImageJPEGRepresentation(image,1)
-        
-        var teststring = imageData.base64EncodedStringWithOptions(nil)
-        //println(teststring)
-        
-        postToDB(teststring)
-        
-    }
-*/
-    
+
     func postToDB(str2 : String) {
         // post user information to database
         var client:TCPClient = TCPClient(addr: "146.169.53.33", port: 1111)
@@ -488,6 +664,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     
     func detectBoundry(dataType:UnsafeMutablePointer<UInt8>,off1:Int,off2:Int)->Bool{
+        
         var red     = Int(diff(dataType[off1], b:dataType[off2]))
         var green   = Int(diff(dataType[off1+1], b:dataType[off2+1]))
         var blue    = Int(diff(dataType[off1+2], b:dataType[off2+2]))
@@ -511,7 +688,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             return (b - a)
         }
     }
-
+    
     
     func process() {
         
