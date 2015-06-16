@@ -268,12 +268,24 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     private func outrange(i:Int,j:Int,wide:Int,hight:Int)->Bool{
         
-        if((j > (wide*10/30))&&(j < wide*20/30) && (i>(hight/6))&&(i<(hight*3/5))){
-            return false
+        if(selectParts==0 ){
+            if((i > (wide*13/30))&&(i < wide*17/30) && (j>(hight/6))&&(j<(hight*55/100))){
+                return false
+            }
+        }else if(selectParts==1){
+            if((i > (wide*29/90))&&(i < wide*61/90) && (j>(hight*13/80))&&(j<(hight*85/100)) ){
+                return false
+            }
+        }else if(selectParts==2){
+            if((i > (wide*3/90))&&(i < wide*87/90) && (j>(hight*10/80))&&(j<(hight*90/100)) ){
+                return false
+            }
         }
         return true
         
     }
+    
+    var selectParts = 0
     
     private func modifyPixel(context:CGContextRef,inImage: CGImage,color:UIColor)->UIImage{
         typealias RawColorType = (newRedColor:UInt8, newgreenColor:UInt8, newblueColor:UInt8, newalphaValue:UInt8)
@@ -282,61 +294,119 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         
         var data = CGBitmapContextGetData(context)
         var dataType = UnsafeMutablePointer<UInt8>(data)
-        
-        var shirtboundry = 0
-        var foundboundry = false
-        
-        //var whiteLimit:Int = 250
-        for i in 0...pixelsHigh{
-            for j in 0...pixelsWide{
-                let offset = 4*((Int(pixelsWide) * Int(i)) + Int(j))
-                if(outrange(i,j:j,wide:pixelsWide,hight:pixelsHigh)&&(dataType[offset] > 240) && dataType[offset+1] > 240 && dataType[offset+2] > 240 && dataType[offset+3] > 240){
-                    
-                    //println("here")
-                    dataType[offset]   = 0
-                    dataType[offset+1] = 0
-                    dataType[offset+2] = 0
-                    dataType[offset+3] = 0
-                }
-                // above remove background
+        switch selectParts{
+        case 0:
+            
+            for i in 0...pixelsWide{
+                var foundBoundry = false
+                var lastboundry = 0
+                var boundry = 0
                 
-                if(outrange(i,j:j,wide:pixelsWide,hight:pixelsHigh)){
+                for j in 0...pixelsHigh{
                     
-                    if((i < pixelsHigh/7 )&&(dataType[offset+1]>100)){
-                        dataType[offset]   = 0
-                        dataType[offset+1] = 0
-                        dataType[offset+2] = 0
-                        dataType[offset+3] = 0
-                        // remove head
-                        // can add to the second condition as ||
-                        // remain this for debugging purpose
-                    }else if((dataType[offset+1]>100)&&(dataType[offset+2]>110)&&(dataType[offset+3]<110)){
+                    let offset = 4*((Int(pixelsWide) * Int(j)) + Int(i))
+                    if(outrange(i,j:j,wide:pixelsWide,hight:pixelsHigh) && detect_white_background(dataType, offset:offset)){
                         
-                        if (!foundboundry && i > pixelsHigh*19/30){
+                        clear_pixel(dataType, offset:offset)
+                    }
+                    // above remove background
+                    
+                    if(outrange(i,j:j,wide:pixelsWide,hight:pixelsHigh)){
+                        
+                        if(j<pixelsHigh/7&&(detect_human_skin(dataType, offset: offset)||detectBlack(dataType,offset:offset))){
                             
-                            shirtboundry = i
-                            foundboundry = true
+                            clear_pixel(dataType, offset:offset)
+                            // remove head
+                        }else if(detect_human_skin(dataType, offset:offset)){
+                            clear_pixel(dataType, offset:offset)
                         }
+                    }
+                    // above removes human skin
+                    
+                    
+                    if( !foundBoundry && (j > getBoundry(pixelsHigh) )){
                         
-                        dataType[offset]   = 0
-                        dataType[offset+1] = 0
-                        dataType[offset+2] = 0
-                        dataType[offset+3] = 0
+                        let offset_above = 4*((Int(pixelsWide) * Int(j-5)) + Int(i))
+                        
+                        if( detectBoundry(dataType,off1:offset,off2:offset_above) /*&& (i-lastboundry<10 || i-lastboundry>100)*/ ){
+                            foundBoundry = true
+                            boundry = j
+                        }else{
+                            // println("didn't find boundry yet")
+                            // println(i,j)
+                        }
+                    }else if(foundBoundry){
+                        clear_pixel(dataType, offset: offset)
                     }
                 }
-                
-                // above removes human skin
-                
-                if(foundboundry){
-                    dataType[offset]   = 0
-                    dataType[offset+1] = 0
-                    dataType[offset+2] = 0
-                    dataType[offset+3] = 0
-                }
-                
             }
+            
+        case 1:
+            
+            for i in 0...pixelsWide{
+                
+                var firstBoundry = 0
+                var secondBoundry = 0
+                var findFirst  = false
+                var findSecond = false
+                
+                for j in 0...pixelsHigh{
+                    
+                    let offset = 4*((Int(pixelsWide) * Int(j)) + Int(i))
+                    
+                    if(outrange(i,j:j,wide:pixelsWide,hight:pixelsHigh)){
+                        clear_pixel(dataType, offset:offset)
+                    }
+                    
+                    if(!findFirst && j < pixelsHigh-1 /*&& j<getBoundry(pixelsHigh)*/ ){
+                        
+                        let offset_above = 4*((Int(pixelsWide) * Int(j+1)) + Int(i))
+                        let offset_two_above = 4*((Int(pixelsWide) * Int(j+2)) + Int(i))
+                        
+                        if(detectBoundry(dataType,off1:offset_above,off2:offset_two_above)){
+                            
+                            findFirst = true
+                            firstBoundry = j
+                            //println(firstBoundry)
+                            //println(i,j)
+                            //clear_pixel(dataType,offset:offset)
+                        }
+                        clear_pixel(dataType,offset:offset)
+                        
+                        // clear_pixel(dataType,offset:offset)
+                    }
+                    
+                    if(findFirst && detect_white_background(dataType, offset: offset)){
+                        clear_pixel(dataType,offset:offset)
+                    }
+                    
+                    if(findFirst && detect_human_skin(dataType, offset: offset)){
+                        clear_pixel(dataType,offset:offset)
+                    }
+                    
+                    
+                }
+            }
+            
+            
+        case 2:
+            for i in 0...pixelsWide{
+                for j in 0...pixelsHigh{
+                    
+                    let offset = 4*((Int(pixelsWide) * Int(j)) + Int(i))
+                    
+                    if(outrange(i,j:j,wide:pixelsWide,hight:pixelsHigh)){
+                        clear_pixel(dataType, offset:offset)
+                    }
+                    if(detect_white_background(dataType, offset: offset)){
+                        clear_pixel(dataType, offset:offset)
+                        
+                    }
+                }
+            }
+        default:
+            ()
         }
-        
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
         let bitmapBytesPerRow = Int(pixelsWide) * 4
@@ -346,6 +416,108 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         
         return UIImage(CGImage: imageRef)!
     }
+    
+    func detect_human_skin(dataType:UnsafeMutablePointer<UInt8>,offset:Int)-> Bool{
+        var r = Int(dataType[offset+1])
+        var g = Int(dataType[offset+2])
+        var b = Int(dataType[offset+3])
+        var cond = max(r,g:g,b:b) - min(r,g:g,b:b) > 15
+        var cond_rg = diff(dataType[offset+1],b:dataType[offset+2])>15
+        if ( (r>95)&&(g>40)&&(b>20)&&cond&&cond_rg&&(r>g)&&(r>b) ){
+            return true
+        }
+        return false
+    }
+    
+    func detectBlack(dataType:UnsafeMutablePointer<UInt8>,offset:Int)-> Bool{
+        
+        
+        var r = Int(dataType[offset+1])
+        var g = Int(dataType[offset+2])
+        var b = Int(dataType[offset+3])
+        
+        if( r < 100 && g < 65 && b < 65){
+            return true
+        }
+        
+        return false
+    }
+    func max(r:Int,g:Int,b:Int)->Int{
+        var res = r
+        if(g > res){
+            res = g
+        }
+        
+        if(b > res){
+            res = b
+        }
+        
+        return res
+        
+    }
+    
+    func min(r:Int,g:Int,b:Int)->Int{
+        var res = r
+        if(g < res){
+            res = g
+        }
+        
+        if(b < res){
+            res = b
+        }
+        
+        return res
+        
+    }
+    
+    func detect_white_background(dataType:UnsafeMutablePointer<UInt8>,offset:Int)-> Bool{
+        if ( (dataType[offset] > 240) && dataType[offset+1] > 240 && dataType[offset+2] > 240 && dataType[offset+3] > 240){
+            return true
+        }
+        return false
+    }
+    
+    func clear_pixel(dataType:UnsafeMutablePointer<UInt8>,offset:Int){
+        dataType[offset]   = 0
+        dataType[offset+1] = 0
+        dataType[offset+2] = 0
+        dataType[offset+3] = 0
+    }
+    
+    func getBoundry(height:Int) -> Int{
+        switch selectParts{
+        case 0: return height*19/30
+        case 1: return height*8/30
+        default: return 0
+        }
+    }
+    
+    
+    func detectBoundry(dataType:UnsafeMutablePointer<UInt8>,off1:Int,off2:Int)->Bool{
+        var red     = Int(diff(dataType[off1], b:dataType[off2]))
+        var green   = Int(diff(dataType[off1+1], b:dataType[off2+1]))
+        var blue    = Int(diff(dataType[off1+2], b:dataType[off2+2]))
+        var alpha   = Int(diff(dataType[off1+3], b:dataType[off2+3]))
+        
+        let difference :Int = red+green+blue+alpha
+        let thrash :Int = 80
+        if( difference > thrash){
+            return true
+        }else{
+            
+        }
+        
+        return false
+    }
+    
+    func diff(a:UInt8, b:UInt8 )->UInt8{
+        if(a > b){
+            return (a - b)
+        }else{
+            return (b - a)
+        }
+    }
+
     
     func process() {
         

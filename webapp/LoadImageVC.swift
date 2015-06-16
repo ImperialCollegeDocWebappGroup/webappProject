@@ -13,8 +13,9 @@ class LoadImageVC: UIViewController {
 
     @IBOutlet weak var selectTable: UITableView!
 
-    var items:[String] = ["TOP", "Bottom", "Other"]
-
+    var items:[String] = ["TOP", "Bottom", "Hat"]
+    var selectParts = 0
+    
     var loadSuccess: Bool = false
     var imageUrl: String = "www.google.co.uk"
     
@@ -85,17 +86,20 @@ class LoadImageVC: UIViewController {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectTable.hidden = true
+        selectParts = indexPath.row
         switch (indexPath.row) {
         case 0:
             // top
-            println("top")
+            //println("top")
             self.performSegueWithIdentifier("save", sender: self)
         case 1:
             // bottom
             println("bottom")
+            self.performSegueWithIdentifier("save", sender: self)
         case 2:
             // other
             println("other")
+            self.performSegueWithIdentifier("save", sender: self)
         default: ()
         }
     }
@@ -218,12 +222,10 @@ class LoadImageVC: UIViewController {
  
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-         println("called")
-        println(segue.destinationViewController.description)
-        println(segue.sourceViewController.description)
-        println(segue.identifier)
+        
         var svc = segue.destinationViewController as! MainFeaturesVC;
-           svc.shirt = imageURL.image
+        svc.shirt = imageURL.image
+        svc.selectParts = selectParts
     }
     
    
