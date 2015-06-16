@@ -39,7 +39,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     override func viewDidLoad() {
         super.viewDidLoad()
     // ensure the tab bar doesn't show
-        self.tabBarController!.tabBar.hidden = true
+        self.tabBarController?.tabBar.hidden = true
         var saveButton: UIBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveTapped:")
         self.navigationItem.rightBarButtonItem = saveButton
         self.tabBarController?.tabBar.hidden = true
