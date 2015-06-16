@@ -708,12 +708,11 @@
                     <connections>
                         <outlet property="pageControl" destination="wl1-Hq-LXI" id="kXz-ZJ-AH2"/>
                         <outlet property="scrollView" destination="1va-KB-zKy" id="GbL-US-PKg"/>
-                        <outlet property="shareButt" destination="qt0-ab-8LN" id="vGP-6D-Jla"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="crv-lp-Nze" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5740.5" y="2339.5"/>
+            <point key="canvasLocation" x="5584" y="2310"/>
         </scene>
         <!--Photo ViewVC-->
         <scene sceneID="6z4-6j-61y">
@@ -1913,10 +1912,10 @@
         <image name="skinColours" width="551" height="68"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Rng-cZ-u7k"/>
         <segue reference="29m-As-rpe"/>
         <segue reference="AvK-1q-mIm"/>
         <segue reference="Yei-vw-uDj"/>
-        <segue reference="tQH-bS-51s"/>
-        <segue reference="Rng-cZ-u7k"/>
+        <segue reference="a06-Aj-nz8"/>
     </inferredMetricsTieBreakers>
 </document>
