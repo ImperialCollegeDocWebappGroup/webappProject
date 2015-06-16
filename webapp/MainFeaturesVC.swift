@@ -35,9 +35,13 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         dropDownMenu.hidden = true
         sectionMenu.hidden = true
         self.navigationItem.title = "FITTING ROOM"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
+        
+        
         shirtView.userInteractionEnabled = true
         /*
         setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
@@ -80,17 +84,20 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         if (tableView == dropDownMenu) {
         switch (indexPath.row) {
         case 0:
+            dropDownMenu.hidden = true
             self.performSegueWithIdentifier("goto_load", sender: self)
         case 1:
+            dropDownMenu.hidden = true
             self.performSegueWithIdentifier("goto_combine", sender: self)
         case 2:
             //add to my collection
             sectionMenu.hidden = false
             
         case 3:
+            dropDownMenu.hidden = true
             self.performSegueWithIdentifier("goto_share", sender: self)
         case 4:
-            println("selected")
+            dropDownMenu.hidden = true
             shirtView.image = nil
         default: ()
         }

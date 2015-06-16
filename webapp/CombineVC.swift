@@ -16,8 +16,12 @@ class CombineVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "My Controller"
+        self.navigationItem.title = "Combine With Another"
         self.tabBarController?.hidesBottomBarWhenPushed
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
 
         // Do any additional setup after loading the view.

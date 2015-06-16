@@ -29,12 +29,11 @@ class MomentsVC: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-    self.navigationItem.title = "Moments"
-    self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
-    
-    self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation3"), forBarMetrics: .Default)
-    
-
+        self.navigationItem.title = "MOMENTS"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
     
     /*

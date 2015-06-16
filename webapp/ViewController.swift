@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         logoutButton.layer.cornerRadius = 5
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.blackColor()]
         
-        
+        self.navigationController?.navigationBarHidden = true
     }
     
     override func didReceiveMemoryWarning() {

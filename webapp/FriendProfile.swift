@@ -30,6 +30,12 @@ class FriendProfile: UIViewController {
             icon.image = UIImage(data:data1)
             
         }
+        
+        self.navigationItem.title = "Friend Profile"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
 
     }
 

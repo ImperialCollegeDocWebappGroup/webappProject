@@ -27,10 +27,10 @@ class FriendsVC: UIViewController {
         super.viewDidLoad()
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Friendcell")
-        self.navigationItem.title = "Friends"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation4"), forBarMetrics: .Default)
+        self.navigationItem.title = "FRIENDS"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
          postToDB()
         // parseJson(str2)
 

@@ -43,6 +43,9 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         var saveButton: UIBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveTapped:")
         self.navigationItem.rightBarButtonItem = saveButton
         self.tabBarController?.tabBar.hidden = true
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+       // ???????????
+        //self.navigationController?.navigationBarHidden = true
         
        /* if let previousVC = backViewController {
             if previousVC

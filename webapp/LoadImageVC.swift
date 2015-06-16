@@ -26,10 +26,14 @@ class LoadImageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.backItem?.title = "Cancel"
         selectTable.hidden = true
         selectTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         saveButton.enabled = false
+        self.navigationItem.title = "Load Image"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
     
     override func didReceiveMemoryWarning() {
