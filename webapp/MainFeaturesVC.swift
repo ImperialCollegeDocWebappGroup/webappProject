@@ -37,17 +37,11 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         self.navigationItem.title = "FITTING ROOM"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+    self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
-        
-        
+
         shirtView.userInteractionEnabled = true
-        /*
-        setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-        [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
-        shadow, NSShadowAttributeName,
-        [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];*/
         
         dropDownMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         shirtView.image = shirt

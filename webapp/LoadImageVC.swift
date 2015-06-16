@@ -30,10 +30,10 @@ class LoadImageVC: UIViewController {
         selectTable.hidden = true
         selectTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         saveButton.enabled = false
+        //self.hidesBottomBarWhenPushed = true
         self.navigationItem.title = "Load Image"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+    self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
     

@@ -19,6 +19,7 @@ class AddNewFriend: UIViewController {
         super.viewDidLoad()
 
         foundLabel.hidden = true
+        self.tabBarController?.tabBar.hidden = true
         self.navigationItem.title = "Add a friends"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         

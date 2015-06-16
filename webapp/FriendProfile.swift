@@ -31,6 +31,7 @@ class FriendProfile: UIViewController {
             
         }
         
+        self.tabBarController?.tabBar.hidden = true
         self.navigationItem.title = "Friend Profile"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         

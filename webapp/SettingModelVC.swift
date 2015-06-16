@@ -24,6 +24,8 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     
     var imagePicker: UIImagePickerController!
     
+    @IBOutlet weak var saveBarButt: UIBarButtonItem!
+
     @IBOutlet weak var FemaleButt: UIButton!
     @IBOutlet weak var MaleButt: UIButton!
     @IBOutlet weak var txtHeight:
@@ -38,11 +40,8 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    // ensure the tab bar doesn't show
-        self.tabBarController?.tabBar.hidden = true
         var saveButton: UIBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "saveTapped:")
         self.navigationItem.rightBarButtonItem = saveButton
-        self.tabBarController?.tabBar.hidden = true
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
        // ???????????
         //self.navigationController?.navigationBarHidden = true
@@ -52,8 +51,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
             -------> distinguish previous view controller, to hide back button when pushed from registerVC
         }*/
     }
-    
-    override func didReceiveMemoryWarning() {
+       override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -157,8 +155,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     }
     
     
-    
-    func saveTapped(sender: UIBarButtonItem) { // check height and weight value
+    func saveTapped(sender: AnyObject) { // check height and weight value
         let a:Int? = txtHeight.text.toInt()
         let b:Int? = txtWeight.text.toInt()
         

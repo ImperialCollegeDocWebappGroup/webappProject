@@ -22,12 +22,13 @@ import UIKit
         
 
         UITabBar.appearance().translucent = false
-      //  UITabBar.appearance().barTintColor = UIColor(rgba: "#12296f")
         UITabBar.appearance().backgroundImage = UIImage(named: "tabBar")
-        UITabBar.appearance().tintColor = UIColor.whiteColor()
+        UITabBar.appearance().tintColor = UIColor(red: (68/255.0), green: (154/255.0), blue: (211/255.0), alpha: 1.0)
         UITabBar.appearance().autoresizesSubviews = false
         UITabBar.appearance().clipsToBounds = true
+    //    UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName:UIFont(name: "American Typewriter", size: 20)], forState: .Normal)
         return true
+        
         
     }
   
