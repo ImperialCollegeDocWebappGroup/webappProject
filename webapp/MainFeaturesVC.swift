@@ -117,7 +117,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             modelWidth = default_weight
         }
         
-        var imageStretch = CGFloat(1)//(CGFloat(modelWidth/default_weight) + CGFloat(modelHeight/default_height))/2
+        var imageStretch = (CGFloat(modelWidth/default_weight) + CGFloat(modelHeight/default_height))/2
         modelView.transform = CGAffineTransformScale(modelView.transform, imageStretch, 1);
         println(imageLink)
         

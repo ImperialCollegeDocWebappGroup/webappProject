@@ -1124,12 +1124,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="defaultM" translatesAutoresizingMaskIntoConstraints="NO" id="32V-8n-UEG">
-                                <rect key="frame" x="10" y="61" width="267" height="539"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="267" id="d6x-yD-EXn"/>
-                                </constraints>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kn8-TY-wJ4">
                                 <rect key="frame" x="-6" y="181" width="325" height="370"/>
                                 <gestureRecognizers/>
@@ -1225,9 +1219,6 @@
                                     <outlet property="delegate" destination="2Kn-XS-Z1j" id="YVT-iR-hhW"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f17-Uz-20y">
-                                <rect key="frame" x="0.0" y="316" width="319" height="235"/>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Tsk-84-xss">
                                 <rect key="frame" x="254" y="169" width="65" height="193"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1294,6 +1285,15 @@
                                     <outlet property="delegate" destination="2Kn-XS-Z1j" id="Ld0-Na-RXq"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f17-Uz-20y">
+                                <rect key="frame" x="0.0" y="316" width="319" height="235"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="defaultM" translatesAutoresizingMaskIntoConstraints="NO" id="32V-8n-UEG">
+                                <rect key="frame" x="33" y="61" width="267" height="539"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="267" id="d6x-yD-EXn"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1960,7 +1960,7 @@
         <segue reference="tzW-gv-jYE"/>
         <segue reference="Yei-vw-uDj"/>
         <segue reference="AvK-1q-mIm"/>
-        <segue reference="cAN-6O-VpG"/>
+        <segue reference="tQH-bS-51s"/>
         <segue reference="Rng-cZ-u7k"/>
     </inferredMetricsTieBreakers>
 </document>
