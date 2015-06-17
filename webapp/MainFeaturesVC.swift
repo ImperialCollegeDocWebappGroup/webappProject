@@ -10,6 +10,7 @@ import UIKit
 
 class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
+    var addNotShare:Bool = true
     
     @IBOutlet weak var sectionMenu: UITableView!
     
@@ -270,7 +271,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         sectionMenu.hidden = true
-        var addOrShare = 0
+        
         if (tableView == dropDownMenu) {
             switch (indexPath.row) {
             case 0:
@@ -280,14 +281,18 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
                 dropDownMenu.hidden = true
                 self.performSegueWithIdentifier("goto_combine", sender: self)
             case 2:
+                addNotShare = true
                 //add to my collection
-                sectionMenu.hidden = false
-                addOrShare = 2
-                
-            case 3:
                 if (shirtView.image != nil) {
                     sectionMenu.hidden = false
-                    addOrShare = 3
+                    
+                }
+                
+            case 3:
+                addNotShare = false
+                if (shirtView.image != nil) {
+                    sectionMenu.hidden = false
+                    
                 }
             case 4:
                 dropDownMenu.hidden = true
@@ -300,17 +305,36 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             // choose between top, bottom, other and whole appearance
             dropDownMenu.hidden = true
             sectionMenu.hidden = true
-            if (addOrShare == 2) {
+            if (addNotShare) {
                 // add to my wardrobe
+                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
             switch (indexPath.row) {
             case 0:
                 // add to top
-                println("top")
+                var requestLine = "UPDATE userprofile SET tops = array_append(tops, '" + webURL + "') WHERE login = '" + logname + "';"
+                if query(requestLine) {
+                
+                } else {
+                
+                }
             case 1:
                 // add to bottom
+                var requestLine = "UPDATE userprofile SET buttoms = array_append(buttoms, '" + webURL + "') WHERE login = '" + logname + "';"
+                if query(requestLine) {
+                    
+                } else {
+                    
+                }
                 println("bottom")
             case 2:
                 // add to hat
+                var requestLine = "UPDATE userprofile SET hat = array_append(tops, '" + webURL + "') WHERE hat = '" + logname + "';"
+                if query(requestLine) {
+                    
+                } else {
+                    
+                }
                 println("hat")
             case 3:
                 // whole appearance
@@ -329,7 +353,6 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
                 
                 println("appearance")
             default: ()
-                
             }
             } else {
                 // share to friends
@@ -345,20 +368,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
                     println("hat")
                 case 3:
                     // whole appearance
-                    
-                    UIGraphicsBeginImageContext(view.frame.size)
-                    view.layer.renderInContext(UIGraphicsGetCurrentContext())
-                    let image = UIGraphicsGetImageFromCurrentImageContext()
-                    UIGraphicsEndImageContext()
-                    
-                    var imageData = UIImageJPEGRepresentation(image,1)
-                    
-                    var teststring = imageData.base64EncodedStringWithOptions(nil)
-                    //println(teststring)
-                    
-                    // postToDB(teststring)
-                    
-                    println("appearance")
+                println("appearance")
                 default: ()
                 }
              self.performSegueWithIdentifier("goto_share", sender: self)
@@ -457,6 +467,74 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             println(errmsg)
         }
     }
+    
+    func query(query : String) -> Bool {
+        println("posting")
+        getServerIp()
+        // post user information to database
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
+        var client:TCPClient = TCPClient(addr: serverIp, port: 1111)
+        var (success,errmsg)=client.connect(timeout: 10)
+        if success{
+            println("Connection success!")
+            var (success,errmsg)=client.send(str: query)
+            var i: Int = 0
+            var dd : Bool = false
+            while true {
+                if success && i < 10 {
+                    println("sent success!")
+                    var data=client.read(1024*10)
+                    if let d = data {
+                        if let str1 = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
+                            println("read success")
+                            println(str1)
+                            println("----")
+                            var str  = str1.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                            println(str)
+                            if (str == "ERROR") {
+                                println("--ERROR")
+                                client.close()
+                                return false
+                            } else if (str == "NOERROR"){ // NOERROR
+                                println("--NOERROR")
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            } else if (str == "NOR") {
+                                println("--NOR")
+                                client.close()
+                                return true
+                            } else if (str == "YESR") {
+                                println("--YESR")
+                                dd = true
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            } else if dd && str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0 {
+                                //data
+                                println("this is data")
+                                println(str)
+                                return true
+                            } else {
+                                println("er...")
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            }
+                        }
+                        
+                    }
+                    i+=1
+                    
+                } else {
+                    client.close()
+                    println(errmsg)
+                    return false
+                }
+                
+            }
+        }else{
+            client.close()
+            println(errmsg)
+            return false
+        }
+    }
+
     
     var location = CGPoint(x:0,y:0)
     

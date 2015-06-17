@@ -87,7 +87,7 @@ class SharingVC: UIViewController {
     
     
     @IBAction func attachURL(sender: UIButton) {
-        textField.text = webURL
+        attachURLButt.setTitle("Attached", forState: .Normal)
         
         // post url to DB
     }

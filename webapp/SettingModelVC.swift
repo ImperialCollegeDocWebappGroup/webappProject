@@ -59,9 +59,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         -------> distinguish previous view controller, to hide back button when pushed from registerVC
         }*/
         
-        saveButt.layer.cornerRadius = 5
-        saveButt.layer.borderWidth = 1
-        saveButt.layer.borderColor = UIColor.blackColor().CGColor
+        
         if (self.navigationController != nil) {
             // pushed
             resetModel = true

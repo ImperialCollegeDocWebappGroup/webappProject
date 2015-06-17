@@ -52,6 +52,12 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nYI-0D-ZyB" id="U0B-sZ-mbI">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pa-cL-WRQ">
+                                                    <rect key="frame" x="140" y="37" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtb-3u-KPW">
                                                     <rect key="frame" x="15" y="118" width="424" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -75,7 +81,7 @@
                                                     <rect key="frame" x="15" y="150" width="564" height="231"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCI-jF-1AN">
-                                                    <rect key="frame" x="485" y="390" width="30" height="30"/>
+                                                    <rect key="frame" x="467" y="390" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="Kib-O5-0Gw"/>
                                                     </constraints>
@@ -87,17 +93,11 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YlZ-IS-9UW">
-                                                    <rect key="frame" x="539" y="390" width="30" height="30"/>
-                                                    <state key="normal" title="Button" image="like">
+                                                    <rect key="frame" x="513" y="390" width="30" height="30"/>
+                                                    <state key="normal" title="Button" image="like2">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pa-cL-WRQ">
-                                                    <rect key="frame" x="140" y="37" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="pCI-jF-1AN" firstAttribute="top" secondItem="XVz-FA-SBh" secondAttribute="bottom" constant="3" id="1QX-dQ-rtm"/>
@@ -669,22 +669,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="jrU-Z0-pJy">
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="jrU-Z0-pJy">
                                 <rect key="frame" x="-20" y="593" width="694" height="37"/>
                             </pageControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hOn-hr-uxL">
-                                <rect key="frame" x="10" y="135" width="635" height="429"/>
+                                <rect key="frame" x="16" y="98" width="349" height="429"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="349" id="dk8-67-Yh9"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="jrU-Z0-pJy" firstAttribute="top" secondItem="50Y-YV-uPl" secondAttribute="bottom" constant="42" id="7Qc-Iw-fHr"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hOn-hr-uxL" secondAttribute="trailing" constant="-61" id="BPh-ey-MoM"/>
-                            <constraint firstItem="jrU-Z0-pJy" firstAttribute="leading" secondItem="622-MY-EIi" secondAttribute="leadingMargin" constant="-36" id="MtM-il-0CX"/>
-                            <constraint firstItem="hOn-hr-uxL" firstAttribute="leading" secondItem="622-MY-EIi" secondAttribute="leadingMargin" constant="-6" id="T5H-dK-L0Z"/>
-                            <constraint firstItem="jrU-Z0-pJy" firstAttribute="centerX" secondItem="hOn-hr-uxL" secondAttribute="centerX" id="eQJ-2g-WMm"/>
-                            <constraint firstItem="hOn-hr-uxL" firstAttribute="top" secondItem="qgK-ug-7JB" secondAttribute="bottom" constant="115" id="ku1-1x-Yb5"/>
-                            <constraint firstItem="50Y-YV-uPl" firstAttribute="top" secondItem="hOn-hr-uxL" secondAttribute="bottom" constant="36" id="oVf-A3-X4M"/>
+                            <constraint firstItem="hOn-hr-uxL" firstAttribute="top" secondItem="qgK-ug-7JB" secondAttribute="bottom" constant="78" id="26h-cP-jg1"/>
+                            <constraint firstItem="50Y-YV-uPl" firstAttribute="top" secondItem="hOn-hr-uxL" secondAttribute="bottom" constant="73" id="8Uh-Qm-sBR"/>
+                            <constraint firstItem="hOn-hr-uxL" firstAttribute="leading" secondItem="622-MY-EIi" secondAttribute="leadingMargin" id="K21-3S-Oyx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6HP-iE-4dJ">
@@ -702,7 +701,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ovN-BC-h9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6154.5" y="2910.5"/>
+            <point key="canvasLocation" x="6154" y="2910"/>
         </scene>
         <!--Bottoms ScrollVC-->
         <scene sceneID="FqH-oy-5cj">
@@ -716,21 +715,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="wl1-Hq-LXI">
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="wl1-Hq-LXI">
                                 <rect key="frame" x="168" y="610" width="39" height="37"/>
                             </pageControl>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1va-KB-zKy">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1va-KB-zKy">
                                 <rect key="frame" x="37" y="151" width="300" height="365"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="OLK-Jp-kBh"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="1va-KB-zKy" secondAttribute="trailing" constant="-33" id="Emb-af-4W6"/>
-                            <constraint firstItem="1va-KB-zKy" firstAttribute="centerX" secondItem="wl1-Hq-LXI" secondAttribute="centerX" id="Jc8-Ae-uwT"/>
-                            <constraint firstItem="1va-KB-zKy" firstAttribute="leading" secondItem="bjG-W9-f5A" secondAttribute="leadingMargin" constant="21" id="XHU-ng-uou"/>
-                            <constraint firstItem="1va-KB-zKy" firstAttribute="top" secondItem="HES-F9-vzw" secondAttribute="bottom" constant="131" id="k14-t8-sXe"/>
-                            <constraint firstItem="N62-x4-eYx" firstAttribute="top" secondItem="1va-KB-zKy" secondAttribute="bottom" constant="52" id="lXi-kU-Wbz"/>
-                            <constraint firstItem="wl1-Hq-LXI" firstAttribute="top" secondItem="N62-x4-eYx" secondAttribute="bottom" constant="42" id="rTe-uw-DDi"/>
+                            <constraint firstItem="1va-KB-zKy" firstAttribute="top" secondItem="HES-F9-vzw" secondAttribute="bottom" constant="131" id="1Ts-d5-qSF"/>
+                            <constraint firstItem="N62-x4-eYx" firstAttribute="top" secondItem="1va-KB-zKy" secondAttribute="bottom" constant="84" id="Zhy-8F-55o"/>
+                            <constraint firstItem="1va-KB-zKy" firstAttribute="leading" secondItem="bjG-W9-f5A" secondAttribute="leadingMargin" constant="21" id="rpw-C1-X6u"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VUv-g2-r5m">
@@ -1112,6 +1111,7 @@
                                 </state>
                                 <connections>
                                     <action selector="cameraTapped:" destination="1Ty-56-PsZ" eventType="touchUpInside" id="b7A-2Q-Ds4"/>
+                                    <segue destination="Rva-Ta-f7w" kind="push" id="H9Y-8D-M94"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2039,15 +2039,15 @@
         <image name="comment" width="128" height="128"/>
         <image name="defaultM" width="146" height="418"/>
         <image name="default_profile" width="1290" height="1290"/>
-        <image name="like" width="128" height="121"/>
+        <image name="like2" width="50" height="50"/>
         <image name="menuicon" width="33" height="30"/>
         <image name="skinColours" width="551" height="68"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="tzW-gv-jYE"/>
-        <segue reference="Yei-vw-uDj"/>
+        <segue reference="R3n-gH-sDe"/>
         <segue reference="AvK-1q-mIm"/>
-        <segue reference="tQH-bS-51s"/>
-        <segue reference="Rng-cZ-u7k"/>
+        <segue reference="a06-Aj-nz8"/>
+        <segue reference="cp2-jd-8x3"/>
     </inferredMetricsTieBreakers>
 </document>
