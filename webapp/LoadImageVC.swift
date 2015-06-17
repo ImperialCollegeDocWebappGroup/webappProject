@@ -21,6 +21,7 @@ class LoadImageVC: UIViewController {
     var loadSuccess: Bool = false
     var imageUrl: String = "www.google.co.uk"
     var imageLink = ""
+    var realURL: String = ""
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
@@ -130,7 +131,7 @@ class LoadImageVC: UIViewController {
         */
         var error_msg: String = ""
         var invalidURL: Bool = false
-        var realURL: String = txtURL.text!
+        realURL = txtURL.text!
         if let myURL = NSURL(string: realURL) {
             var error: NSError?
             var myHTMLString = NSString(contentsOfURL: myURL, encoding: NSUTF8StringEncoding, error: &error)
@@ -213,10 +214,13 @@ class LoadImageVC: UIViewController {
         println(segue.sourceViewController.description)
         println(segue.identifier)
         var svc = segue.destinationViewController as! MainFeaturesVC;
+        
         svc.shirt = imageURL.image
+        
         svc.selectParts = selectParts
         svc.imageLink = imageLink
-        svc.url = imageUrl
+        svc.imgURL = imageUrl
+        svc.webURL = realURL
         //println("url is \(imageUrl)")
     }
     

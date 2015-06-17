@@ -21,8 +21,16 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     @IBOutlet weak var shirtView: UIImageView!
     
+    @IBOutlet weak var bottomView: UIImageView!
+    
+    //var currentView: UIImageView! = nil
+    
+    
     var shirt: UIImage! = nil
-    var url: String! = nil
+    var bottom: UIImage! = nil
+    
+    var imgURL: String! = nil
+    var webURL: String! = nil
     
     var menus:[String] = ["Load Clothing", "Combine with another", "Add to my wardrobe", "Share to Friends", "Clear Appearance"]
     var sections:[String] = ["Top", "Bottom", "Hat", "Whole"]
@@ -35,6 +43,14 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /*if(selectParts == 0)
+        {
+            currentView = shirtView
+        }else{
+            currentView = bottomView
+        }*/
+
         
         let reallink = link + fileName
         let url = NSURL(string: reallink)
@@ -66,11 +82,12 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         dropDownMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         sectionMenu.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell2")
         
-        
         shirtView.image = shirt
         if(shirtView.image != nil){
             process()
         }
+        
+        process_skin()
         
         var usrInfo = getData()
         
@@ -106,7 +123,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         let reallink = link + fileName
         let url = NSURL(string: reallink)
         if let data1 = NSData(contentsOfURL: url!) {
-            println("!!!!!")
+            println("getServerIP")
             var datastring = NSString(data:data1, encoding:NSUTF8StringEncoding) as! String
             println(datastring)
             serverIp = datastring
@@ -352,7 +369,8 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
             if (segue.identifier == "goto_share") {
                 var svc = segue.destinationViewController as! SharingVC;
-                svc.url = url
+                svc.webURL = webURL
+                svc.imgURL = imgURL
                 //println("url is \(imageUrl)")
         }
     }
@@ -394,7 +412,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     @IBAction func scaleImage(sender: UIPinchGestureRecognizer) {
         
         shirtView.transform = CGAffineTransformScale(shirtView.transform, sender.scale,sender.scale)
-        println("here")
+       // println("scaleImage")
         sender.scale = 1
         
     }
@@ -503,7 +521,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     private func outrange(i:Int,j:Int,wide:Int,hight:Int)->Bool{
         
         if(selectParts==0 ){
-            if((i > (wide*13/30))&&(i < wide*17/30) && (j>(hight/6))&&(j<(hight*55/100))){
+            if((i > (wide*13/30))&&(i < wide*17/30) && (j>(hight/6))&&(j<(hight*45/100))){
                 return false
             }
         }else if(selectParts==1){
@@ -705,7 +723,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     }
     
     func detect_white_background(dataType:UnsafeMutablePointer<UInt8>,offset:Int)-> Bool{
-        if ( (dataType[offset] > 240) && dataType[offset+1] > 240 && dataType[offset+2] > 240 && dataType[offset+3] > 240){
+        if (dataType[offset+1] > 240 && dataType[offset+2] > 240 && dataType[offset+3] > 240){
             return true
         }
         return false
@@ -753,6 +771,76 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    private func modifySkin(context:CGContextRef,inImage: CGImage,skin:UInt8)->UIImage{
+        typealias RawColorType = (newRedColor:UInt8, newgreenColor:UInt8, newblueColor:UInt8, newalphaValue:UInt8)
+        let pixelsWide = CGImageGetWidth(inImage)
+        let pixelsHigh = CGImageGetHeight(inImage)
+        
+        var data = CGBitmapContextGetData(context)
+        var dataType = UnsafeMutablePointer<UInt8>(data)
+        
+        println(pixelsWide,pixelsHigh)
+        
+        for i in 0...pixelsWide{
+            for j in 0...pixelsHigh{
+                
+                let offset = 4*((Int(pixelsWide) * Int(j)) + Int(i))
+                /*dataType[offset+1] = 200
+                dataType[offset+2] = 210
+                dataType[offset+3] = 210
+                */
+                
+                var r = Int(dataType[offset+1])
+                var g = Int(dataType[offset+2])
+                var b = Int(dataType[offset+3])
+                
+                
+                if(detect_human_skin(dataType, offset: offset)){
+                    //println("what~")
+                    r -= 17 * Int(skin)
+                    g -= 12 * Int(skin)
+                    b -= 10 * Int(skin)
+                    if(r > 255){
+                        dataType[offset+1] = 255
+                    }else if(r < 0){
+                        dataType[offset+1] = 0
+                    }else{
+                        dataType[offset+1] = UInt8(r)
+                    }
+                    
+                    if(g > 255){
+                        dataType[offset+2] = 255
+                    }else if(g < 0){
+                        dataType[offset+2] = 0
+                    }else{
+                        dataType[offset+2] = UInt8(g)
+                    }
+                    
+                    if(b > 255){
+                        dataType[offset+3] = 255
+                    }else if(b < 0){
+                        dataType[offset+3] = 0
+                    }else{
+                        dataType[offset+3] = UInt8(b)
+                    }
+                    
+                }
+            }
+        }
+        
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
+        let bitmapBytesPerRow = Int(pixelsWide) * 4
+        let bitmapByteCount = bitmapBytesPerRow * Int(pixelsHigh)
+        let finalcontext = CGBitmapContextCreate(data, pixelsWide, pixelsHigh, (8), (bitmapBytesPerRow), colorSpace, bitmapInfo)
+        let imageRef = CGBitmapContextCreateImage(finalcontext)
+        
+        modelView.image = UIImage(CGImage: imageRef)
+        return UIImage(CGImage: imageRef)!
+    }
+
+    
+    
     
     func process() {
         
@@ -790,6 +878,45 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         
         //print("finish process")
     }
+    
+    
+    func process_skin() {
+        
+        var modelUI: UIImage = modelView.image!
+        
+        var lowResImage = UIImageJPEGRepresentation(modelUI, 1)
+        var modelCG: CGImage = UIImage(data:lowResImage)!.CGImage
+        // Use the above two lines will solve an wierd memory error
+        // probably will be fine in an real iphone
+        
+        // originally intended:
+        //      var shirtCG: CGImage = shirtUI.CGImage!
+        
+        var width  : CGFloat = CGFloat(CGImageGetWidth(modelCG))
+        var height : CGFloat = CGFloat(CGImageGetHeight(modelCG))
+        //println(width)
+        var context: CGContext = createARGBBitmapContext(modelCG)
+        var rect :CGRect = CGRectMake(0,0,width,height)
+        
+        
+        CGContextDrawImage(context, rect, modelCG)
+        
+        let pixelsWide = CGImageGetWidth(modelCG)
+        let pixelsHigh = CGImageGetHeight(modelCG)
+        
+        
+        var redP = UnsafeMutablePointer<CGFloat>.alloc(8)
+        var color = getcolorfrompoint(context,rect:rect,inImage:modelCG,x:10,y:20 )
+        color.getRed(redP,green:nil,blue:nil,alpha:nil)
+        var black = UIColor.blackColor()
+        modelUI = modifySkin(context, inImage: modelCG, skin: UInt8(10))
+        modelView.image = modelUI
+        
+        //println(redP.memory * 255)
+        
+        //print("finish process")
+    }
+
     
     
     

@@ -1361,6 +1361,9 @@
                                     <outlet property="delegate" destination="2Kn-XS-Z1j" id="Ld0-Na-RXq"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f17-Uz-20y">
+                                <rect key="frame" x="0.0" y="316" width="319" height="235"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1377,6 +1380,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomView" destination="f17-Uz-20y" id="aXK-9T-hDC"/>
                         <outlet property="dropDownMenu" destination="GnA-s5-pnQ" id="BEZ-w9-gL3"/>
                         <outlet property="menuButt" destination="bIo-3v-hz9" id="COI-oW-YXx"/>
                         <outlet property="modelView" destination="32V-8n-UEG" id="08P-G5-iy0"/>

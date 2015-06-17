@@ -17,7 +17,8 @@ class SharingVC: UIViewController {
     var serverIp : String = ""
     var imageString = ""
     var im: UIImage! = nil
-    var url: String! = nil
+    var imgURL: String! = nil
+    var webURL: String! = nil
     //var imm : UIImage = UIImage(named: "collect")!
     
     @IBOutlet weak var attachURLButt: UIButton!
@@ -33,7 +34,7 @@ class SharingVC: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
 
-        if (url == nil) {
+        if (webURL == nil) {
             attachURLButt.hidden = true
         } else {
             attachURLButt.hidden = false
@@ -43,33 +44,12 @@ class SharingVC: UIViewController {
     
 
     func loadImage() {
-        /*
-        var altStringToSearch:String = "I want to make a cake and then prepare coffee"
-        let altSearchTerm:String = "cake"
-        let altScanner = NSScanner(string: altStringToSearch)
-        var altResult:NSString?
-        altScanner.scanUpToString(altSearchTerm, intoString:&altResult) // altResult : "I want to make a "
-        var len = altResult!.length
-        var someString = (altStringToSearch as NSString).substringFromIndex(len)
-        println(someString)
-        let altSearchTerm2:String = "prepare"
-        let altScanner2 = NSScanner(string: someString)
-        altScanner.scanUpToString(altSearchTerm2, intoString:&altResult)
-        println(altResult!)
-        */
-        /*
-        var realURL: String = "http://www.selfridges.com/en/ralph-lauren-new-fit-bi-swing-windbreaker-jacket_434-88064526-A30J4030Y3177/?previewAttribute=Rl+black"
-        */
-        
-        
-        /*original method from loadImageVC
         var error_msg: String = ""
         var invalidURL: Bool = false
-        var realURL: String = txtURL.text!
+        var realURL: String = imgURL
         if let myURL = NSURL(string: realURL) {
             var error: NSError?
             var myHTMLString = NSString(contentsOfURL: myURL, encoding: NSUTF8StringEncoding, error: &error)
-            
             if let error = error {
                 invalidURL = true
                 error_msg = "Your URL is not valid"
@@ -111,10 +91,12 @@ class SharingVC: UIViewController {
                     altScanner4.scanUpToString(altSearchTerm3, intoString:&altResult5)
                     println(altResult5!)
                     
-                    imageUrl = altResult5! as String
-                    loadSuccess = true
-                    saveButton.enabled = true
-                    imageLink = imageUrl
+                     var imageUrl = altResult5! as String
+                    let url = NSURL(string: imageUrl)
+                    if let data1 = NSData(contentsOfURL: url!) {
+                        println("!!!!!2")
+                        imageV.image = UIImage(data:data1)
+                    }
                 }
             }
         } else {
@@ -122,25 +104,6 @@ class SharingVC: UIViewController {
             error_msg = "Invalid URL."
             println("Error: \(realURL) doesn't seem to be a valid URL")
         }
-        var image2 : UIImage = UIImage(named:"notfound")!
-        let url = NSURL(string: imageUrl)
-        if let data = NSData(contentsOfURL: url!) {
-            imageURL.image = UIImage(data: data)
-            println("good1")
-        } else {
-            invalidURL = true
-        }
-        
-        if invalidURL {
-            println("not good")
-            var invalidURLAlert = UIAlertController(title: "Invalid URL", message: error_msg as String, preferredStyle: .Alert )
-            
-            invalidURLAlert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
-            
-            self.presentViewController(invalidURLAlert, animated: true, completion: nil)
-            imageV.image = image2
-        }*/
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -177,7 +140,7 @@ class SharingVC: UIViewController {
     
     
     @IBAction func attachURL(sender: UIButton) {
-        textField.text = url
+        textField.text = webURL
         
         // post url to DB
     }
