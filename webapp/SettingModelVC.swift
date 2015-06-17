@@ -242,20 +242,28 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
             gender = "true"
         }
         var info = [gender, String(height), String(weight), String(skinColour)]
-        var requestLine = ("INSERT INTO userprofile VALUES ('" + logname + "', '")
-        requestLine += (logname + "', " + info[0] + ", 20, " + info[1] + ", ")
-        requestLine += (info[2] + ", " + info[3] + ", ARRAY[]::text[], ARRAY['http://www.selfridges.com/en/givenchy-amerika-cuban-fit-cotton-jersey-t-shirt_242-3000831-15S73176511/?previewAttribute=Black'],")
-        var s1 = requestLine + "ARRAY[]::text[]);\n"
-        //   after new user
-        var s2 =    "INSERT INTO publishs VALUES ('" + logname + "',ARRAY[]::publishitem[]);\n"
-        var s3 =   "INSERT INTO friendlist VALUES ('" + logname + "',ARRAY['" + logname + "']);\n"
-        if query(s1) {
-            if query(s2) {
-                if query(s3) {
-                    return true
+        if resetModel { // reset
+            var requestLine = "UPDATE userprofile SET height = " + info[1] + ", weight = " + info[2] + ", skincolour = " + info[3] + " WHERE login = '" + logname + "';\n"
+                        if query(requestLine) {
+                                       return true
+                    }
+        } else { // insert
+            var requestLine = ("INSERT INTO userprofile VALUES ('" + logname + "', '")
+            requestLine += (logname + "', " + info[0] + ", 20, " + info[1] + ", ")
+            requestLine += (info[2] + ", " + info[3] + ", ARRAY[]::text[], ARRAY['http://www.selfridges.com/en/givenchy-amerika-cuban-fit-cotton-jersey-t-shirt_242-3000831-15S73176511/?previewAttribute=Black'],")
+            var s1 = requestLine + "ARRAY[]::text[]);\n"
+            //   after new user
+            var s2 =    "INSERT INTO publishs VALUES ('" + logname + "',ARRAY[]::publishitem[]);\n"
+            var s3 =   "INSERT INTO friendlist VALUES ('" + logname + "',ARRAY['" + logname + "']);\n"
+            if query(s1) {
+                if query(s2) {
+                    if query(s3) {
+                        return true
+                    }
                 }
             }
         }
+        
         return false
     }
     

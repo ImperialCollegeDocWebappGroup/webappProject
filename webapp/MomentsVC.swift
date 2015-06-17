@@ -122,11 +122,22 @@ class MomentsVC: UIViewController {
             cell.momentsIcon.contentMode = .ScaleAspectFill
             cell.momentsIcon.image = UIImage(data: data1)
             cell.momentsPhoto.contentMode = .ScaleAspectFit
-            cell.momentsPhoto.image = UIImage(data: data1)
+            if publish[3] != "" {
+                let url = NSURL(string: link+publish[3])
+                if let data2 = NSData(contentsOfURL: url!) {
+                    println("!!!!!")
+                    cell.momentsPhoto.image = UIImage(data: data2)
+                    
+                }
+            } else {
+                cell.momentsPhoto.image = UIImage(data: data1)
+                
+            }
         }
         cell.layer.cornerRadius = 10
         return cell
     }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //selectedRow = indexPath.row
@@ -219,17 +230,28 @@ class MomentsVC: UIViewController {
         let ptimes = (jsonObject as! NSDictionary)["ptime"] as! [NSString]
         let photo = (jsonObject as! NSDictionary)["photo"] as! [NSString]
         let length = namess.count
-        publishes = [[String]](count: length, repeatedValue: ["","",""])
+        publishes = [[String]](count: length, repeatedValue: ["","","",""])
         for i in 0..<length {
-            publishes[i] = ["","",""]
+            publishes[i] = ["","","",""]
             publishes[i][0] = namess[i] as String
             publishes[i][1] = contentss[i] as String
-            var pStr = (ptimes[i] as NSString).substringWithRange(NSMakeRange(0, 16))
-            println(pStr)
-            publishes[i][2] = pStr
+            publishes[i][2] = (ptimes[i] as NSString).substringWithRange(NSMakeRange(0, 16))
+            publishes[i][3] = ""
             println(photo[i])
+            var photoStr : String = photo[i] as String
+            if photoStr != "" {
+                if photoStr.rangeOfString("picFile") != nil {
+                    publishes[i][3] = photoStr
+                } else {
+                    publishes[i][1] += ("\n Share cloth URL: " + photoStr)
+                }
+            }
+            
+            
         }
     }
+    
+
     
 }
 
