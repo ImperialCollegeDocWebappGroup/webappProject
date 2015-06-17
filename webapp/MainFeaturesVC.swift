@@ -87,7 +87,6 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             process()
         }
         
-        process_skin()
         
         var usrInfo = getData()
         
@@ -96,6 +95,9 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         }else{
             modelView.image = UIImage(named:"defaultF")
         }
+        
+        
+        process_skin()
         
         //change model:
         var default_weight = 50.0
@@ -909,7 +911,8 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         var color = getcolorfrompoint(context,rect:rect,inImage:modelCG,x:10,y:20 )
         color.getRed(redP,green:nil,blue:nil,alpha:nil)
         var black = UIColor.blackColor()
-        modelUI = modifySkin(context, inImage: modelCG, skin: UInt8(10))
+        modelUI = modifySkin(context, inImage: modelCG, skin: UInt8(5))
+        //println("what")
         modelView.image = modelUI
         
         //println(redP.memory * 255)
