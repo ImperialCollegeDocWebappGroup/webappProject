@@ -73,6 +73,69 @@ class MomentsVC: UIViewController {
         }
     }
     
+    func loadImage(str: String) -> UIImage? {
+        var error_msg: String = ""
+        var invalidURL: Bool = false
+        var realURL = str
+        var imageURL = ""
+        if let myURL = NSURL(string: realURL) {
+            var error: NSError?
+            var myHTMLString = NSString(contentsOfURL: myURL, encoding: NSUTF8StringEncoding, error: &error)
+            if let error = error {
+                invalidURL = true
+                error_msg = "Your URL is not valid"
+                println("Error : \(error)")
+                return nil
+            } else {
+                // check the url is from selfridges.com
+                if realURL.rangeOfString("selfridges") == nil {
+                    invalidURL = true
+                    error_msg = "URL is not from selfridges.com"
+                    return nil
+                } else {
+                    //  println("HTML : \(myHTMLString)")
+                    println("success")
+                    let altSearchTerm:String = "<div class=\"productImage\">"
+                    let altScanner = NSScanner(string: myHTMLString! as String)
+                    var altResult:NSString?
+                    altScanner.scanUpToString(altSearchTerm, intoString:&altResult)
+                    var len2 = altResult!.length
+                    // println(len2)
+                    var someString = (myHTMLString! as NSString).substringFromIndex(len2)
+                    //println(someString)
+                    let altSearchTerm2:String = "/>"
+                    let altScanner2 = NSScanner(string: someString)
+                    var altResult22:NSString?
+                    altScanner.scanUpToString(altSearchTerm2, intoString:&altResult22)
+                    //   println(altResult22!)
+                    let altSearchTerm222:String = "src=\""
+                    let altScanner3 = NSScanner(string: altResult22! as String)
+                    var altResult5:NSString?
+                    altScanner3.scanUpToString(altSearchTerm222, intoString:&altResult5)
+                    var len22 = altResult5!.length
+                    //println(len22)
+                    var someString2 = (altResult22! as NSString).substringFromIndex(len22+5)
+                    //println(someString2)
+                    let altSearchTerm3:String = "\""
+                    let altScanner4 = NSScanner(string: someString2)
+                    altScanner4.scanUpToString(altSearchTerm3, intoString:&altResult5)
+                    println(altResult5!)
+                    imageURL = altResult5! as String
+                    
+                }
+            }
+        } else {
+            return nil
+        }
+        let url = NSURL(string: imageURL)
+        if let data = NSData(contentsOfURL: url!) {
+            return UIImage(data: data)
+        } else {
+            return nil
+        }
+    }
+
+    
     func getServerIp() {
         let reallink = link + fileName
         let url = NSURL(string: reallink)
@@ -115,6 +178,8 @@ class MomentsVC: UIViewController {
         cell.username.text = publish[0]
         cell.content.text = publish[1]
         cell.publishTime.text = publish[2]
+        println(publish[4])
+       
         let reallink : String = link1 + names[indexPath.row % 7]
         println(reallink)
         let url = NSURL(string: reallink)
@@ -126,14 +191,21 @@ class MomentsVC: UIViewController {
             if publish[3] != "" {
                 let url = NSURL(string: link+publish[3])
                 if let data2 = NSData(contentsOfURL: url!) {
-                    println("!!!!!")
-                    cell.momentsPhoto.image = UIImage(data: data2)
+                    println("!!!!!2")
+                    //cell.momentsPhoto.image = UIImage(data: data2)
                     
                 }
             } else {
-                cell.momentsPhoto.image = UIImage(data: data1)
+               // cell.momentsPhoto.image = UIImage(data: data1)
                 
             }
+            
+        }
+        if publish[4] != "" {
+            println("in")
+            if let im = loadImage(publish[4]) {
+                println("!!!!!3")
+                cell.momentsPhoto.image = im            }
         }
         cell.layer.cornerRadius = 10
         return cell
@@ -232,9 +304,9 @@ class MomentsVC: UIViewController {
         let photo = (jsonObject as! NSDictionary)["photo"] as! [NSString]
         let attachurls = (jsonObject as! NSDictionary)["attachurl"] as! [NSString]
         let length = namess.count
-        publishes = [[String]](count: length, repeatedValue: ["","","",""])
+        publishes = [[String]](count: length, repeatedValue: ["","","","",""])
         for i in 0..<length {
-            publishes[i] = ["","","",""]
+            publishes[i] = ["","","","",""]
             publishes[i][0] = namess[i] as String
             publishes[i][1] = contentss[i] as String
             publishes[i][2] = (ptimes[i] as NSString).substringWithRange(NSMakeRange(0, 16))
