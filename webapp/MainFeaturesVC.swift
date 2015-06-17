@@ -22,6 +22,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var shirtView: UIImageView!
     
     var shirt: UIImage! = nil
+    var url: String! = nil
     
     var menus:[String] = ["Load Clothing", "Combine with another", "Add to my wardrobe", "Share to Friends", "Clear Appearance"]
     var sections:[String] = ["Top", "Bottom", "Hat", "Whole"]
@@ -250,6 +251,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         sectionMenu.hidden = true
+        var addOrShare = 0
         if (tableView == dropDownMenu) {
             switch (indexPath.row) {
             case 0:
@@ -261,10 +263,13 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             case 2:
                 //add to my collection
                 sectionMenu.hidden = false
+                addOrShare = 2
                 
             case 3:
-                dropDownMenu.hidden = true
-                self.performSegueWithIdentifier("goto_share", sender: self)
+                if (shirtView.image != nil) {
+                    sectionMenu.hidden = false
+                    addOrShare = 3
+                }
             case 4:
                 dropDownMenu.hidden = true
                 shirtView.image = nil
@@ -276,6 +281,8 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             // choose between top, bottom, other and whole appearance
             dropDownMenu.hidden = true
             sectionMenu.hidden = true
+            if (addOrShare == 2) {
+                // add to my wardrobe
             switch (indexPath.row) {
             case 0:
                 // add to top
@@ -305,12 +312,51 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             default: ()
                 
             }
+            } else {
+                // share to friends
+                switch (indexPath.row) {
+                case 0:
+                    // add to top
+                    println("top")
+                case 1:
+                    // add to bottom
+                    println("bottom")
+                case 2:
+                    // add to hat
+                    println("hat")
+                case 3:
+                    // whole appearance
+                    
+                    UIGraphicsBeginImageContext(view.frame.size)
+                    view.layer.renderInContext(UIGraphicsGetCurrentContext())
+                    let image = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    
+                    var imageData = UIImageJPEGRepresentation(image,1)
+                    
+                    var teststring = imageData.base64EncodedStringWithOptions(nil)
+                    //println(teststring)
+                    
+                    // postToDB(teststring)
+                    
+                    println("appearance")
+                default: ()
+                }
+             self.performSegueWithIdentifier("goto_share", sender: self)
+            }
             sectionMenu.deselectRowAtIndexPath(indexPath, animated: true)
         }
         
     }
     
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+            if (segue.identifier == "goto_share") {
+                var svc = segue.destinationViewController as! SharingVC;
+                svc.url = url
+                //println("url is \(imageUrl)")
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

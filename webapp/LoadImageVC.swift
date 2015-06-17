@@ -216,6 +216,8 @@ class LoadImageVC: UIViewController {
         svc.shirt = imageURL.image
         svc.selectParts = selectParts
         svc.imageLink = imageLink
+        svc.url = imageUrl
+        //println("url is \(imageUrl)")
     }
     
 }
