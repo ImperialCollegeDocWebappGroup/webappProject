@@ -17,6 +17,8 @@ class BottomsScrollVC: UIViewController, UIScrollViewDelegate {
     
     var pageImages: [UIImage?] = []
     var pageViews: [UIImageView?] = []
+    var topss:[NSString] = []
+    var imgURLs: [String] = []
     
     
     let link1 : String = "http://www.doc.ic.ac.uk/~jl6613/"
@@ -217,7 +219,7 @@ class BottomsScrollVC: UIViewController, UIScrollViewDelegate {
         if let e  = error1 {
             println("Error: \(error1)")
         }
-        let topss = (jsonObject as! NSDictionary)["unnest"] as! [NSString]
+        topss = (jsonObject as! NSDictionary)["unnest"] as! [NSString]
         let length = topss.count
         pageImages = [UIImage?] (count: length, repeatedValue: nil)
         for i in 0..<length {
@@ -281,11 +283,36 @@ class BottomsScrollVC: UIViewController, UIScrollViewDelegate {
         }
         let url = NSURL(string: imageURL)
         if let data = NSData(contentsOfURL: url!) {
+            imgURLs.append(imageURL)
             return UIImage(data: data)
         } else {
+            imgURLs.append(imageURL)
             return nil
         }
     }
+    
+    
+    @IBAction func shareTapped(sender: UIBarButtonItem) {
+        
+        self.performSegueWithIdentifier("shared", sender: self)
+    }
+    
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "shared") {
+            println("topss count is \(topss.count)")
+            println(topss[0])
+            var width:CGFloat = scrollView.frame.size.width;
+            var page:NSInteger = NSInteger((scrollView.contentOffset.x + (0.5 * width)) / width);
+            println("top scroll current number is \(page)")
+            var svc = segue.destinationViewController as! SharingVC;
+            svc.webURL = topss[page] as String
+            svc.imgURL = imgURLs[page]
+        }
+    }
+    
+
     /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "goto_share") {

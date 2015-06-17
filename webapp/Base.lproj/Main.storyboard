@@ -737,6 +737,7 @@
                     <navigationItem key="navigationItem" id="VUv-g2-r5m">
                         <barButtonItem key="rightBarButtonItem" title="Share" id="qt0-ab-8LN">
                             <connections>
+                                <action selector="shareTapped:" destination="7X8-Vb-Cke" id="lN6-Mf-Oz1"/>
                                 <segue destination="E4W-IK-Zuf" kind="show" identifier="shared" id="cAN-6O-VpG"/>
                             </connections>
                         </barButtonItem>
@@ -1959,7 +1960,7 @@
         <segue reference="tzW-gv-jYE"/>
         <segue reference="Yei-vw-uDj"/>
         <segue reference="AvK-1q-mIm"/>
-        <segue reference="a06-Aj-nz8"/>
+        <segue reference="cAN-6O-VpG"/>
         <segue reference="Rng-cZ-u7k"/>
     </inferredMetricsTieBreakers>
 </document>
