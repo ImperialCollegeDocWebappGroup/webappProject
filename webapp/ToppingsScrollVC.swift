@@ -14,7 +14,8 @@ class ToppingsScrollVC: UIViewController, UIScrollViewDelegate {
     
     var pageImages: [UIImage?] = []
     var pageViews: [UIImageView?] = []
-    
+    var topss:[NSString] = []
+    var imgURLs: [String] = []
     
     let link1 : String = "http://www.doc.ic.ac.uk/~jl6613/"
     let link : String = "http://www.doc.ic.ac.uk/~jl6613/"
@@ -213,15 +214,15 @@ class ToppingsScrollVC: UIViewController, UIScrollViewDelegate {
         if let e  = error1 {
             println("Error: \(error1)")
         }
-        let topss = (jsonObject as! NSDictionary)["unnest"] as! [NSString]
+        topss = (jsonObject as! NSDictionary)["unnest"] as! [NSString]
         let length = topss.count
         pageImages = [UIImage?] (count: length, repeatedValue: nil)
         for i in 0..<length {
             println(topss[i])
-            pageImages[i] = loadImage(topss[i] as String)
+            pageImages[i] = loadImage(topss[i] as String, i:i)
         }
     }
-    func loadImage(str: String) -> UIImage? {
+    func loadImage(str: String, i: Int) -> UIImage? {
         var error_msg: String = ""
         var invalidURL: Bool = false
         var realURL = str
@@ -277,21 +278,34 @@ class ToppingsScrollVC: UIViewController, UIScrollViewDelegate {
         }
         let url = NSURL(string: imageURL)
         if let data = NSData(contentsOfURL: url!) {
+            imgURLs.append(imageURL)
             return UIImage(data: data)
         } else {
+            imgURLs.append(imageURL)
             return nil
         }
     }
-    /*
-override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-if (segue.identifier == "goto_share") {
-var svc = segue.destinationViewController as! SharingVC;
-svc.webURL = webURL
-svc.imgURL = imgURL
-//println("url is \(imageUrl)")
-}
-}
-*/
+    
+    @IBAction func shareTapped(sender: UIBarButtonItem) {
+        
+        self.performSegueWithIdentifier("shared", sender: self)
+    }
+    
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "shared") {
+            println("topss count is \(topss.count)")
+            println(topss[0])
+            var width:CGFloat = scrollView.frame.size.width;
+            var page:NSInteger = NSInteger((scrollView.contentOffset.x + (0.5 * width)) / width);
+            println("top scroll current number is \(page)")
+            var svc = segue.destinationViewController as! SharingVC;
+            svc.webURL = topss[page] as String
+            svc.imgURL = imgURLs[page]
+        }
+    }
+
 
 
     /*

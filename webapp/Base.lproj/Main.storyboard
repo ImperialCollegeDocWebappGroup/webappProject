@@ -691,7 +691,8 @@
                         <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" title="Share" id="039-l5-chf">
                             <connections>
-                                <segue destination="E4W-IK-Zuf" kind="show" id="a06-Aj-nz8"/>
+                                <action selector="shareTapped:" destination="15t-Er-GIn" id="8hi-wi-nCX"/>
+                                <segue destination="E4W-IK-Zuf" kind="show" identifier="shared" id="a06-Aj-nz8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -736,7 +737,7 @@
                     <navigationItem key="navigationItem" id="VUv-g2-r5m">
                         <barButtonItem key="rightBarButtonItem" title="Share" id="qt0-ab-8LN">
                             <connections>
-                                <segue destination="E4W-IK-Zuf" kind="show" id="cAN-6O-VpG"/>
+                                <segue destination="E4W-IK-Zuf" kind="show" identifier="shared" id="cAN-6O-VpG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1958,7 +1959,7 @@
         <segue reference="tzW-gv-jYE"/>
         <segue reference="Yei-vw-uDj"/>
         <segue reference="AvK-1q-mIm"/>
-        <segue reference="tQH-bS-51s"/>
+        <segue reference="a06-Aj-nz8"/>
         <segue reference="Rng-cZ-u7k"/>
     </inferredMetricsTieBreakers>
 </document>

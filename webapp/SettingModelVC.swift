@@ -241,7 +241,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         }
         var info = [gender, String(height), String(weight), String(skinColour)]
         if resetModel { // reset
-            var requestLine = "UPDATE userprofile SET height = " + info[1] + ", weight = " + info[2] + ", skincolour = " + info[3] + " WHERE login = '" + logname + "';\n"
+            var requestLine = "UPDATE userprofile SET gender = " + info[0] + ", height = " + info[1] + ", weight = " + info[2] + ", skincolour = " + info[3] + " WHERE login = '" + logname + "';\n"
                         if query(requestLine) {
                                        return true
                     }
@@ -340,6 +340,9 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
             println(errmsg)
             return false
         }
+    }
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
     }
     
     
