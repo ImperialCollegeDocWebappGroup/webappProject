@@ -1096,8 +1096,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZQ-44-Kvp">
                                 <rect key="frame" x="80" y="391" width="47" height="50"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="b3G-qG-zYG"/>
                                     <constraint firstAttribute="width" constant="47" id="dme-VS-5qX"/>
-                                    <constraint firstAttribute="height" constant="50" id="z6i-Ix-4jM"/>
                                 </constraints>
                                 <state key="normal" image="camera">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1152,9 +1152,7 @@
                             <constraint firstItem="7Ie-7z-HgK" firstAttribute="trailing" secondItem="zrW-RK-53G" secondAttribute="trailing" id="l2g-sG-hB2"/>
                             <constraint firstItem="auX-h5-SAD" firstAttribute="top" secondItem="MXm-XW-Fkv" secondAttribute="bottom" constant="54" id="mSt-F1-82R"/>
                             <constraint firstItem="nMQ-Ha-JQ0" firstAttribute="top" secondItem="tsN-t2-mJC" secondAttribute="bottom" constant="16" id="mmo-fR-VMC"/>
-                            <constraint firstItem="cof-yj-peJ" firstAttribute="top" secondItem="JZQ-44-Kvp" secondAttribute="bottom" constant="159" id="mpY-FO-LAZ"/>
                             <constraint firstItem="HMH-sG-9A1" firstAttribute="top" secondItem="fLD-md-pJZ" secondAttribute="bottom" constant="19" id="n0c-Pl-4VC"/>
-                            <constraint firstItem="L3i-hN-pbb" firstAttribute="top" secondItem="JZQ-44-Kvp" secondAttribute="bottom" constant="60" id="nhv-6A-pKA"/>
                             <constraint firstItem="MXm-XW-Fkv" firstAttribute="leading" secondItem="Ydo-HQ-wra" secondAttribute="leadingMargin" constant="29" id="oYn-DV-rOX"/>
                             <constraint firstItem="JZQ-44-Kvp" firstAttribute="leading" secondItem="Ydo-HQ-wra" secondAttribute="leadingMargin" constant="64" id="ooW-BR-m8Z"/>
                             <constraint firstItem="nMQ-Ha-JQ0" firstAttribute="leading" secondItem="zrW-RK-53G" secondAttribute="trailing" constant="8" id="oxm-F3-nic"/>
