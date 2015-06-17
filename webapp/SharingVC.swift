@@ -44,66 +44,12 @@ class SharingVC: UIViewController {
     
 
     func loadImage() {
-        var error_msg: String = ""
-        var invalidURL: Bool = false
-        var realURL: String = imgURL
-        if let myURL = NSURL(string: realURL) {
-            var error: NSError?
-            var myHTMLString = NSString(contentsOfURL: myURL, encoding: NSUTF8StringEncoding, error: &error)
-            if let error = error {
-                invalidURL = true
-                error_msg = "Your URL is not valid"
-                println("Error : \(error)")
-            } else {
-                // check the url is from selfridges.com
-                if realURL.rangeOfString("selfridges") == nil {
-                    invalidURL = true
-                    error_msg = "URL is not from selfridges.com"
-                } else {
-                    //  println("HTML : \(myHTMLString)")
-                    println("success")
-                    
-                    let altSearchTerm:String = "<div class=\"productImage\">"
-                    let altScanner = NSScanner(string: myHTMLString! as String)
-                    var altResult:NSString?
-                    altScanner.scanUpToString(altSearchTerm, intoString:&altResult)
-                    var len2 = altResult!.length
-                    // println(len2)
-                    var someString = (myHTMLString! as NSString).substringFromIndex(len2)
-                    //println(someString)
-                    let altSearchTerm2:String = "/>"
-                    let altScanner2 = NSScanner(string: someString)
-                    var altResult22:NSString?
-                    altScanner.scanUpToString(altSearchTerm2, intoString:&altResult22)
-                    //   println(altResult22!)
-                    
-                    
-                    let altSearchTerm222:String = "src=\""
-                    let altScanner3 = NSScanner(string: altResult22! as String)
-                    var altResult5:NSString?
-                    altScanner3.scanUpToString(altSearchTerm222, intoString:&altResult5)
-                    var len22 = altResult5!.length
-                    //println(len22)
-                    var someString2 = (altResult22! as NSString).substringFromIndex(len22+5)
-                    //println(someString2)
-                    let altSearchTerm3:String = "\""
-                    let altScanner4 = NSScanner(string: someString2)
-                    altScanner4.scanUpToString(altSearchTerm3, intoString:&altResult5)
-                    println(altResult5!)
-                    
-                     var imageUrl = altResult5! as String
-                    let url = NSURL(string: imageUrl)
+        
+                    let url = NSURL(string: imgURL)
                     if let data1 = NSData(contentsOfURL: url!) {
                         println("!!!!!2")
                         imageV.image = UIImage(data:data1)
                     }
-                }
-            }
-        } else {
-            invalidURL = true
-            error_msg = "Invalid URL."
-            println("Error: \(realURL) doesn't seem to be a valid URL")
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -121,6 +67,7 @@ class SharingVC: UIViewController {
            //     println("SUCCESS!!!")
             //}
        // }
+        self.dismissViewControllerAnimated(true, completion: nil)
         
     }
     

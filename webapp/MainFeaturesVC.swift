@@ -911,7 +911,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         var color = getcolorfrompoint(context,rect:rect,inImage:modelCG,x:10,y:20 )
         color.getRed(redP,green:nil,blue:nil,alpha:nil)
         var black = UIColor.blackColor()
-        modelUI = modifySkin(context, inImage: modelCG, skin: UInt8(5))
+        modelUI = modifySkin(context, inImage: modelCG, skin: UInt8(2))
         //println("what")
         modelView.image = modelUI
         
