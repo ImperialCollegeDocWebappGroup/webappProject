@@ -9,7 +9,7 @@
 import UIKit
 
 class MomentsVC: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -17,7 +17,7 @@ class MomentsVC: UIViewController {
     
     //var contents = ["image1", "image2", "image3"]
     
-   // var publishTime = ["2015-6-8, 12:20", "2015-6-9, 09:30", "2015-6-9, 15:13"]
+    // var publishTime = ["2015-6-8, 12:20", "2015-6-9, 09:30", "2015-6-9, 15:13"]
     var publishes = [
         ["Sam", "Image1", "2015-6-8, 12:20"],
         ["Sam2", "Image2", "2015-6-9, 09:30"],
@@ -47,13 +47,14 @@ class MomentsVC: UIViewController {
             println(datastring)
             serverIp = datastring
         }
+        getMoments()
         self.navigationItem.title = "MOMENTS"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-
-        getMoments()
+        
+        
         
     }
     
@@ -82,7 +83,7 @@ class MomentsVC: UIViewController {
             serverIp = datastring
         }
     }
-        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
@@ -151,7 +152,7 @@ class MomentsVC: UIViewController {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
         //SELECT unnest(friends) FROM friendlist WHERE uname = 'nathan';
-        var requestLine = "SELECT usrname,(unnest(shows)).content,(unnest(shows)).photo,(unnest(shows)).publishtime AS ptime FROM publishs WHERE usrname in (SELECT unnest(friends) FROM friendlist WHERE uname = '" + logname + "') ORDER BY ptime DESC LIMIT 20;\n"
+        var requestLine = "SELECT usrname,(unnest(shows)).content,(unnest(shows)).photo,(unnest(shows)).publishtime AS ptime , (unnest(shows)).attachurl FROM publishs WHERE usrname in (SELECT unnest(friends) FROM friendlist WHERE uname = '" + logname + "') ORDER BY ptime DESC LIMIT 20;\n"
         println(requestLine)
         var client:TCPClient = TCPClient(addr: serverIp, port: 1111)
         var (success,errmsg)=client.connect(timeout: 10)
@@ -229,6 +230,7 @@ class MomentsVC: UIViewController {
         let contentss = (jsonObject as! NSDictionary)["content"] as! [NSString]
         let ptimes = (jsonObject as! NSDictionary)["ptime"] as! [NSString]
         let photo = (jsonObject as! NSDictionary)["photo"] as! [NSString]
+        let attachurls = (jsonObject as! NSDictionary)["attachurl"] as! [NSString]
         let length = namess.count
         publishes = [[String]](count: length, repeatedValue: ["","","",""])
         for i in 0..<length {
@@ -237,13 +239,24 @@ class MomentsVC: UIViewController {
             publishes[i][1] = contentss[i] as String
             publishes[i][2] = (ptimes[i] as NSString).substringWithRange(NSMakeRange(0, 16))
             publishes[i][3] = ""
+            
             println(photo[i])
             var photoStr : String = photo[i] as String
+            println("photo=====: " + photoStr)
             if photoStr != "" {
                 if photoStr.rangeOfString("picFile") != nil {
                     publishes[i][3] = photoStr
                 } else {
-                    publishes[i][1] += ("\n Share cloth URL: " + photoStr)
+                    publishes[i][3] += ("\n Share cloth URL: " + photoStr)
+                }
+            } else {
+                println("xxxx-- " + photoStr)
+              publishes[i][3] = ""
+            }
+            var attach = attachurls[i] as String
+            if (attach != "") {
+                if (attach.rangeOfString("selfridge") != nil) {
+                    publishes[i][4] = attach
                 }
             }
             
@@ -251,7 +264,7 @@ class MomentsVC: UIViewController {
         }
     }
     
-
+    
     
 }
 

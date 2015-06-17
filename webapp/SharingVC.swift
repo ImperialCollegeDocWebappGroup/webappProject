@@ -33,7 +33,7 @@ class SharingVC: UIViewController {
         self.navigationItem.title = "Share to Friends"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
-
+        
         if (webURL == nil) {
             attachURLButt.hidden = true
         } else {
@@ -42,14 +42,14 @@ class SharingVC: UIViewController {
         }
     }
     
-
+    
     func loadImage() {
         
-                    let url = NSURL(string: imgURL)
-                    if let data1 = NSData(contentsOfURL: url!) {
-                        println("!!!!!2")
-                        imageV.image = UIImage(data:data1)
-                    }
+        let url = NSURL(string: imgURL)
+        if let data1 = NSData(contentsOfURL: url!) {
+            println("!!!!!2")
+            imageV.image = UIImage(data:data1)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -59,14 +59,25 @@ class SharingVC: UIViewController {
     
     @IBAction func share(sender: UIBarButtonItem) {
         processImage()
-        query3(selfridgeLink)
-       // qq(selfridgeLink)
-       // if query1("") {
-         //   if query2() {
-               // qq(imageString)
-           //     println("SUCCESS!!!")
-            //}
-       // }
+        if webURL != nil {
+            query3(webURL,content: textField.text)
+        } else {
+            
+            if qq(imageString,content: textField.text) {
+                
+            } else {
+                
+                
+            }
+        }
+        
+        // qq(selfridgeLink)
+        // if query1("") {
+        //   if query2() {
+        // qq(imageString)
+        //     println("SUCCESS!!!")
+        //}
+        // }
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
@@ -88,11 +99,10 @@ class SharingVC: UIViewController {
     
     @IBAction func attachURL(sender: UIButton) {
         attachURLButt.setTitle("Attached", forState: .Normal)
-        
         // post url to DB
     }
     
-    func qq(query : String) -> Bool {
+    func qq(query : String, content: String) -> Bool {
         println("posting")
         // post user information to database
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -122,6 +132,9 @@ class SharingVC: UIViewController {
                             } else if (str == "GOOD2") {
                                 println("--GOOD2")
                                 (success,errmsg)=client.send(str: query+"\n")
+                            } else if (str == "GOOD3") {
+                                println("--GOOD3")
+                                (success,errmsg)=client.send(str: content+"\n")
                             } else if (str == "ERROR") {
                                 println("--ERROR")
                                 client.close()
@@ -156,7 +169,7 @@ class SharingVC: UIViewController {
         }
     }
     
-    func query3(query : String) -> Bool { // publish text
+    func query3(query : String, content : String) -> Bool { // publish text
         println("posting")
         // post user information to database
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -166,7 +179,7 @@ class SharingVC: UIViewController {
         var (success,errmsg)=client.connect(timeout: 10)
         if success{
             println("Connection success!")
-            var (success,errmsg)=client.send(str: "PUBLISH\n")
+            var (success,errmsg)=client.send(str: "PUBLISH2\n")
             var i: Int = 0
             var dd : Bool = false
             while true {
@@ -187,6 +200,10 @@ class SharingVC: UIViewController {
                                 println("--GOOD2")
                                 println(textField.text)
                                 (success,errmsg)=client.send(str: query+"\n")
+                            } else if (str == "GOOD3") {
+                                println("--GOOD3")
+                                println(textField.text)
+                                (success,errmsg)=client.send(str: content+"\n")
                             } else if (str == "ERROR") {
                                 println("--ERROR")
                                 client.close()

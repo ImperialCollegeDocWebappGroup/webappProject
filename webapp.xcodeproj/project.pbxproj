@@ -25,6 +25,7 @@
 		188F04A51B25E4B100F55F41 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F04A41B25E4B100F55F41 /* SettingsVC.swift */; };
 		188F04A71B27053D00F55F41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 188F04A61B27053D00F55F41 /* Images.xcassets */; };
 		18A30BB31B309D4E00B8E6D1 /* SelfProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A30BB21B309D4E00B8E6D1 /* SelfProfileVC.swift */; };
+		18DEB4801B31E1E5002F5AE5 /* ImgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DEB47F1B31E1E5002F5AE5 /* ImgCell.swift */; };
 		18E402581B13634800AB9ADD /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E402571B13634800AB9ADD /* SignupVC.swift */; };
 		365A51071B133805005C2E92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365A51061B133805005C2E92 /* AppDelegate.swift */; };
 		365A51091B133805005C2E92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365A51081B133805005C2E92 /* ViewController.swift */; };
@@ -32,7 +33,6 @@
 		365A51111B133805005C2E92 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365A510F1B133805005C2E92 /* LaunchScreen.xib */; };
 		365A511D1B133805005C2E92 /* webappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365A511C1B133805005C2E92 /* webappTests.swift */; };
 		365A51271B134D89005C2E92 /* LoginVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365A51261B134D89005C2E92 /* LoginVCViewController.swift */; };
-		491DDDEE1B2AF8E700992831 /* PhotoViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491DDDED1B2AF8E700992831 /* PhotoViewVC.swift */; };
 		49D122F71B30738A000E2B9B /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D122F61B30738A000E2B9B /* UserInfo.swift */; };
 		BD4E12F71B2F35E70007C979 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4E12F61B2F35E70007C979 /* ContentViewController.swift */; };
 		BD4E12F91B2F36220007C979 /* BeginningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4E12F81B2F36220007C979 /* BeginningVC.swift */; };
@@ -71,6 +71,7 @@
 		188F04A41B25E4B100F55F41 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		188F04A61B27053D00F55F41 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		18A30BB21B309D4E00B8E6D1 /* SelfProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfProfileVC.swift; sourceTree = "<group>"; };
+		18DEB47F1B31E1E5002F5AE5 /* ImgCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImgCell.swift; sourceTree = "<group>"; };
 		18E402571B13634800AB9ADD /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		365A51011B133805005C2E92 /* webapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = webapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		365A51051B133805005C2E92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,7 +83,6 @@
 		365A511B1B133805005C2E92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		365A511C1B133805005C2E92 /* webappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webappTests.swift; sourceTree = "<group>"; };
 		365A51261B134D89005C2E92 /* LoginVCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVCViewController.swift; sourceTree = "<group>"; };
-		491DDDED1B2AF8E700992831 /* PhotoViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewVC.swift; sourceTree = "<group>"; };
 		49D122F61B30738A000E2B9B /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		BD4E12F61B2F35E70007C979 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		BD4E12F81B2F36220007C979 /* BeginningVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeginningVC.swift; sourceTree = "<group>"; };
@@ -132,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				188F04A61B27053D00F55F41 /* Images.xcassets */,
+				18DEB47F1B31E1E5002F5AE5 /* ImgCell.swift */,
 				365A51061B133805005C2E92 /* AppDelegate.swift */,
 				365A51081B133805005C2E92 /* ViewController.swift */,
 				186B81D61B206CAC00C3DD9B /* ysocket.swift */,
@@ -157,7 +158,6 @@
 				181F63181B2834E300A0CB1D /* FriendsVC.swift */,
 				184BA3DD1B285BA900E53202 /* CombineVC.swift */,
 				BDF519011B2A4D5600872BA7 /* FriendProfile.swift */,
-				491DDDED1B2AF8E700992831 /* PhotoViewVC.swift */,
 				183213301B2D99820085001A /* TakePhotoVC.swift */,
 				BD4E12F61B2F35E70007C979 /* ContentViewController.swift */,
 				BD4E12F81B2F36220007C979 /* BeginningVC.swift */,
@@ -314,7 +314,6 @@
 				1846BAC51B1E768300FEA88E /* SettingModelVC.swift in Sources */,
 				181F63191B2834E300A0CB1D /* FriendsVC.swift in Sources */,
 				186B81DB1B206CAC00C3DD9B /* ytcpsocket.swift in Sources */,
-				491DDDEE1B2AF8E700992831 /* PhotoViewVC.swift in Sources */,
 				BD4E12F71B2F35E70007C979 /* ContentViewController.swift in Sources */,
 				BDF519021B2A4D5600872BA7 /* FriendProfile.swift in Sources */,
 				18A30BB31B309D4E00B8E6D1 /* SelfProfileVC.swift in Sources */,
@@ -323,6 +322,7 @@
 				D4E37FCE1B20DC390066AF5D /* AddNewFriend.swift in Sources */,
 				49D122F71B30738A000E2B9B /* UserInfo.swift in Sources */,
 				188F04A51B25E4B100F55F41 /* SettingsVC.swift in Sources */,
+				18DEB4801B31E1E5002F5AE5 /* ImgCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

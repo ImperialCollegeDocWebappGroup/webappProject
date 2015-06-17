@@ -12,43 +12,28 @@ class AddNewFriend: UIViewController {
     
     @IBOutlet weak var searchUsername: UITextField!
     @IBOutlet weak var foundLabel: UIButton!
+    
+    
     var fri : String = ""
     
     let link : String = "http://www.doc.ic.ac.uk/~jl6613/"
     let fileName : String = "serverIp.txt"
     var serverIp : String = ""
     var str2 : NSString = ""
+    var str3 : NSString = ""
     var friendsList: [NSString] = []
+    var friends : [NSString] = []
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        foundLabel.hidden = true
-        
-        self.navigationItem.title = "Add a friends"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        
-        getServerIp()
-        for f in friendsList {
-            //println(f)
-        }
-        
-        
-    }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     @IBAction func foundPressed(sender: UIButton) {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
         println("=== " + fri)
+        getFriends()
+        if (friends.count != 0 ) {
+            friendsList = friends
+        }
+        
         if (contains(friendsList , fri) || (fri == logname)) {
             println("already friends")
             let alertController = UIAlertController(title: "Can't add friend", message:
@@ -73,23 +58,6 @@ class AddNewFriend: UIViewController {
         
     }
     
-    func realAddFriend() -> Bool {
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
-        println(fri)
-        var re = query("UPDATE friendlist SET friends = array_append(friends, '" + fri + "') WHERE uname = '" + logname + "';\n")
-        if re {
-            re = query("UPDATE friendlist SET friends = array_append(friends, '" + logname + "') WHERE uname = '" + fri + "';\n")
-            if re {
-                return true
-            } else {
-                return false
-            }
-        } else {
-            return false
-        }
-        
-    }
     
     
     @IBAction func searchPressed(sender: UIButton) {
@@ -129,6 +97,52 @@ class AddNewFriend: UIViewController {
             foundLabel.hidden = true
             
         }
+        
+    }
+    
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        foundLabel.hidden = true
+        
+        self.navigationItem.title = "Add a friends"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
+        getServerIp()
+        for f in friendsList {
+            //println(f)
+        }
+        
+        
+    }
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    
+    func realAddFriend() -> Bool {
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
+        println(fri)
+        var re = query("UPDATE friendlist SET friends = array_append(friends, '" + fri + "') WHERE uname = '" + logname + "';\n")
+        if re {
+            re = query("UPDATE friendlist SET friends = array_append(friends, '" + logname + "') WHERE uname = '" + fri + "';\n")
+            if re {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+        
     }
     
     func searchFriends() -> Bool {
@@ -296,4 +310,106 @@ class AddNewFriend: UIViewController {
             return false
         }
     }
+    
+    func getFriends() {
+        println("getting")
+        if postToDB() {
+            println("post success")
+            parseJson(str3)
+        }
+    }
+    
+    
+    
+    func postToDB() -> Bool {
+        println("posting")
+        // post user information to database
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
+        //SELECT unnest(friends) FROM friendlist WHERE uname = 'nathan';
+        var requestLine = "SELECT unnest(friends) FROM friendlist WHERE uname = '" + logname + "';\n"
+        println(requestLine)
+        var client:TCPClient = TCPClient(addr: serverIp, port: 1111)
+        var (success,errmsg)=client.connect(timeout: 10)
+        if success{
+            println("Connection success!")
+            var (success,errmsg)=client.send(str: requestLine)
+            var i: Int = 0
+            var dd : Bool = false
+            while true {
+                if success && i < 10 {
+                    println("sent success!")
+                    var data=client.read(1024*10)
+                    if let d = data {
+                        if let str1 = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
+                            println("read success")
+                            println(str1)
+                            println("----")
+                            var str  = str1.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                            println(str)
+                            //println("fasa4")
+                            if (str == "ERROR") {
+                                println("--ERROR")
+                                client.close()
+                                return false
+                            } else if (str == "NOERROR"){ // NOERROR
+                                println("--NOERROR")
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            } else if (str == "NOR") {
+                                println("--NOR")
+                                client.close()
+                                return true
+                            } else if (str == "YESR") {
+                                println("--YESR")
+                                dd = true
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            } else if dd && str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0{
+                                //data
+                                println("this is data")
+                                println(str)
+                                str3 = str
+                                return true
+                            } else {
+                                println("er...")
+                                (success,errmsg)=client.send(str: "GOOD\n")
+                            }
+                        }
+                        
+                    }
+                    i+=1
+                    
+                } else {
+                    client.close()
+                    println(errmsg)
+                    return false
+                }
+                
+            }
+        }else{
+            client.close()
+            println(errmsg)
+            return false
+        }
+    }
+    
+    
+    func parseJson(str: NSString) {
+        println("===")
+        println(str)
+        var data: NSData = str.dataUsingEncoding(NSUTF8StringEncoding)!
+        var error1: NSError?
+        var jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.allZeros, error: &error1)
+        if let e  = error1 {
+            println("Error: \(error1)")
+        }
+        let frds = (jsonObject as! NSDictionary)["unnest"] as! [NSString]
+        let length = frds.count
+        friends = [NSString](count: length, repeatedValue: "")
+        //for element in frds {
+        //println(element)
+        //}
+        friends = frds
+    }
+    
 }
+

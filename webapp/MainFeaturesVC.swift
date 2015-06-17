@@ -144,7 +144,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     func postToDB() -> Bool {
         var queryLine = "SELECT login,gender,age,height,weight,skincolour FROM userprofile WHERE login = '"
-        println("posting")
+        println("posting ha3 ")
         // post user information to database
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
@@ -314,26 +314,30 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
                 // add to top
                 var requestLine = "UPDATE userprofile SET tops = array_append(tops, '" + webURL + "') WHERE login = '" + logname + "';"
                 if query(requestLine) {
-                
-                } else {
-                
+                    println("!!!!! post successs!!!!!!!!!")
+                    var successAlert = UIAlertController(title: "Saved", message: "Clothes successfully saved!", preferredStyle: .Alert )
+                    successAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                    self.presentViewController(successAlert, animated: true, completion: nil)
                 }
             case 1:
+                
                 // add to bottom
                 var requestLine = "UPDATE userprofile SET buttoms = array_append(buttoms, '" + webURL + "') WHERE login = '" + logname + "';"
                 if query(requestLine) {
-                    
-                } else {
-                    
+                    println("!!!!! post successs!!!!!!!!!")
+                    var successAlert = UIAlertController(title: "Saved", message: "Clothes successfully saved!", preferredStyle: .Alert )
+                    successAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                    self.presentViewController(successAlert, animated: true, completion: nil)
                 }
                 println("bottom")
             case 2:
                 // add to hat
                 var requestLine = "UPDATE userprofile SET hat = array_append(tops, '" + webURL + "') WHERE hat = '" + logname + "';"
                 if query(requestLine) {
-                    
-                } else {
-                    
+                    println("!!!!! post successs!!!!!!!!!")
+                    var successAlert = UIAlertController(title: "Saved", message: "Clothes successfully saved!", preferredStyle: .Alert )
+                    successAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                    self.presentViewController(successAlert, animated: true, completion: nil)
                 }
                 println("hat")
             case 3:
@@ -437,7 +441,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
    
     
     func query(query : String) -> Bool {
-        println("posting")
+        println("posting haha")
         getServerIp()
         // post user information to database
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -446,7 +450,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         var (success,errmsg)=client.connect(timeout: 10)
         if success{
             println("Connection success!")
-            var (success,errmsg)=client.send(str: query)
+            var (success,errmsg)=client.send(str: query+"\n")
             var i: Int = 0
             var dd : Bool = false
             while true {
@@ -588,7 +592,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     var selectParts = 0
     
     func query2(query : String) -> Bool {
-        println("posting")
+        println("posting ha2")
         getServerIp()
         // post user information to database
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()

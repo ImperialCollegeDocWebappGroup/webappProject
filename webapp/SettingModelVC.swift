@@ -249,7 +249,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
             var requestLine = ("INSERT INTO userprofile VALUES ('" + logname + "', '")
             requestLine += (logname + "', " + info[0] + ", 20, " + info[1] + ", ")
             requestLine += (info[2] + ", " + info[3] + ", ARRAY[]::text[], ARRAY['http://www.selfridges.com/en/givenchy-amerika-cuban-fit-cotton-jersey-t-shirt_242-3000831-15S73176511/?previewAttribute=Black'],")
-            var s1 = requestLine + "ARRAY[]::text[]);\n"
+            var s1 = requestLine + "'',ARRAY[]::text[]);\n"
             //   after new user
             var s2 =    "INSERT INTO publishs VALUES ('" + logname + "',ARRAY[]::publishitem[]);\n"
             var s3 =   "INSERT INTO friendlist VALUES ('" + logname + "',ARRAY['" + logname + "']);\n"

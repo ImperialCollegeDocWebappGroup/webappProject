@@ -224,4 +224,8 @@ class LoadImageVC: UIViewController {
         //println("url is \(imageUrl)")
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
+    
 }
