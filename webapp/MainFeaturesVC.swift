@@ -349,7 +349,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
                 var teststring = imageData.base64EncodedStringWithOptions(nil)
                 //println(teststring)
                 
-                // postToDB(teststring)
+                
                 
                 println("appearance")
             default: ()
@@ -430,43 +430,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     }
     
     
-    func postToDB(str2 : String) {
-        // post user information to database
-        var client:TCPClient = TCPClient(addr: "146.169.53.33", port: 1111)
-        var (success,errmsg) = client.connect(timeout: 10)
-        if success{
-            println("Connection success!")
-            var (success,errmsg) = client.send(str: "SAVE\n")
-            if success{
-                println("sent success 1!")
-                (success,errmsg) = client.send(str: str2)
-                if success{
-                    println("sent success 2!")
-                    (success,errmsg) = client.send(str: "\n")
-                    if success {
-                        println("3")
-                    }
-                    var data=client.read(1024*10)
-                    if let d = data {
-                        if let str = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
-                            println("read success")
-                            println(str)
-                            client.close()
-                        }
-                    }
-                } else {
-                    client.close()
-                    println(errmsg)
-                }
-            }else{
-                client.close()
-                println(errmsg)
-            }
-        }else{
-            client.close()
-            println(errmsg)
-        }
-    }
+   
     
     func query(query : String) -> Bool {
         println("posting")
@@ -618,6 +582,71 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     }
     
     var selectParts = 0
+    
+    func query2() -> Bool {
+        println("posting")
+        getServerIp()
+        // post user information to database
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let logname =  (prefs.valueForKey("USERNAME") as! NSString as String)
+        println(logname)
+        var client:TCPClient = TCPClient(addr: serverIp, port: 1111)
+        var (success,errmsg)=client.connect(timeout: 10)
+        if success{
+            println("Connection success!")
+            var (success,errmsg)=client.send(str: "SAVE1\n")
+            var i: Int = 0
+            var dd : Bool = false
+            while true {
+                if success && i < 10 {
+                    println("sent success!")
+                    var data=client.read(1024*10)
+                    if let d = data {
+                        if let str1 = NSString(bytes: d, length: d.count, encoding: NSUTF8StringEncoding) {
+                            println("read success")
+                            println(str1)
+                            println("----")
+                            var str  = str1.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                            println(str)
+                            if (str == "GOOD") {
+                                println("--GOOD")
+                                (success,errmsg)=client.send(str: logname+"\n")
+                            } else if (str == "GOOD2") {
+                                println("--GOOD2")
+                                (success,errmsg)=client.send(str: imageString+"\n")
+                            } else if (str == "ERROR") {
+                                println("--ERROR")
+                                client.close()
+                                return false
+                            } else if (str == "SAVEDONE"){ // NOERROR
+                                println("--DONE")
+                                client.close()
+                                return true
+                            } else {
+                                if (str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0) {
+                                    println( " er...")
+                                    (success,errmsg)=client.send(str:"GOOD\n")
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                    i+=1
+                    
+                } else {
+                    client.close()
+                    println(errmsg)
+                    return false
+                }
+                
+            }
+        }else{
+            client.close()
+            println(errmsg)
+            return false
+        }
+    }
     
     private func modifyPixel(context:CGContextRef,inImage: CGImage,color:UIColor)->UIImage{
         typealias RawColorType = (newRedColor:UInt8, newgreenColor:UInt8, newblueColor:UInt8, newalphaValue:UInt8)
