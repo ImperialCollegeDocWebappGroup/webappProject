@@ -86,7 +86,16 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         var modelHeight = Double(usrInfo.height)
         var modelWidth = Double(usrInfo.weight)
         
-        var imageStretch = (CGFloat(modelWidth/default_weight) + CGFloat(modelHeight/default_height))/2
+        if(modelHeight < 10.0){
+            modelHeight = default_height
+            
+        }
+        
+        if(modelWidth < 10.0){
+            modelWidth = default_weight
+        }
+        
+        var imageStretch = CGFloat(1)//(CGFloat(modelWidth/default_weight) + CGFloat(modelHeight/default_height))/2
         modelView.transform = CGAffineTransformScale(modelView.transform, imageStretch, 1);
         println(imageLink)
         
@@ -199,8 +208,10 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         let weight = (jsonObject as! NSDictionary)["weight"] as! [String]
         let skincolor = (jsonObject as! NSDictionary)["skincolour"] as! [String]
         
-        
-        return UserInfo(login:login[0],gender:gender[0],age:age[0],height:height[0],weight:weight[0],skincolor:skincolor[0])
+        if (login.count != 0) {
+            return UserInfo(login:login[0],gender:gender[0],age:age[0],height:height[0],weight:weight[0],skincolor:skincolor[0])
+        }
+        return UserInfo(login: "error",gender:"t",age:"0",height:"0",weight:"0",skincolor:"0")
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -226,8 +237,8 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         } else {
             var cell:UITableViewCell = sectionMenu.dequeueReusableCellWithIdentifier("cell2") as! UITableViewCell
             
-            cell.textLabel!.text = self.sections[indexPath.row]
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+           // cell.textLabel!.text = self.sections[indexPath.row]
+            //cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             var imageName = UIImage(named: sectionImgs[indexPath.row])
             cell.imageView!.image = imageName
             return cell
@@ -259,6 +270,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
                 shirtView.image = nil
             default: ()
             }
+            dropDownMenu.deselectRowAtIndexPath(indexPath, animated: true)
         }
         if (tableView == sectionMenu) {
             // choose between top, bottom, other and whole appearance
@@ -293,6 +305,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
             default: ()
                 
             }
+            sectionMenu.deselectRowAtIndexPath(indexPath, animated: true)
         }
         
     }

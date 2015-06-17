@@ -13,7 +13,9 @@ class LoadImageVC: UIViewController {
     
     @IBOutlet weak var selectTable: UITableView!
     
-    var items:[String] = ["TOP", "Bottom", "Hat"]
+    var items:[String] = ["Top", "Bottom", "Hat"]
+    
+    var imgs:[String] = ["ttop","bbottom","hhat"]
     var selectParts = 0
     
     var loadSuccess: Bool = false
@@ -36,6 +38,7 @@ class LoadImageVC: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        imageURL.hidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,7 +52,6 @@ class LoadImageVC: UIViewController {
         } else {
             self.hideDropDownView()
         }
-        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -64,6 +66,7 @@ class LoadImageVC: UIViewController {
         var cell:UITableViewCell = selectTable.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         
         cell.textLabel?.text = self.items[indexPath.row]
+        cell.imageView?.image = UIImage(named: imgs[indexPath.row])
         
         return cell
     }
@@ -107,6 +110,7 @@ class LoadImageVC: UIViewController {
     
     
     @IBAction func buttonPressed(sender: UIButton) {
+        imageURL.hidden = false
         /*
         var altStringToSearch:String = "I want to make a cake and then prepare coffee"
         let altSearchTerm:String = "cake"

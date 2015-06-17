@@ -10,6 +10,9 @@ import UIKit
 
 class SelfProfileVC: UIViewController {
     
+    @IBOutlet weak var userImage: UIImageView!
+    
+    
     @IBOutlet weak var userNameLB: UILabel!
     @IBOutlet weak var genderLB: UILabel!
     @IBOutlet weak var heightLB: UILabel!

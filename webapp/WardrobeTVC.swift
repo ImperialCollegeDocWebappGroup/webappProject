@@ -10,8 +10,8 @@ import UIKit
 
 class WardrobeTVC: UITableViewController {
 
-    var sections: [String] = ["Toppings", "Bottoms"]
-    var sectionImgs:[String] = ["Top", "Bottom"]
+    var sections: [String] = ["Toppings", "Bottoms", "Hats", "Whole Appearances"]
+    var sectionImgs:[String] = ["Top", "Bottom", "Hat", "Suit"]
 
     override func viewDidLoad() {
         super.viewDidLoad()

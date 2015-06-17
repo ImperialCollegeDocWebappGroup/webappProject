@@ -34,6 +34,7 @@ class MomentsVC: UIViewController {
     let fileName : String = "serverIp.txt"
     var serverIp : String = ""
     
+    @IBOutlet weak var nav: UINavigationItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,7 +47,14 @@ class MomentsVC: UIViewController {
             println(datastring)
             serverIp = datastring
         }
+        self.navigationItem.title = "MOMENTS"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+
         getMoments()
+        
     }
     
     
@@ -73,28 +81,7 @@ class MomentsVC: UIViewController {
             serverIp = datastring
         }
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        self.navigationItem.title = "Moments"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.orangeColor()]
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation3"), forBarMetrics: .Default)
-        
-        
-    }
-    
-    /*
-    override func viewDidAppear(animated: Bool) {
-    // change width of navigation bar
-    navigateBar.frame=CGRectMake(0, 0, 400, 60)
-    
-    self.view .addSubview(navigateBar)
-    
-    navigateBar.setBackgroundImage(UIImage(named:"navigation"),
-    forBarMetrics: .Default)
-    }
-    */
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
