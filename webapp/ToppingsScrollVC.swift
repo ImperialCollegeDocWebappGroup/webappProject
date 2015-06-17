@@ -282,9 +282,18 @@ class ToppingsScrollVC: UIViewController, UIScrollViewDelegate {
             return nil
         }
     }
-    
-    
-    
+    /*
+override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+if (segue.identifier == "goto_share") {
+var svc = segue.destinationViewController as! SharingVC;
+svc.webURL = webURL
+svc.imgURL = imgURL
+//println("url is \(imageUrl)")
+}
+}
+*/
+
+
     /*
     let scrollView = UIScrollView(frame: CGRectMake(0, 0, 100, 100))
     scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * 3, scrollView.frame.size.height)

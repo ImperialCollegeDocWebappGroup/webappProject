@@ -21,7 +21,6 @@ class SharingVC: UIViewController {
     var webURL: String! = nil
     //var imm : UIImage = UIImage(named: "collect")!
     
-    @IBOutlet weak var attachURLButt: UIButton!
     @IBOutlet weak var imageV: UIImageView!
     @IBOutlet weak var textField: UITextField!
     
@@ -33,13 +32,7 @@ class SharingVC: UIViewController {
         self.navigationItem.title = "Share to Friends"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"navigation"), forBarMetrics: .Default)
-        
-        if (webURL == nil) {
-            attachURLButt.hidden = true
-        } else {
-            attachURLButt.hidden = false
-            loadImage()
-        }
+        loadImage()
     }
     
     
@@ -96,11 +89,7 @@ class SharingVC: UIViewController {
         }
     }
     
-    
-    @IBAction func attachURL(sender: UIButton) {
-        attachURLButt.setTitle("Attached", forState: .Normal)
-        // post url to DB
-    }
+ 
     
     func qq(query : String, content: String) -> Bool {
         println("posting")
@@ -379,6 +368,10 @@ class SharingVC: UIViewController {
             println(datastring)
             serverIp = datastring
         }
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
     }
     
 }

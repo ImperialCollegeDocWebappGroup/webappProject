@@ -19,9 +19,9 @@ class MomentsVC: UIViewController {
     
     // var publishTime = ["2015-6-8, 12:20", "2015-6-9, 09:30", "2015-6-9, 15:13"]
     var publishes = [
-        ["Sam", "Image1", "2015-6-8, 12:20"],
-        ["Sam2", "Image2", "2015-6-9, 09:30"],
-        ["Nathan", "Image3", "2015-6-9, 15:13"]
+        ["Sam", "Image1", "2015-6-8, 12:20","",""],
+        ["Sam2", "Image2", "2015-6-9, 09:30","",""],
+        ["Nathan", "Image3", "2015-6-9, 15:13","",""]
     ]
     var str2 : NSString = ""
     
@@ -178,7 +178,7 @@ class MomentsVC: UIViewController {
         cell.username.text = publish[0]
         cell.content.text = publish[1]
         cell.publishTime.text = publish[2]
-        println(publish[4])
+        //println(publish[4])
        
         let reallink : String = link1 + names[indexPath.row % 7]
         println(reallink)
@@ -205,9 +205,12 @@ class MomentsVC: UIViewController {
             println("in")
             if let im = loadImage(publish[4]) {
                 println("!!!!!3")
-                cell.momentsPhoto.image = im            }
+                cell.momentsPhoto.image = im
+                cell.url = publish[4]
+            }
         }
         cell.layer.cornerRadius = 10
+        
         return cell
     }
     

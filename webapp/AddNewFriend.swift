@@ -72,7 +72,7 @@ class AddNewFriend: UIViewController {
             if found {
                 if (addFriend()) {
                     foundLabel.hidden = false
-                    let display = searchContent! + " is found, click here to add"
+                    let display = "Add " + searchContent! + " Now"
                     foundLabel.setTitle(display, forState: .Normal)
                 } else {
                     let alertController = UIAlertController(title: "Not Found", message:
@@ -411,5 +411,8 @@ class AddNewFriend: UIViewController {
         friends = frds
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
 }
 

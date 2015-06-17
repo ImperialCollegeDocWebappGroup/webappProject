@@ -11,7 +11,6 @@ import UIKit
 
 class CombineVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-    @IBOutlet weak var confirmButt: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     var imgs: [UIImage] = []
     var cloths : [NSString] = []
@@ -248,71 +247,6 @@ class CombineVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     
     }
     
-    /*
-    
-    var largePhotoIndexPath : NSIndexPath? {
-        didSet {
-            //2
-            var indexPaths = [NSIndexPath]()
-            if largePhotoIndexPath != nil {
-                indexPaths.append(largePhotoIndexPath!)
-            }
-            if oldValue != nil {
-                indexPaths.append(oldValue!)
-            }
-            //3
-            collectionView?.performBatchUpdates({
-                self.collectionView?.reloadItemsAtIndexPaths(indexPaths)
-                return
-                }){
-                    completed in
-                    //4
-                    if self.largePhotoIndexPath != nil {
-                        self.collectionView?.scrollToItemAtIndexPath(
-                            self.largePhotoIndexPath!,
-                            atScrollPosition: .CenteredVertically,
-                            animated: true)
-                    }
-            }
-        }
-    }
-    
-    func collectionView(collectionView: UICollectionView,
-            shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-                if largePhotoIndexPath == indexPath {
-                    largePhotoIndexPath = nil
-                }
-                else {
-                    largePhotoIndexPath = indexPath
-                }
-                return false
-    }
-    
-    
-    func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            
-            let flickrPhoto = photoForIndexPath(indexPath)
-            
-            // New code
-            if indexPath == largePhotoIndexPath {
-                var size = collectionView.bounds.size
-                size.height -= topLayoutGuide.length
-                size.height -= (sectionInsets.top + sectionInsets.right)
-                size.width -= (sectionInsets.left + sectionInsets.right)
-                return flickrPhoto.sizeToFillWidthOfSize(size)
-            }
-            // Previous code
-            if var size = flickrPhoto.thumbnail?.size {
-                size.width += 10
-                size.height += 10
-                return size
-            }
-            return CGSize(width: 100, height: 100)
-    }
-    */
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "confirmed") {
@@ -323,9 +257,5 @@ class CombineVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         }
     }
     
-    @IBAction func confirmTapped(sender: UIBarButtonItem) {
-        var indexPath : NSArray = self.collectionView.indexPathsForSelectedItems()
-        self.performSegueWithIdentifier("confirmed", sender: self)
-    }
     
 }

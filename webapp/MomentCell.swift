@@ -10,6 +10,7 @@ import UIKit
 
 class MomentCell: UITableViewCell {
     
+    var url:String = ""
     @IBOutlet weak var username: UILabel!
     
     @IBOutlet weak var content: UILabel!
@@ -23,6 +24,7 @@ class MomentCell: UITableViewCell {
     
     @IBOutlet weak var commentButton: UIButton!
     
+    @IBOutlet weak var shopButton: UIButton!
     var selectedName :String = ""
     
     
@@ -44,5 +46,11 @@ class MomentCell: UITableViewCell {
     }
     
     
+    @IBAction func shopTapped(sender: UIButton) {
+        if (url != "") {
+            var URL:NSURL = NSURL(string: url)!
+            UIApplication.sharedApplication().openURL(URL)
+        }
+    }
 
 }

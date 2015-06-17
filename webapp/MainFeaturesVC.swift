@@ -98,7 +98,8 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         }
         
         
-        process_skin()
+        
+        process_skin(usrInfo.skincolor)
         
         //change model:
         var default_weight = 50.0
@@ -997,7 +998,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     }
     
     
-    func process_skin() {
+    func process_skin(skin:Int) {
         
         var modelUI: UIImage = modelView.image!
         
@@ -1026,7 +1027,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         var color = getcolorfrompoint(context,rect:rect,inImage:modelCG,x:10,y:20 )
         color.getRed(redP,green:nil,blue:nil,alpha:nil)
         var black = UIColor.blackColor()
-        modelUI = modifySkin(context, inImage: modelCG, skin: UInt8(2))
+        modelUI = modifySkin(context, inImage: modelCG, skin: UInt8(skin))
         //println("what")
         modelView.image = modelUI
         
