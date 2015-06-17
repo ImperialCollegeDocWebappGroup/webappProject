@@ -381,7 +381,6 @@
                                 <rect key="frame" x="195" y="264" width="212" height="71"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="71" id="JKw-Xv-gk8"/>
-                                    <constraint firstAttribute="width" constant="212" id="vbj-PR-lRq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Username Found">
@@ -448,7 +447,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uG3-i7-ave">
                                 <rect key="frame" x="40" y="278" width="523" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ZY-rl-EBD">
                                 <rect key="frame" x="40" y="339" width="523" height="41"/>
@@ -776,7 +775,7 @@
                                     <constraint firstAttribute="height" constant="30" id="V8B-fD-g6S"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Your Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2Y-99-EsX">
                                 <rect key="frame" x="50" y="324" width="500" height="30"/>
@@ -784,7 +783,7 @@
                                     <constraint firstAttribute="height" constant="30" id="ksk-eo-g73"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NzP-eP-itD">
                                 <rect key="frame" x="50" y="392" width="500" height="30"/>
@@ -885,7 +884,7 @@
                         <outlet property="txtConfirmPassword" destination="A2Y-99-EsX" id="DMZ-hE-GAc"/>
                         <outlet property="txtPassword" destination="pDk-uE-t6j" id="CyT-RB-u4L"/>
                         <outlet property="txtUsername" destination="O3x-6U-GJf" id="mZc-Sm-ojf"/>
-                        <segue destination="1Ty-56-PsZ" kind="push" identifier="goto_entry" id="R3n-gH-sDe"/>
+                        <segue destination="1Ty-56-PsZ" kind="presentation" identifier="goto_entry" id="R3n-gH-sDe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSj-F4-wpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -941,6 +940,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="G6r-j4-f6d">
+                                <rect key="frame" x="0.0" y="-3" width="600" height="603"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ie-7z-HgK">
                                 <rect key="frame" x="45" y="92" width="116" height="21"/>
                                 <constraints>
@@ -1064,9 +1066,6 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZQ-44-Kvp">
                                 <rect key="frame" x="59" y="390" width="62" height="58"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="62" id="33F-M3-lLE"/>
-                                </constraints>
                                 <state key="normal" image="camera">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1163,7 +1162,7 @@
                         <outlet property="saveButt" destination="L3i-hN-pbb" id="Lab-fE-JRb"/>
                         <outlet property="txtHeight" destination="nMQ-Ha-JQ0" id="fc1-TQ-L0K"/>
                         <outlet property="txtWeight" destination="kWB-2l-0M2" id="Bjn-ZO-sln"/>
-                        <segue destination="2Kn-XS-Z1j" kind="show" identifier="saved" id="oWy-oI-zmU"/>
+                        <segue destination="7eQ-pX-4eC" kind="show" identifier="saved" id="tzW-gv-jYE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nMb-OM-UXC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2008,7 +2007,7 @@
         <image name="Warodrobe" width="25" height="25"/>
         <image name="back" width="600" height="450"/>
         <image name="backg" width="1376" height="1376"/>
-        <image name="black1" width="93" height="91"/>
+        <image name="black1" width="60" height="60"/>
         <image name="black2" width="95" height="95"/>
         <image name="camera" width="72" height="72"/>
         <image name="colour1" width="93" height="91"/>
@@ -2018,9 +2017,9 @@
         <image name="skinColours" width="551" height="68"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="29m-As-rpe"/>
+        <segue reference="tzW-gv-jYE"/>
+        <segue reference="Yei-vw-uDj"/>
         <segue reference="AvK-1q-mIm"/>
-        <segue reference="R3n-gH-sDe"/>
         <segue reference="tQH-bS-51s"/>
         <segue reference="Rng-cZ-u7k"/>
     </inferredMetricsTieBreakers>

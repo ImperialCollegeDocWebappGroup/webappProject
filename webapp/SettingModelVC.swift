@@ -26,6 +26,9 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     
     var modelImage: UIImage = UIImage(named: "defaultM")!
     
+    // false if user just registered, and setting for the 1st time
+    var resetModel: Bool = false
+    
     @IBOutlet weak var cameraButt: UIButton!
     @IBOutlet weak var FemaleButt: UIButton!
     @IBOutlet weak var MaleButt: UIButton!
@@ -59,6 +62,13 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         saveButt.layer.cornerRadius = 5
         saveButt.layer.borderWidth = 1
         saveButt.layer.borderColor = UIColor.blackColor().CGColor
+        if (self.navigationController != nil) {
+            // pushed
+            resetModel = true
+        } else {
+            resetModel = false
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -109,11 +119,6 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     }
     
     
-    override func viewDidAppear(animated: Bool) {
-        
-    }
-    
-    
     func selectGender(butt: UIButton) {
         butt.selected = true
         if butt == MaleButt {
@@ -155,6 +160,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     }
     
     @IBAction func saveTapped(sender: AnyObject) {
+        println("resetModel is \(resetModel)")
         // check height and weight value
         let a:Int? = txtHeight.text.toInt()
         let b:Int? = txtWeight.text.toInt()
@@ -196,7 +202,11 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         height = heightInit
         weight = weightInit
         if (postToDB()) {
-            self.performSegueWithIdentifier("saved", sender: self)
+            if (resetModel) {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                self.performSegueWithIdentifier("saved", sender: self)
+            }
         } else {
             var nerworkErrorAlert = UIAlertController(title: "Network error", message: "Network error, please try again", preferredStyle: .Alert )
             nerworkErrorAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
@@ -207,7 +217,11 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
     
     func processConfirmAlert(alert: UIAlertAction!) {
         if (postToDB()) {
-            self.performSegueWithIdentifier("saved", sender: self)
+            if (resetModel) {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                self.performSegueWithIdentifier("saved", sender: self)
+            }
         } else {
             var nerworkErrorAlert = UIAlertController(title: "Network error", message: "Network error, please try again", preferredStyle: .Alert )
             nerworkErrorAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
@@ -215,6 +229,7 @@ class SettingModelVC: UIViewController,UIImagePickerControllerDelegate, UINaviga
         }
         //navigationController?.popViewControllerAnimated(true)
     }
+    
     
     
     func postToDB() -> Bool {

@@ -38,8 +38,9 @@ class ToppingsScrollVC: UIViewController, UIScrollViewDelegate {
             println(datastring)
             serverIp = datastring
         }
-        postToDB()
-        parseJson(str2)
+        if (postToDB()) {
+            parseJson(str2)
+        }
         
         let pageCount = pageImages.count
         

@@ -51,6 +51,7 @@ class FriendsVC: UIViewController {
     
     @IBAction func refreshTapped(sender: UIBarButtonItem) {
         getFriends()
+        self.tableView.reloadData()
     }
     
     func getFriends() {

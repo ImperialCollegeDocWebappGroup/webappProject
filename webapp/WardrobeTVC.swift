@@ -57,6 +57,7 @@ class WardrobeTVC: UITableViewController {
             self.performSegueWithIdentifier("goto_bottom", sender: self)
         default: ()
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
   /*
     override func viewWillAppear(animated: Bool) {

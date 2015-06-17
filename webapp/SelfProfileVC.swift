@@ -136,6 +136,8 @@ class SelfProfileVC: UIViewController {
         if let e  = error1 {
             println("Error: \(error1)")
         }
+        
+        
         let login = (jsonObject as! NSDictionary)["login"] as! [String]
         let gender = (jsonObject as! NSDictionary)["gender"] as! [String]
         let age = (jsonObject as! NSDictionary)["age"] as! [String]
@@ -143,8 +145,12 @@ class SelfProfileVC: UIViewController {
         let weight = (jsonObject as! NSDictionary)["weight"] as! [String]
         let skincolor = (jsonObject as! NSDictionary)["skincolour"] as! [String]
         
-        
+        if (login.count != 0 ) {
         return UserInfo(login:login[0],gender:gender[0],age:age[0],height:height[0],weight:weight[0],skincolor:skincolor[0])
+        } else {
+         return UserInfo(login: "error",gender:"t",age:"0",height:"0",weight:"0",skincolor:"0")
+        }
+        
     }
     
     func getServerIp() {

@@ -60,6 +60,7 @@ class MomentsVC: UIViewController {
     
     @IBAction func momentsRefreshTapped(sender: UIBarButtonItem) {
         getMoments()
+        self.tableView.reloadData()
     }
     
     func getMoments() {
