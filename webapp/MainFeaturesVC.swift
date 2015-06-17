@@ -348,7 +348,11 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
                 
                 var teststring = imageData.base64EncodedStringWithOptions(nil)
                 //println(teststring)
+                if query2(teststring) {
                 
+                } else {
+                
+                }
                 
                 
                 println("appearance")
@@ -583,7 +587,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
     
     var selectParts = 0
     
-    func query2() -> Bool {
+    func query2(query : String) -> Bool {
         println("posting")
         getServerIp()
         // post user information to database
@@ -594,7 +598,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
         var (success,errmsg)=client.connect(timeout: 10)
         if success{
             println("Connection success!")
-            var (success,errmsg)=client.send(str: "SAVE1\n")
+            var (success,errmsg)=client.send(str: "SAVE3\n")
             var i: Int = 0
             var dd : Bool = false
             while true {
@@ -613,7 +617,7 @@ class MainFeaturesVC: UIViewController,UITableViewDelegate, UITableViewDataSourc
                                 (success,errmsg)=client.send(str: logname+"\n")
                             } else if (str == "GOOD2") {
                                 println("--GOOD2")
-                                (success,errmsg)=client.send(str: imageString+"\n")
+                                (success,errmsg)=client.send(str: query+"\n")
                             } else if (str == "ERROR") {
                                 println("--ERROR")
                                 client.close()
